@@ -1,9 +1,7 @@
+import AppRouter from './app/routes/router';
+
 function App() {
-  return (
-    <div>
-      <h1>YOEDU Project</h1>
-    </div>
-  );
+  return <AppRouter />;
 }
 
 export default App;

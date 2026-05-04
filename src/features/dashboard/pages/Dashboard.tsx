@@ -1,3 +1,4 @@
+import { Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
@@ -5,8 +6,10 @@ const Dashboard = () => {
 
   return (
     <div>
-      <button onClick={() => navigate('/students')}>Go to Students</button>
-      <button onClick={() => navigate('/courses')}>Go to Courses</button>
+      <Button type="primary" onClick={() => navigate('/students')}>
+        Go to Students
+      </Button>
+      <Button onClick={() => navigate('/courses')}>Go to Courses</Button>
     </div>
   );
 };

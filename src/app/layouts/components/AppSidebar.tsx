@@ -2,7 +2,7 @@ import { Image, Layout, Menu } from 'antd';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { DashboardOutlined, UserOutlined, BookOutlined } from '@ant-design/icons';
 import YoeduLogo from '@/assets/images/yoedu-logo.svg';
-import { useTheme } from '@/app/providers/ThemeProvider';
+import { useTheme } from '@/app/providers/theme/useTheme';
 
 const { Sider } = Layout;
 

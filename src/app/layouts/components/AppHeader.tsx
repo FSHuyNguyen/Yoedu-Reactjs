@@ -10,7 +10,7 @@ import {
   SunOutlined,
   MoonOutlined,
 } from '@ant-design/icons';
-import { useTheme } from '@/app/providers/ThemeProvider';
+import { useTheme } from '@/app/providers/theme/useTheme';
 
 const { Header } = Layout;
 

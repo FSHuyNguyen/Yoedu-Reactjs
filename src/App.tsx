@@ -1,5 +1,5 @@
 import { RouterProvider } from 'react-router-dom';
-import ThemeProvider from './app/providers/ThemeProvider';
+import ThemeProvider from './app/providers/theme/ThemeProvider';
 import AntdProvider from './app/providers/AntdProvider';
 import { router } from './app/router/routes';
 

@@ -10,9 +10,9 @@ import {
   SunOutlined,
   MoonOutlined,
 } from '@ant-design/icons';
-import { useTheme } from '@/app/providers/theme/useTheme';
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
 import { logout } from '@/features/auth/store/auth.slice';
+import { useTheme } from '@/app/providers/theme/hooks/useTheme';
 
 const { Header } = Layout;
 

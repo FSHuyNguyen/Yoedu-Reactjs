@@ -6,17 +6,16 @@ import AntdProvider from './app/providers/antd/antd-provider';
 
 import { RouterProvider } from 'react-router-dom';
 import { router } from './app/router/routes';
-
-import AppInitializer from './app/AppInitializer';
+import AppInit from './app/init/app-init';
 
 function App() {
   return (
     <Provider store={store}>
       <ThemeProvider>
         <AntdProvider>
-          <AppInitializer>
+          <AppInit>
             <RouterProvider router={router} />
-          </AppInitializer>
+          </AppInit>
         </AntdProvider>
       </ThemeProvider>
     </Provider>

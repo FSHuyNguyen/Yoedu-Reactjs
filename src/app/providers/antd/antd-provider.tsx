@@ -5,7 +5,7 @@ import viVN from 'antd/locale/vi_VN';
 import EmptyCustom from '@/shared/components/empty-custom';
 import { AppColors } from '@/shared/theme/colors';
 import { AppFontFamily } from '@/shared/theme/fonts';
-import { useTheme } from '../theme/useTheme';
+import { useTheme } from '@/app/providers/theme/hooks/useTheme';
 
 type AntdProviderProps = {
   children: React.ReactNode;

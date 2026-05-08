@@ -1,7 +1,7 @@
-import type { StatData } from '../types';
 import CardCustom from '@/shared/components/card-custom';
+import type { Stat } from '@/features/dashboard/types/start-data.type';
 
-const StatCard: React.FC<StatData> = ({ title, value, extra, color }) => {
+const StatCard: React.FC<Stat> = ({ title, value, extra, color }) => {
   return (
     <CardCustom title={title} className="shadow-sm">
       <div className="flex flex-col gap-2">

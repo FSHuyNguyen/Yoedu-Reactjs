@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
-import { getMeThunk } from '@/features/auth/slices/auth.thunk';
+import { getMeThunk } from '@/features/auth/store/auth.thunk';
 
 export default function AppInitializer({ children }: { children: React.ReactNode }) {
   const dispatch = useAppDispatch();

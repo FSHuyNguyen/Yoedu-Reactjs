@@ -1,12 +1,12 @@
-import StatCard from '../components/StatCard';
-import RecentActivity from '../components/RecentActivity';
-import TodayClasses from '../components/TodayClasses';
+import StatCard from '@/features/dashboard/components/stat-card';
 import { useEffect, useState } from 'react';
 import { getDashboardData } from '../services';
-import type { DashboardData } from '../types';
+import type { Dashboard } from '@/features/dashboard/types/dashboard.type';
+import RecentActivity from '@/features/dashboard/components/recent-activity';
+import TodayClasses from '@/features/dashboard/components/today-classes';
 
 const DashboardPage = () => {
-  const [data, setData] = useState<DashboardData | null>(null);
+  const [data, setData] = useState<Dashboard | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {

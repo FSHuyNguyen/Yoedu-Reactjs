@@ -1,10 +1,10 @@
 import { Tag } from 'antd';
-import type { TodayClassesData } from '../types';
+import type { TodayClassesItem } from '@/features/dashboard/types/today-classes.type';
 import EmptyCustom from '@/shared/components/empty-custom/EmptyCustom';
 import CardCustom from '@/shared/components/card-custom';
 
 interface TodayClassesProps {
-  data: TodayClassesData[];
+  data: TodayClassesItem[];
 }
 
 const TodayClasses: React.FC<TodayClassesProps> = ({ data }) => {

@@ -1,12 +1,12 @@
 import { Timeline } from 'antd';
-import type { RecentActivityData } from '../types';
 import EmptyCustom from '@/shared/components/empty-custom';
-import { ActivityType } from '../constants';
 import { DollarOutlined, UserOutlined, HomeOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import CardCustom from '@/shared/components/card-custom';
+import { ActivityType } from '@/features/dashboard/constants/activity';
+import type { RecentActivityItem } from '@/features/dashboard/types/recent-activity.type';
 
 interface RecentActivityProps {
-  data: RecentActivityData[];
+  data: RecentActivityItem[];
 }
 
 const activityConfig = {

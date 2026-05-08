@@ -1,12 +1,14 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import AuthLayout from '../layouts/AuthLayout';
-import LoginPage from '@/features/auth/pages/login/LoginPage';
-import RegisterPage from '@/features/auth/pages/register/RegisterPage';
+import AuthLayout from '../layouts/auth-layout';
 
-import MainLayout from '@/app/layouts/MainLayout';
-import Dashboard from '@/features/dashboard/pages';
+import MainLayout from '@/app/layouts/main-layout';
+
 import ProtectedRoute from './protected-route';
+
+import LoginPage from '@/features/auth/pages/login-page';
+import RegisterPage from '@/features/auth/pages/register-page';
+import DashboardPage from '@/features/dashboard/pages/dashboard';
 
 export const router = createBrowserRouter([
   /******************** AUTH *********************/
@@ -39,7 +41,7 @@ export const router = createBrowserRouter([
           {
             index: true,
 
-            element: <Dashboard />,
+            element: <DashboardPage />,
           },
         ],
       },

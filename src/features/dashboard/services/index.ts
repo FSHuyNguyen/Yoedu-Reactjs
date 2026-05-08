@@ -1,4 +1,4 @@
-import { ActivityType } from '../constants';
+import { ActivityType } from '@/features/dashboard/constants/activity';
 
 export const getDashboardData = async () => {
   /* Fake Data */

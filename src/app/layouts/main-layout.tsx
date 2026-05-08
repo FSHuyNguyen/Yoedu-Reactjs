@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 import { Layout } from 'antd';
 import { Outlet } from 'react-router-dom';
-import AppSidebar from './components/AppSidebar';
-import AppHeader from './components/AppHeader';
+import AppSidebar from './components/app-sidebar';
+import AppHeader from './components/app-header';
 
 const { Content } = Layout;
 

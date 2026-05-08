@@ -11,6 +11,8 @@ import {
   MoonOutlined,
 } from '@ant-design/icons';
 import { useTheme } from '@/app/providers/theme/useTheme';
+import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
+import { logout } from '@/features/auth/slices/auth.slice';
 
 const { Header } = Layout;
 
@@ -21,12 +23,8 @@ interface AppHeaderProps {
 
 const AppHeader: React.FC<AppHeaderProps> = ({ collapsed, setCollapsed }) => {
   const { theme, toggleTheme } = useTheme();
-
-  // fake user
-  const user = {
-    name: 'Nguyễn Văn Huy',
-    role: 'Admin',
-  };
+  const { user } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
 
   const menuItems = [
     {
@@ -47,6 +45,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ collapsed, setCollapsed }) => {
       icon: <LogoutOutlined />,
       label: 'Đăng xuất',
       danger: true,
+      onClick: () => dispatch(logout()),
     },
   ];
 
@@ -80,8 +79,10 @@ const AppHeader: React.FC<AppHeaderProps> = ({ collapsed, setCollapsed }) => {
             <Avatar icon={<UserOutlined />} />
 
             <div className="flex flex-col leading-tight">
-              <span className="text-sm font-medium">{user.name}</span>
-              <span className="text-xs text-gray-400">{user.role}</span>
+              <span className="text-red-500 text-sm font-medium">
+                {user?.fullName || user?.email}
+              </span>
+              <span className="text-xs text-gray-400">{user?.role}</span>
             </div>
           </div>
         </Dropdown>

@@ -35,22 +35,37 @@ const AntdProvider: React.FC<AntdProviderProps> = ({ children }) => {
         // Customize riêng từng component
         components: {
           Layout: {
-            headerBg: theme === 'dark' ? AppColors.Primary : '#fff',
-            siderBg: theme === 'dark' ? AppColors.Primary : '#fff',
+            headerBg: theme === 'dark' ? AppColors.Secondary : '#fff',
+            siderBg: theme === 'dark' ? AppColors.Secondary : '#fff',
           },
+
           Menu: {
-            itemSelectedBg: AppColors.Selected,
+            itemSelectedBg: AppColors.Primary,
             itemSelectedColor: '#fff',
 
             itemHoverBg: 'rgba(0,0,0,0.04)',
 
-            darkItemSelectedBg: AppColors.Selected,
+            darkItemSelectedBg: AppColors.Primary,
             darkItemHoverBg: 'rgba(255,255,255,0.1)',
           },
+
           Switch: {
-            colorPrimary: AppColors.Secondary,
-            colorPrimaryHover: AppColors.SecondaryHover,
+            colorPrimary: AppColors.Primary,
+            colorPrimaryHover: AppColors.PrimaryHover,
             handleBg: '#fff',
+          },
+
+          Button: {
+            borderRadius: 12,
+            controlHeight: 44,
+
+            fontWeight: 500,
+          },
+
+          Input: {
+            controlHeight: 40,
+
+            borderRadius: 12,
           },
         },
       }}

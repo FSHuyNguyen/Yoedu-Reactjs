@@ -1,15 +1,25 @@
-import { RouterProvider } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from './app/store/store';
+
 import ThemeProvider from './app/providers/theme/ThemeProvider';
 import AntdProvider from './app/providers/antd/AntdProvider';
+
+import { RouterProvider } from 'react-router-dom';
 import { router } from './app/router/routes';
+
+import AppInitializer from './app/AppInitializer';
 
 function App() {
   return (
-    <ThemeProvider>
-      <AntdProvider>
-        <RouterProvider router={router} />
-      </AntdProvider>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider>
+        <AntdProvider>
+          <AppInitializer>
+            <RouterProvider router={router} />
+          </AppInitializer>
+        </AntdProvider>
+      </ThemeProvider>
+    </Provider>
   );
 }
 

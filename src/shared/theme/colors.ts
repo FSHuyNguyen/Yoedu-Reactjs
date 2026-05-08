@@ -1,6 +1,6 @@
 export const AppColors = {
-  Primary: '#001529',
-  Selected: '#1890ff',
-  Secondary: '#005DAC',
-  SecondaryHover: '#1677ff',
+  Primary: '#1890ff',
+  PrimaryHover: '#1677ff',
+  Secondary: '#001529',
+  SecondaryHover: '#000c17',
 };

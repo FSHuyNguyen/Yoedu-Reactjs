@@ -1,26 +1,47 @@
 import { createBrowserRouter } from 'react-router-dom';
-import MainLayout from '@/app/layouts/MainLayout';
 
+import AuthLayout from '../layouts/AuthLayout';
+import LoginPage from '@/features/auth/pages/login/LoginPage';
+import RegisterPage from '@/features/auth/pages/register/RegisterPage';
+
+import MainLayout from '@/app/layouts/MainLayout';
 import Dashboard from '@/features/dashboard/pages';
-import Student from '@/features/students/pages';
-import Course from '@/features/courses/pages';
+import ProtectedRoute from './protected-route';
 
 export const router = createBrowserRouter([
+  /******************** AUTH *********************/
   {
-    path: '/',
-    element: <MainLayout />,
+    path: '/auth',
+    element: <AuthLayout />,
     children: [
       {
-        index: true, // route "/"
-        element: <Dashboard />,
+        path: 'login',
+        element: <LoginPage />,
       },
       {
-        path: 'students',
-        element: <Student />,
+        path: 'register',
+        element: <RegisterPage />,
       },
+    ],
+  },
+
+  /******************** MAIN *********************/
+  {
+    element: <ProtectedRoute />,
+
+    children: [
       {
-        path: 'courses',
-        element: <Course />,
+        path: '/',
+
+        element: <MainLayout />,
+
+        children: [
+          {
+            index: true,
+
+            element: <Dashboard />,
+          },
+        ],
       },
     ],
   },

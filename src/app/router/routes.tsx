@@ -10,6 +10,7 @@ import LoginPage from '@/features/auth/pages/login-page';
 import RegisterPage from '@/features/auth/pages/register-page';
 import DashboardPage from '@/features/dashboard/pages/dashboard';
 import ProfilePage from '@/features/profile/pages/profile-page';
+import AppInit from '../init/app-init';
 
 export const router = createBrowserRouter([
   /******************** AUTH *********************/
@@ -36,8 +37,11 @@ export const router = createBrowserRouter([
       {
         path: '/',
 
-        element: <MainLayout />,
-
+        element: (
+          <AppInit>
+            <MainLayout />
+          </AppInit>
+        ),
         children: [
           {
             index: true,

@@ -9,7 +9,7 @@ import CardCustom from '@/shared/components/card-custom';
 import { FormFieldType } from '@/shared/types/form-field-type';
 import { loginFormFields } from '@/features/auth/constants/login-form-fields';
 import { loginThunk } from '@/features/auth/store/auth.thunk';
-import { showNotification } from '@/shared/utils/notification';
+import { useNotification } from '@/shared/hooks/use-notification';
 
 type LoginFormValues = {
   email: string;
@@ -19,6 +19,7 @@ type LoginFormValues = {
 const LoginPage = () => {
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.auth);
+  const { showNotification } = useNotification();
 
   const navigate = useNavigate();
 

@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { getMeThunk, loginThunk, registerThunk } from './auth.thunk';
+import type { User } from '@/features/profile/types/user.type';
 
 type AuthState = {
-  user: any | null;
+  user: User | null;
   accessToken: string | null;
   loading: boolean;
   error: string | null;

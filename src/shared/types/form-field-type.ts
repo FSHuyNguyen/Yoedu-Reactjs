@@ -4,8 +4,7 @@ export const FormFieldType = {
   Select: 'select',
   Checkbox: 'checkbox',
   DatePicker: 'datePicker',
-  Text: 'text',
-  File: 'file',
+  TextArea: 'textArea',
 } as const;
 
 export type FormFieldTypeKey = (typeof FormFieldType)[keyof typeof FormFieldType];

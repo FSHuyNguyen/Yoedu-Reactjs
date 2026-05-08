@@ -13,6 +13,7 @@ import {
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
 import { logout } from '@/features/auth/store/auth.slice';
 import { useTheme } from '@/app/providers/theme/hooks/useTheme';
+import { useNavigate } from 'react-router-dom';
 
 const { Header } = Layout;
 
@@ -25,12 +26,14 @@ const AppHeader: React.FC<AppHeaderProps> = ({ collapsed, setCollapsed }) => {
   const { theme, toggleTheme } = useTheme();
   const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const menuItems = [
     {
       key: 'profile',
       icon: <ProfileOutlined />,
       label: 'Thông tin cá nhân',
+      onClick: () => navigate('/profile'),
     },
     {
       key: 'settings',

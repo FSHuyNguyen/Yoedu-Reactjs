@@ -8,9 +8,9 @@ import CardCustom from '@/shared/components/card-custom';
 
 import { FormFieldType } from '@/shared/types/form-field-type';
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
-import { showNotification } from '@/shared/utils/notification';
 import { registerThunk } from '@/features/auth/store/auth.thunk';
 import { registerFormFields } from '@/features/auth/constants/register-form-fields';
+import { useNotification } from '@/shared/hooks/use-notification';
 
 type RegisterFormValues = {
   email: string;
@@ -21,6 +21,8 @@ type RegisterFormValues = {
 const RegisterPage = () => {
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.auth);
+
+  const { showNotification } = useNotification();
 
   const navigate = useNavigate();
 

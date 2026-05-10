@@ -8,7 +8,7 @@ import ProtectedRoute from './protected-route';
 
 import LoginPage from '@/features/auth/pages/login-page';
 import RegisterPage from '@/features/auth/pages/register-page';
-import DashboardPage from '@/features/dashboard/pages/dashboard';
+import DashboardPage from '@/features/dashboard/pages/Dashboard';
 import ProfilePage from '@/features/profile/pages/profile-page';
 import AppInit from '../init/app-init';
 

@@ -2,6 +2,7 @@ import EmptyCustom from '@/shared/components/empty-custom';
 import StudentInfoForm from './student-info-form';
 import TeacherInfoForm from './teacher-info-form';
 import { useAppSelector } from '@/app/store/hooks';
+import { UserRole } from '../types/user-role.type';
 
 const RoleInfoTab = () => {
   const { user } = useAppSelector((state) => state.auth);
@@ -9,10 +10,10 @@ const RoleInfoTab = () => {
   if (!user) return null;
 
   switch (user?.role) {
-    case 'STUDENT':
+    case UserRole.STUDENT:
       return <StudentInfoForm student={user.student} />;
 
-    case 'TEACHER':
+    case UserRole.TEACHER:
       return <TeacherInfoForm teacher={user.teacher} />;
 
     default:

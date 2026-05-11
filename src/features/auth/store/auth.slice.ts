@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { getMeThunk, loginThunk, registerThunk } from './auth.thunk';
-import type { User } from '@/features/profile/types/user.type';
+import type { User } from '@/features/users/types/user.type';
 
 type AuthState = {
   user: User | null;

@@ -8,9 +8,10 @@ import ProtectedRoute from './protected-route';
 
 import LoginPage from '@/features/auth/pages/login-page';
 import RegisterPage from '@/features/auth/pages/register-page';
-import DashboardPage from '@/features/dashboard/pages/Dashboard';
-import ProfilePage from '@/features/profile/pages/profile-page';
+import DashboardPage from '@/features/dashboard/pages/dashboard';
 import AppInit from '../init/app-init';
+import StudentPage from '@/features/students/pages/student-page';
+import UserProfilePage from '@/features/users/pages/user-profile-page';
 
 export const router = createBrowserRouter([
   /******************** AUTH *********************/
@@ -51,7 +52,12 @@ export const router = createBrowserRouter([
           {
             path: 'profile',
 
-            element: <ProfilePage />,
+            element: <UserProfilePage />,
+          },
+          {
+            path: 'students',
+
+            element: <StudentPage />,
           },
         ],
       },

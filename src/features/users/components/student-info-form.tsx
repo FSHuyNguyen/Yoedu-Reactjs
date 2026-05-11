@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 
 import { Button, Form, Input } from 'antd';
-import type { Student } from '../types/user.type';
 import CardCustom from '@/shared/components/card-custom';
 import { studentFormFields } from '../contants/student-form-fields';
 import { useAppDispatch } from '@/app/store/hooks';
-import { updateStudentInfo } from '@/features/profile/api/profile.api';
 import { getMeThunk } from '@/features/auth/store/auth.thunk';
 import { useNotification } from '@/shared/hooks/use-notification';
+import type { Student } from '@/features/students/types/student.type';
+import { studentRoleStudentApi } from '@/features/students/api/student.api';
 
 interface Props {
   student: Student | undefined;
@@ -21,7 +21,7 @@ const StudentInfoForm = ({ student }: Props) => {
 
   const onFinish = async (values: Student) => {
     try {
-      const res = await updateStudentInfo(values);
+      const res = await studentRoleStudentApi.update(values);
 
       if (!res.success) {
         showNotification(

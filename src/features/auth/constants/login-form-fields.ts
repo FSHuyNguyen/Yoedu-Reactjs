@@ -1,4 +1,4 @@
-import { FormFieldType } from '@/shared/types/form-field-type';
+import { FormFieldType } from '@/shared/types/form-field.type';
 import { rules } from '@/shared/utils/rules';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 

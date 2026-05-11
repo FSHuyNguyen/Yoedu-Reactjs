@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
 
 import YoeduLogo from '@/assets/images/yoedu-logo.svg';
 import CardCustom from '@/shared/components/card-custom';
-import { FormFieldType } from '@/shared/types/form-field-type';
+import { FormFieldType } from '@/shared/types/form-field.type';
 import { loginFormFields } from '@/features/auth/constants/login-form-fields';
 import { loginThunk } from '@/features/auth/store/auth.thunk';
 import { useNotification } from '@/shared/hooks/use-notification';
@@ -41,8 +41,8 @@ const LoginPage = () => {
       );
 
       navigate('/', { replace: true });
-    } catch (err: any) {
-      showNotification('error', 'Đăng nhập thất bại', err || 'Đã xảy ra lỗi. Vui lòng thử lại.');
+    } catch (error: any) {
+      showNotification('error', 'Đăng nhập thất bại', error || 'Đã xảy ra lỗi. Vui lòng thử lại.');
     }
   };
 

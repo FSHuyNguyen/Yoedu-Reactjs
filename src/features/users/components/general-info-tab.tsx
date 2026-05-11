@@ -2,11 +2,11 @@ import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
 import { Button, Flex, Form, Input } from 'antd';
 import { generalInfoFormFields } from '../contants/general-info-form-fields';
 import CardCustom from '@/shared/components/card-custom';
-import { updateGeneralInfo } from '../api/profile.api';
 import type { User } from '../types/user.type';
 import { useEffect } from 'react';
 import { getMeThunk } from '@/features/auth/store/auth.thunk';
 import { useNotification } from '@/shared/hooks/use-notification';
+import { userRoleUserApi } from '../api/user.api';
 
 const GeneralInfoTab = () => {
   const { user } = useAppSelector((state) => state.auth);
@@ -14,20 +14,13 @@ const GeneralInfoTab = () => {
 
   const { showNotification } = useNotification();
 
+  const { update } = userRoleUserApi;
+
   const [form] = Form.useForm();
 
   const onFinish = async (values: User) => {
     try {
-      const res = await updateGeneralInfo(values);
-
-      if (!res.success) {
-        showNotification(
-          'error',
-          'Cập nhật thất bại',
-          res.message || 'Đã có lỗi xảy ra khi cập nhật thông tin cá nhân',
-        );
-        return;
-      }
+      const res = await update(values);
 
       dispatch(getMeThunk());
 
@@ -36,11 +29,11 @@ const GeneralInfoTab = () => {
         'Cập nhật thành công',
         res.message || 'Thông tin cá nhân đã được cập nhật thành công',
       );
-    } catch (error) {
+    } catch (error: any) {
       showNotification(
         'error',
         'Cập nhật thất bại',
-        'Đã có lỗi xảy ra khi cập nhật thông tin cá nhân',
+        error?.response?.data?.message || 'Đã có lỗi xảy ra khi cập nhật thông tin cá nhân',
       );
     }
   };
@@ -62,6 +55,7 @@ const GeneralInfoTab = () => {
               <Input />
             </Form.Item>
           ))}
+
           <Button type="primary" htmlType="submit">
             Cập nhật
           </Button>

@@ -11,9 +11,11 @@ const RoleInfoTab = () => {
 
   switch (user?.role) {
     case UserRole.STUDENT:
+      if (!user.student) return null;
       return <StudentInfoForm student={user.student} />;
 
     case UserRole.TEACHER:
+      if (!user.teacher) return null;
       return <TeacherInfoForm teacher={user.teacher} />;
 
     default:

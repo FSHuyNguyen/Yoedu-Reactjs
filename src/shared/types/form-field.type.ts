@@ -1,5 +1,6 @@
 export const FormFieldType = {
   Input: 'input',
+  InputNumber: 'inputNumber',
   InputPassword: 'inputPassword',
   Select: 'select',
   Checkbox: 'checkbox',

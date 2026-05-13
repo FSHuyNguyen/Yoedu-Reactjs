@@ -1,9 +1,9 @@
 import { Tag } from 'antd';
 
-import { STATUS, type Status } from '@/shared/types/status.type';
+import { STATUS, type StatusType } from '@/shared/types/status.type';
 
 interface StatusTagProps {
-  status?: Status;
+  status?: StatusType;
 }
 
 const StatusTag = ({ status }: StatusTagProps) => {

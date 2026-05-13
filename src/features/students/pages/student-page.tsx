@@ -2,18 +2,18 @@ import useTablePage from '@/shared/hooks/use-table';
 import type { Student } from '../types/student.type';
 import PageHeader from '@/shared/components/page-header';
 import { Button } from 'antd';
-import SearchInput from '@/shared/components/search-input';
 import StudentTable from '../components/student-table';
-import { useNotification } from '@/shared/hooks/use-notification';
 import { studentFormFields } from '../constants/student-form-fields';
 import FormModalCustom from '@/shared/components/form-modal-custom';
 import { studentRoleAdminApi } from '../api/student.api';
 import { useFormModal } from '@/shared/hooks/use-form-modal';
 import { FormModalMode } from '@/shared/types/form-modal-mode.type';
 import { userRoleAdminApi } from '@/features/users/api/user.api';
+import { studentFilters } from '../constants/student-filter-table';
+import FilterCustom from '@/shared/components/filter-table-custom';
+import type { StudentFilterParams } from '../types/student-filter-params.type';
 
 const StudentPage = () => {
-  const { showNotification } = useNotification();
   const { getAll, create, update } = studentRoleAdminApi;
   const { changeStatus, remove } = userRoleAdminApi;
 
@@ -27,58 +27,29 @@ const StudentPage = () => {
 
     pagination,
 
-    handleSearch,
+    filterValues,
+
+    handleFilterChange,
+
+    handleFilterSubmit,
+
+    handleFilterReset,
 
     handleChangePage,
 
+    handleDelete,
+
+    handleChangeStatus,
+
     refetch,
-  } = useTablePage<Student>({
+  } = useTablePage<Student, StudentFilterParams>({
     fetchApi: getAll,
+    removeApi: remove,
+    changeStatusApi: changeStatus,
   });
 
-  const handleDeleteStudent = async (student: Student) => {
-    try {
-      const res = await remove(student.userId);
-
-      showNotification(
-        'success',
-        'Xóa học viên thành công',
-        res.message || 'Học viên đã được xóa thành công',
-      );
-
-      refetch();
-    } catch (error: any) {
-      console.log(error);
-      showNotification(
-        'error',
-        'Xóa học viên thất bại',
-        error?.response?.data?.message || 'Đã có lỗi xảy ra khi xóa học viên',
-      );
-    }
-  };
-
-  const handleChangeStatus = async (student: Student) => {
-    try {
-      const res = await changeStatus(student.userId);
-
-      showNotification(
-        'success',
-        'Cập nhật trạng thái',
-        res.message || 'Trạng thái học viên đã được cập nhật thành công',
-      );
-
-      refetch();
-    } catch (error: any) {
-      showNotification(
-        'error',
-        'Cập nhật trạng thái',
-        error?.response?.data?.message || 'Đã có lỗi xảy ra khi cập nhật trạng thái học viên',
-      );
-    }
-  };
-
   return (
-    <div>
+    <div className="flex flex-col h-full">
       <PageHeader
         title="Quản lý học viên"
         subtitle="Danh sách học viên"
@@ -90,7 +61,13 @@ const StudentPage = () => {
       />
 
       <div className="mb-4">
-        <SearchInput onSearch={handleSearch} />
+        <FilterCustom
+          dataFilters={studentFilters}
+          values={filterValues}
+          onChange={handleFilterChange}
+          onReset={handleFilterReset}
+          onSubmit={handleFilterSubmit}
+        />
       </div>
 
       <StudentTable
@@ -100,25 +77,22 @@ const StudentPage = () => {
         onChangePage={handleChangePage}
         onView={openView}
         onEdit={openEdit}
-        onDelete={handleDeleteStudent}
-        onChangeStatus={handleChangeStatus}
+        onDelete={(student) => handleDelete(student.userId)}
+        onChangeStatus={(student) => handleChangeStatus(student.userId)}
       />
 
       <FormModalCustom<Student>
         open={open}
-        title={
-          mode === FormModalMode.CREATE
-            ? 'Thêm học viên'
-            : mode === FormModalMode.EDIT
-              ? 'Cập nhật học viên'
-              : 'Thông tin học viên'
-        }
+        title="Học Viên"
+        mode={mode}
         initialValues={selectedRecord}
         disabled={mode === FormModalMode.VIEW}
         onCancel={close}
         onSuccess={refetch}
         onSubmit={
-          mode === FormModalMode.CREATE ? create : (values) => update(selectedRecord!.id, values)
+          mode === FormModalMode.CREATE
+            ? create
+            : (values) => update(selectedRecord!.userId, values)
         }
         fields={studentFormFields}
       />

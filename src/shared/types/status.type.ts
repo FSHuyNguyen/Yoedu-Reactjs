@@ -6,4 +6,4 @@ export const STATUS = {
   DELETED: 'DELETED',
 } as const;
 
-export type Status = (typeof STATUS)[keyof typeof STATUS];
+export type StatusType = (typeof STATUS)[keyof typeof STATUS];

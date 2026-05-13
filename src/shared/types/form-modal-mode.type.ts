@@ -4,4 +4,4 @@ export const FormModalMode = {
   EDIT: 'edit',
 } as const;
 
-export type FormModalMode = (typeof FormModalMode)[keyof typeof FormModalMode];
+export type FormModalModeType = (typeof FormModalMode)[keyof typeof FormModalMode];

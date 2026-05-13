@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { FormModalMode } from '../types/form-modal-mode.type';
+import { FormModalMode, type FormModalModeType } from '../types/form-modal-mode.type';
 
 export const useFormModal = <T>() => {
   const [open, setOpen] = useState(false);
-  const [mode, setMode] = useState<FormModalMode>(FormModalMode.CREATE);
+  const [mode, setMode] = useState<FormModalModeType>(FormModalMode.CREATE);
   const [selectedRecord, setSelectedRecord] = useState<T | null>(null);
 
   const openCreate = () => {

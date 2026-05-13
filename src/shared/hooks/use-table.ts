@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
+
 import { PAGE_DEFAULT, PAGE_LIMIT } from '../constants/pagination';
+
+import { useNotification } from './use-notification';
 
 interface PaginationResponse {
   total: number;
@@ -9,20 +12,37 @@ interface PaginationResponse {
   limit: number;
 }
 
-interface UseTablePageProps {
-  fetchApi: (params: any) => Promise<any>;
+interface UseTablePageProps<P> {
+  fetchApi: (params: P) => Promise<any>;
+
+  removeApi?: (id: string) => Promise<any>;
+
+  changeStatusApi?: (id: string) => Promise<any>;
+
+  initialFilters?: Partial<P>;
 }
 
-const useTablePage = <T>({ fetchApi }: UseTablePageProps) => {
+const useTablePage = <T, P>({
+  fetchApi,
+  removeApi,
+  changeStatusApi,
+  initialFilters = {},
+}: UseTablePageProps<P>) => {
+  const { showNotification } = useNotification();
+
   const [data, setData] = useState<T[]>([]);
 
   const [loading, setLoading] = useState(false);
 
-  const [params, setParams] = useState({
+  // UI filter state
+  const [filterValues, setFilterValues] = useState<Partial<P>>(initialFilters);
+
+  // params thực sự fetch API
+  const [params, setParams] = useState<P>({
     page: PAGE_DEFAULT,
     limit: PAGE_LIMIT,
-    keySearch: '',
-  });
+    ...initialFilters,
+  } as P);
 
   const [pagination, setPagination] = useState<PaginationResponse>({
     total: 0,
@@ -56,23 +76,76 @@ const useTablePage = <T>({ fetchApi }: UseTablePageProps) => {
     fetchData();
   }, [fetchData]);
 
-  const handleSearch = (value: string) => {
+  const handleFilterChange = (values: Partial<P>) => {
+    setFilterValues(values);
+  };
+
+  const handleFilterSubmit = () => {
     setParams((prev) => ({
       ...prev,
 
-      keySearch: value,
+      ...filterValues,
 
       page: PAGE_DEFAULT,
     }));
   };
 
+  const handleFilterReset = () => {
+    setFilterValues(initialFilters);
+
+    setParams({
+      page: PAGE_DEFAULT,
+      limit: PAGE_LIMIT,
+      ...initialFilters,
+    } as P);
+  };
+
   const handleChangePage = (page: number, limit: number) => {
     setParams((prev) => ({
       ...prev,
-
       page,
       limit,
     }));
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!removeApi) return;
+
+    try {
+      const res = await removeApi(id);
+
+      showNotification('success', 'Xóa thành công', res.message || 'Xóa thành công');
+
+      fetchData();
+    } catch (error: any) {
+      showNotification(
+        'error',
+        'Xóa thất bại',
+        error?.response?.data?.message || 'Đã có lỗi xảy ra',
+      );
+    }
+  };
+
+  const handleChangeStatus = async (id: string) => {
+    if (!changeStatusApi) return;
+
+    try {
+      const res = await changeStatusApi(id);
+
+      showNotification(
+        'success',
+        'Cập nhật trạng thái',
+        res.message || 'Cập nhật trạng thái thành công',
+      );
+
+      fetchData();
+    } catch (error: any) {
+      showNotification(
+        'error',
+        'Cập nhật trạng thái',
+        error?.response?.data?.message || 'Đã có lỗi xảy ra',
+      );
+    }
   };
 
   return {
@@ -84,11 +157,23 @@ const useTablePage = <T>({ fetchApi }: UseTablePageProps) => {
 
     params,
 
+    filterValues,
+
     setParams,
 
-    handleSearch,
+    setFilterValues,
+
+    handleFilterChange,
+
+    handleFilterSubmit,
+
+    handleFilterReset,
 
     handleChangePage,
+
+    handleDelete,
+
+    handleChangeStatus,
 
     refetch: fetchData,
   };

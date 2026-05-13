@@ -1,4 +1,4 @@
-import { Button, Form, Image, Input } from 'antd';
+import { Button, Form, Image } from 'antd';
 
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -10,6 +10,8 @@ import { FormFieldType } from '@/shared/types/form-field.type';
 import { loginFormFields } from '@/features/auth/constants/login-form-fields';
 import { loginThunk } from '@/features/auth/store/auth.thunk';
 import { useNotification } from '@/shared/hooks/use-notification';
+import InputCustom from '@/shared/components/input-custom';
+import InputPasswordCustom from '@/shared/components/input-password-custom';
 
 type LoginFormValues = {
   email: string;
@@ -64,10 +66,12 @@ const LoginPage = () => {
             {(() => {
               switch (field.type) {
                 case FormFieldType.InputPassword:
-                  return <Input.Password placeholder={field.placeholder} prefix={<field.icon />} />;
+                  return (
+                    <InputPasswordCustom placeholder={field.placeholder} prefix={<field.icon />} />
+                  );
                 case FormFieldType.Input:
                 default:
-                  return <Input placeholder={field.placeholder} prefix={<field.icon />} />;
+                  return <InputCustom placeholder={field.placeholder} prefix={<field.icon />} />;
               }
             })()}
           </Form.Item>

@@ -16,16 +16,21 @@ import UserProfilePage from '@/features/users/pages/user-profile-page';
 export const router = createBrowserRouter([
   /******************** AUTH *********************/
   {
-    path: '/auth',
-    element: <AuthLayout />,
+    element: <ProtectedRoute requireAuth={false} />,
     children: [
       {
-        path: 'login',
-        element: <LoginPage />,
-      },
-      {
-        path: 'register',
-        element: <RegisterPage />,
+        path: '/auth',
+        element: <AuthLayout />,
+        children: [
+          {
+            path: 'login',
+            element: <LoginPage />,
+          },
+          {
+            path: 'register',
+            element: <RegisterPage />,
+          },
+        ],
       },
     ],
   },
@@ -33,11 +38,9 @@ export const router = createBrowserRouter([
   /******************** MAIN *********************/
   {
     element: <ProtectedRoute />,
-
     children: [
       {
         path: '/',
-
         element: (
           <AppInit>
             <MainLayout />
@@ -46,17 +49,14 @@ export const router = createBrowserRouter([
         children: [
           {
             index: true,
-
             element: <DashboardPage />,
           },
           {
             path: 'profile',
-
             element: <UserProfilePage />,
           },
           {
             path: 'students',
-
             element: <StudentPage />,
           },
         ],

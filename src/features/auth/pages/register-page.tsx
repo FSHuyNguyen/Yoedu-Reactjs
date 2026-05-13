@@ -1,4 +1,4 @@
-import { Button, Form, Image, Input } from 'antd';
+import { Button, Form, Image } from 'antd';
 
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -11,6 +11,8 @@ import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
 import { registerThunk } from '@/features/auth/store/auth.thunk';
 import { registerFormFields } from '@/features/auth/constants/register-form-fields';
 import { useNotification } from '@/shared/hooks/use-notification';
+import InputCustom from '@/shared/components/input-custom';
+import InputPasswordCustom from '@/shared/components/input-password-custom';
 
 type RegisterFormValues = {
   email: string;
@@ -70,10 +72,12 @@ const RegisterPage = () => {
             {(() => {
               switch (field.type) {
                 case FormFieldType.InputPassword:
-                  return <Input.Password placeholder={field.placeholder} prefix={<field.icon />} />;
+                  return (
+                    <InputPasswordCustom placeholder={field.placeholder} prefix={<field.icon />} />
+                  );
                 case FormFieldType.Input:
                 default:
-                  return <Input placeholder={field.placeholder} prefix={<field.icon />} />;
+                  return <InputCustom placeholder={field.placeholder} prefix={<field.icon />} />;
               }
             })()}
           </Form.Item>

@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
-import { Button, Flex, Form, Input } from 'antd';
+import { Button, Col, Flex, Form } from 'antd';
 import { generalInfoFormFields } from '../contants/general-info-form-fields';
 import CardCustom from '@/shared/components/card-custom';
 import type { User } from '../types/user.type';
@@ -7,6 +7,13 @@ import { useEffect } from 'react';
 import { getMeThunk } from '@/features/auth/store/auth.thunk';
 import { useNotification } from '@/shared/hooks/use-notification';
 import { userRoleUserApi } from '../api/user.api';
+import { FormFieldType } from '@/shared/types/form-field.type';
+import RowCustom from '@/shared/components/row-custom';
+import { formatDateToPicker } from '@/shared/utils/date';
+import DatePickerCustom from '@/shared/components/datepicker-custom';
+import SelectCustom from '@/shared/components/select-custom';
+import InputCustom from '@/shared/components/input-custom';
+import InputTextAreaCustom from '@/shared/components/input-textarea-custom';
 
 const GeneralInfoTab = () => {
   const { user } = useAppSelector((state) => state.auth);
@@ -40,7 +47,10 @@ const GeneralInfoTab = () => {
 
   useEffect(() => {
     if (user) {
-      form.setFieldsValue(user);
+      form.setFieldsValue({
+        ...user,
+        dateOfBirth: user.dateOfBirth ? formatDateToPicker(user.dateOfBirth) : null,
+      });
     }
   }, [user, form]);
 
@@ -50,11 +60,30 @@ const GeneralInfoTab = () => {
     <Flex vertical gap={16}>
       <CardCustom title="Thông tin cá nhân">
         <Form form={form} layout="vertical" onFinish={onFinish}>
-          {generalInfoFormFields.map((field) => (
-            <Form.Item key={field.name} label={field.label} name={field.name} rules={field.rules}>
-              <Input />
-            </Form.Item>
-          ))}
+          <RowCustom>
+            {generalInfoFormFields.map((field) => (
+              <Col key={field.name} span={12}>
+                <Form.Item label={field.label} name={field.name} rules={field.rules}>
+                  {(() => {
+                    switch (field.type) {
+                      case FormFieldType.Input:
+                        return <InputCustom placeholder={field.placeholder} />;
+                      case FormFieldType.Select:
+                        return (
+                          <SelectCustom placeholder={field.placeholder} options={field.options} />
+                        );
+                      case FormFieldType.DatePicker:
+                        return <DatePickerCustom placeholder={field.placeholder} />;
+                      case FormFieldType.TextArea:
+                        return <InputTextAreaCustom placeholder={field.placeholder} />;
+                      default:
+                        return null;
+                    }
+                  })()}
+                </Form.Item>
+              </Col>
+            ))}
+          </RowCustom>
 
           <Button type="primary" htmlType="submit">
             Cập nhật

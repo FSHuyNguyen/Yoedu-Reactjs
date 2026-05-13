@@ -12,6 +12,7 @@ import type { Student } from '../types/student.type';
 import StatusTag from '@/shared/components/status-tag';
 import { STATUS } from '@/shared/types/status.type';
 import ActionGroup from '@/shared/components/action-group';
+import CardCustom from '@/shared/components/card-custom';
 
 interface StudentTableProps {
   data: Student[];
@@ -130,22 +131,25 @@ const StudentTable: React.FC<StudentTableProps> = ({
   ];
 
   return (
-    <TableCustom<Student>
-      columns={columns}
-      dataSource={data}
-      loading={loading}
-      pagination={{
-        current: pagination.page,
-        pageSize: pagination.limit,
-        total: pagination.total,
+    <CardCustom className="flex-1">
+      <TableCustom<Student>
+        columns={columns}
+        dataSource={data}
+        loading={loading}
+        pagination={{
+          current: pagination.page,
+          pageSize: pagination.limit,
+          total: pagination.total,
 
-        showSizeChanger: true,
+          showSizeChanger: true,
 
-        onChange: (page, pageSize) => {
-          onChangePage(page, pageSize);
-        },
-      }}
-    />
+          onChange: (page, pageSize) => {
+            onChangePage(page, pageSize);
+          },
+        }}
+        className="py-2"
+      />
+    </CardCustom>
   );
 };
 

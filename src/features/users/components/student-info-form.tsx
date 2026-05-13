@@ -1,16 +1,24 @@
 import { useEffect } from 'react';
 
-import { Button, Form, Input } from 'antd';
+import { Button, Col, Form } from 'antd';
 import CardCustom from '@/shared/components/card-custom';
-import { studentFormFields } from '../contants/student-form-fields';
 import { useAppDispatch } from '@/app/store/hooks';
 import { getMeThunk } from '@/features/auth/store/auth.thunk';
 import { useNotification } from '@/shared/hooks/use-notification';
 import type { Student } from '@/features/students/types/student.type';
 import { studentRoleStudentApi } from '@/features/students/api/student.api';
+import RowCustom from '@/shared/components/row-custom';
+import { FormFieldType } from '@/shared/types/form-field.type';
+import DatePickerCustom from '@/shared/components/datepicker-custom';
+import { formatDateToPicker } from '@/shared/utils/date';
+import InputNumberCustom from '@/shared/components/input-number-custom';
+import { studentFormFields } from '@/features/students/constants/student-form-fields';
+import SelectCustom from '@/shared/components/select-custom';
+import InputCustom from '@/shared/components/input-custom';
+import InputTextAreaCustom from '@/shared/components/input-textarea-custom';
 
 interface Props {
-  student: Student | undefined;
+  student: Student;
 }
 
 const StudentInfoForm = ({ student }: Props) => {
@@ -50,20 +58,54 @@ const StudentInfoForm = ({ student }: Props) => {
 
   useEffect(() => {
     if (student) {
-      form.setFieldsValue(student);
+      form.setFieldsValue({
+        ...student,
+        joinedAt: student.joinedAt ? formatDateToPicker(student.joinedAt) : null,
+      });
     }
   }, [student, form]);
-
-  if (!student) return null;
 
   return (
     <CardCustom title="Thông tin học viên">
       <Form form={form} layout="vertical" onFinish={onFinish}>
-        {studentFormFields.map((field) => (
-          <Form.Item key={field.name} label={field.label} name={field.name} rules={field.rules}>
-            <Input placeholder={field.placeholder} disabled={field.disabled} />
-          </Form.Item>
-        ))}
+        <RowCustom>
+          {studentFormFields.map((field) => (
+            <Col key={field.name} span={12}>
+              <Form.Item label={field.label} name={field.name} rules={field.rules}>
+                {(() => {
+                  switch (field.type) {
+                    case FormFieldType.Input:
+                      return (
+                        <InputCustom placeholder={field.placeholder} disabled={field.disabled} />
+                      );
+                    case FormFieldType.InputNumber:
+                      return (
+                        <InputNumberCustom
+                          placeholder={field.placeholder}
+                          disabled={field.disabled}
+                        />
+                      );
+                    case FormFieldType.Select:
+                      return (
+                        <SelectCustom placeholder={field.placeholder} options={field.options} />
+                      );
+                    case FormFieldType.DatePicker:
+                      return (
+                        <DatePickerCustom
+                          placeholder={field.placeholder}
+                          disabled={field.disabled}
+                        />
+                      );
+                    case FormFieldType.TextArea:
+                      return <InputTextAreaCustom placeholder={field.placeholder} />;
+                    default:
+                      return null;
+                  }
+                })()}
+              </Form.Item>
+            </Col>
+          ))}
+        </RowCustom>
 
         <Button type="primary" htmlType="submit">
           Cập nhật

@@ -12,6 +12,7 @@ import DashboardPage from '@/features/dashboard/pages/dashboard';
 import AppInit from '../init/app-init';
 import StudentPage from '@/features/students/pages/student-page';
 import UserProfilePage from '@/features/users/pages/user-profile-page';
+import TeacherPage from '@/features/teachers/pages/teacher-page';
 
 export const router = createBrowserRouter([
   /******************** AUTH *********************/
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
           {
             path: 'students',
             element: <StudentPage />,
+          },
+          {
+            path: 'teachers',
+            element: <TeacherPage />,
           },
         ],
       },

@@ -13,7 +13,7 @@ export const studentFormFields: FormField<Student>[] = [
     type: FormFieldType.Input,
     placeholder: 'Mã sinh viên',
     disabled: ({ role, mode }: FormContext) =>
-      role !== UserRole.ADMIN || mode === FormModalMode.CREATE,
+      role !== UserRole.ADMIN || (mode && mode === FormModalMode.CREATE),
   },
 
   // ===== Parent Info =====

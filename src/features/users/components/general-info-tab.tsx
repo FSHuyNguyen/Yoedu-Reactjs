@@ -14,6 +14,8 @@ import DatePickerCustom from '@/shared/components/datepicker/datepicker-custom';
 import SelectCustom from '@/shared/components/select/select-custom';
 import InputCustom from '@/shared/components/input/input-custom';
 import InputTextAreaCustom from '@/shared/components/input/input-textarea-custom';
+import InputPasswordCustom from '@/shared/components/input/input-password-custom';
+import UploadImageCustom from '@/shared/components/upload/upload-image-custom';
 
 const GeneralInfoTab = () => {
   const { user } = useAppSelector((state) => state.auth);
@@ -61,28 +63,39 @@ const GeneralInfoTab = () => {
       <CardCustom title="Thông tin cá nhân">
         <Form form={form} layout="vertical" onFinish={onFinish}>
           <RowCustom>
-            {generalInfoFormFields.map((field) => (
-              <Col key={field.name} span={12}>
-                <Form.Item label={field.label} name={field.name} rules={field.rules}>
-                  {(() => {
-                    switch (field.type) {
-                      case FormFieldType.Input:
-                        return <InputCustom placeholder={field.placeholder} />;
-                      case FormFieldType.Select:
-                        return (
-                          <SelectCustom placeholder={field.placeholder} options={field.options} />
-                        );
-                      case FormFieldType.DatePicker:
-                        return <DatePickerCustom placeholder={field.placeholder} />;
-                      case FormFieldType.TextArea:
-                        return <InputTextAreaCustom placeholder={field.placeholder} />;
-                      default:
-                        return null;
-                    }
-                  })()}
-                </Form.Item>
-              </Col>
-            ))}
+            {generalInfoFormFields
+              .filter((field) => field.name !== 'password')
+              .map((field) => (
+                <Col key={field.name} span={field.col || 12}>
+                  <Form.Item label={field.label} name={field.name} rules={field.rules}>
+                    {(() => {
+                      switch (field.type) {
+                        case FormFieldType.Input:
+                          return <InputCustom placeholder={field.placeholder} />;
+                        case FormFieldType.InputPassword:
+                          return <InputPasswordCustom placeholder={field.placeholder} />;
+                        case FormFieldType.ImageUpload:
+                          return (
+                            <UploadImageCustom
+                              value={form.getFieldValue(field.name)}
+                              onChange={(value) => form.setFieldsValue({ [field.name]: value })}
+                            />
+                          );
+                        case FormFieldType.Select:
+                          return (
+                            <SelectCustom placeholder={field.placeholder} options={field.options} />
+                          );
+                        case FormFieldType.DatePicker:
+                          return <DatePickerCustom placeholder={field.placeholder} />;
+                        case FormFieldType.TextArea:
+                          return <InputTextAreaCustom placeholder={field.placeholder} />;
+                        default:
+                          return null;
+                      }
+                    })()}
+                  </Form.Item>
+                </Col>
+              ))}
           </RowCustom>
 
           <Button type="primary" htmlType="submit">

@@ -1,8 +1,7 @@
-import { Layout, Avatar, Dropdown, Badge, Switch } from 'antd';
+import { Layout, Dropdown, Badge, Switch } from 'antd';
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
-  UserOutlined,
   BellOutlined,
   LogoutOutlined,
   SettingOutlined,
@@ -14,6 +13,7 @@ import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
 import { logout } from '@/features/auth/store/auth.slice';
 import { useTheme } from '@/app/providers/theme/hooks/useTheme';
 import { useNavigate } from 'react-router-dom';
+import UserAvatar from '@/shared/components/avatar/user-avatar';
 
 const { Header } = Layout;
 
@@ -79,7 +79,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({ collapsed, setCollapsed }) => {
         {/* User dropdown */}
         <Dropdown menu={{ items: menuItems }} placement="bottomRight">
           <div className="flex items-center gap-2 cursor-pointer">
-            <Avatar icon={<UserOutlined />} />
+            <UserAvatar size={46} />
 
             <div className="flex flex-col leading-tight">
               <span className="text-red-500 text-sm font-medium">

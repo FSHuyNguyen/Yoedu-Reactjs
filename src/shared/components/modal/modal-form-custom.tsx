@@ -1,4 +1,4 @@
-import { Button, Col, Form } from 'antd';
+import { Button, Col, Form, Tabs } from 'antd';
 import ModalCustom from '@/shared/components/modal/modal-custom';
 import { useState, useEffect } from 'react';
 import { FormFieldType, type FormFieldTypeKey } from '../../types/form-field.type';
@@ -14,10 +14,11 @@ import InputCustom from '../input/input-custom';
 import InputNumberCustom from '../input/input-number-custom';
 import InputPasswordCustom from '../input/input-password-custom';
 import InputTextAreaCustom from '../input/input-textarea-custom';
+import UploadImageCustom from '../upload/upload-image-custom';
 
 export interface FormContext {
   role: UserRole;
-  mode: FormModalModeType;
+  mode?: FormModalModeType;
 }
 
 export interface FormField<T> {
@@ -37,6 +38,14 @@ export interface FormField<T> {
     label: string;
     value: string | number;
   }[];
+
+  col?: number;
+}
+
+export interface SectionForm<T> {
+  key: string;
+  label: string;
+  fields: FormField<T>[];
 }
 
 interface ModalFormCustomProps<T> {
@@ -50,7 +59,7 @@ interface ModalFormCustomProps<T> {
 
   loading?: boolean;
 
-  fields: FormField<T>[];
+  sections: SectionForm<T>[];
 
   disabled?: boolean;
 
@@ -66,7 +75,7 @@ const ModalFormCustom = <T,>({
   title,
   mode,
   initialValues,
-  fields,
+  sections,
   onCancel,
   onSuccess,
   onSubmit,
@@ -83,17 +92,19 @@ const ModalFormCustom = <T,>({
         ...initialValues,
       };
 
-      fields.forEach((field) => {
-        const value = initialValues[field.name];
+      sections.forEach((section) => {
+        section.fields.forEach((field) => {
+          const value = initialValues[field.name];
 
-        if (field.type === FormFieldType.DatePicker && value) {
-          formattedValues[field.name as string] = formatDateToPicker(value as string);
-        }
+          if (field.type === FormFieldType.DatePicker && value) {
+            formattedValues[field.name as string] = formatDateToPicker(value as string);
+          }
+        });
       });
 
       form.setFieldsValue(formattedValues);
     }
-  }, [open, initialValues, fields, form]);
+  }, [open, initialValues, sections, form]);
 
   const handleSubmit = async (values: T) => {
     try {
@@ -133,68 +144,89 @@ const ModalFormCustom = <T,>({
       footer={null}
     >
       <Form form={form} layout="vertical" onFinish={handleSubmit}>
-        <RowCustom>
-          {fields.map((field) => (
-            <Col key={field.name as string} span={12}>
-              <Form.Item name={field.name as string} label={field.label} rules={field.rules}>
-                {(() => {
-                  const isDisabled =
-                    typeof field.disabled === 'function'
-                      ? field.disabled({ role: user?.role as UserRole, mode })
-                      : field.disabled;
+        <Tabs
+          items={sections.map((section) => ({
+            key: section.key,
+            label: section.label,
+            children: (
+              <RowCustom>
+                {section.fields
+                  .filter((field) => mode === FormModalMode.CREATE || field.name !== 'password') // Nếu EDIT, VIEW THÌ KHÔNG HIỂN THỊ TRƯỜNG PASSWORD
+                  .map((field) => (
+                    <Col key={field.name as string} span={field.col || 12}>
+                      <Form.Item
+                        name={field.name as string}
+                        label={field.label}
+                        rules={field.rules}
+                      >
+                        {(() => {
+                          const isDisabled =
+                            typeof field.disabled === 'function'
+                              ? field.disabled({ role: user?.role as UserRole, mode })
+                              : field.disabled;
 
-                  switch (field.type) {
-                    case FormFieldType.Input:
-                      return (
-                        <InputCustom
-                          placeholder={field.placeholder}
-                          disabled={isDisabled || disabled}
-                        />
-                      );
-                    case FormFieldType.InputNumber:
-                      return (
-                        <InputNumberCustom
-                          placeholder={field.placeholder}
-                          disabled={isDisabled || disabled}
-                        />
-                      );
-                    case FormFieldType.InputPassword:
-                      return (
-                        <InputPasswordCustom
-                          placeholder={field.placeholder}
-                          disabled={isDisabled || disabled}
-                        />
-                      );
-                    case FormFieldType.Select:
-                      return (
-                        <SelectCustom
-                          placeholder={field.placeholder}
-                          options={field.options}
-                          disabled={isDisabled || disabled}
-                        />
-                      );
-                    case FormFieldType.DatePicker:
-                      return (
-                        <DatePickerCustom
-                          placeholder={field.placeholder}
-                          disabled={isDisabled || disabled}
-                        />
-                      );
-                    case FormFieldType.TextArea:
-                      return (
-                        <InputTextAreaCustom
-                          placeholder={field.placeholder}
-                          disabled={isDisabled || disabled}
-                        />
-                      );
-                    default:
-                      return null;
-                  }
-                })()}
-              </Form.Item>
-            </Col>
-          ))}
-        </RowCustom>
+                          switch (field.type) {
+                            case FormFieldType.Input:
+                              return (
+                                <InputCustom
+                                  placeholder={field.placeholder}
+                                  disabled={isDisabled || disabled}
+                                />
+                              );
+                            case FormFieldType.ImageUpload:
+                              return (
+                                <UploadImageCustom
+                                  value={form.getFieldValue(field.name)}
+                                  onChange={(value) => form.setFieldsValue({ [field.name]: value })}
+                                />
+                              );
+                            case FormFieldType.InputNumber:
+                              return (
+                                <InputNumberCustom
+                                  placeholder={field.placeholder}
+                                  disabled={isDisabled || disabled}
+                                />
+                              );
+                            case FormFieldType.InputPassword:
+                              return (
+                                <InputPasswordCustom
+                                  placeholder={field.placeholder}
+                                  disabled={isDisabled || disabled}
+                                />
+                              );
+                            case FormFieldType.Select:
+                              return (
+                                <SelectCustom
+                                  placeholder={field.placeholder}
+                                  options={field.options}
+                                  disabled={isDisabled || disabled}
+                                />
+                              );
+                            case FormFieldType.DatePicker:
+                              return (
+                                <DatePickerCustom
+                                  placeholder={field.placeholder}
+                                  disabled={isDisabled || disabled}
+                                />
+                              );
+                            case FormFieldType.TextArea:
+                              return (
+                                <InputTextAreaCustom
+                                  placeholder={field.placeholder}
+                                  disabled={isDisabled || disabled}
+                                />
+                              );
+                            default:
+                              return null;
+                          }
+                        })()}
+                      </Form.Item>
+                    </Col>
+                  ))}
+              </RowCustom>
+            ),
+          }))}
+        />
 
         <div className="flex justify-end gap-2">
           <Button onClick={onCancel}>Hủy</Button>

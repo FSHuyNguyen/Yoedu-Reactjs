@@ -2,8 +2,17 @@ import { FormFieldType } from '@/shared/types/form-field.type';
 
 import { rules } from '@/shared/utils/rules';
 import { optionsGender } from './options-gender';
+import type { FormField } from '@/shared/components/modal/modal-form-custom';
+import type { User } from '../types/user.type';
 
-export const generalInfoFormFields = [
+export const generalInfoFormFields: FormField<User>[] = [
+  {
+    name: 'avatarUrl',
+    label: 'Ảnh đại diện',
+    type: FormFieldType.ImageUpload,
+    placeholder: '',
+    col: 24,
+  },
   {
     name: 'email',
     label: 'Email',
@@ -11,7 +20,13 @@ export const generalInfoFormFields = [
     placeholder: 'Nhập email',
     rules: [rules.email],
   },
-
+  {
+    name: 'password',
+    label: 'Mật khẩu',
+    type: FormFieldType.InputPassword,
+    placeholder: 'Nhập mật khẩu',
+    rules: [rules.password],
+  },
   {
     name: 'fullName',
     label: 'Họ và tên',
@@ -25,13 +40,6 @@ export const generalInfoFormFields = [
     type: FormFieldType.Input,
     placeholder: 'Nhập số điện thoại',
     rules: [rules.phone],
-  },
-
-  {
-    name: 'avatarUrl',
-    label: 'Ảnh đại diện',
-    type: FormFieldType.Input,
-    placeholder: 'Nhập URL ảnh đại diện',
   },
 
   {

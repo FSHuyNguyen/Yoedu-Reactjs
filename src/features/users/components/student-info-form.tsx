@@ -16,6 +16,7 @@ import SelectCustom from '@/shared/components/select/select-custom';
 import InputCustom from '@/shared/components/input/input-custom';
 import InputNumberCustom from '@/shared/components/input/input-number-custom';
 import InputTextAreaCustom from '@/shared/components/input/input-textarea-custom';
+import { UserRole } from '../types/user-role.type';
 
 interface Props {
   student: Student;
@@ -73,31 +74,37 @@ const StudentInfoForm = ({ student }: Props) => {
             <Col key={field.name} span={12}>
               <Form.Item label={field.label} name={field.name} rules={field.rules}>
                 {(() => {
+                  const isDisabled =
+                    typeof field.disabled === 'function'
+                      ? field.disabled({ role: UserRole.STUDENT })
+                      : field.disabled;
+
                   switch (field.type) {
                     case FormFieldType.Input:
-                      return (
-                        <InputCustom placeholder={field.placeholder} disabled={field.disabled} />
-                      );
+                      return <InputCustom placeholder={field.placeholder} disabled={isDisabled} />;
                     case FormFieldType.InputNumber:
                       return (
-                        <InputNumberCustom
-                          placeholder={field.placeholder}
-                          disabled={field.disabled}
-                        />
+                        <InputNumberCustom placeholder={field.placeholder} disabled={isDisabled} />
                       );
                     case FormFieldType.Select:
                       return (
-                        <SelectCustom placeholder={field.placeholder} options={field.options} />
+                        <SelectCustom
+                          placeholder={field.placeholder}
+                          options={field.options}
+                          disabled={isDisabled}
+                        />
                       );
                     case FormFieldType.DatePicker:
                       return (
-                        <DatePickerCustom
-                          placeholder={field.placeholder}
-                          disabled={field.disabled}
-                        />
+                        <DatePickerCustom placeholder={field.placeholder} disabled={isDisabled} />
                       );
                     case FormFieldType.TextArea:
-                      return <InputTextAreaCustom placeholder={field.placeholder} />;
+                      return (
+                        <InputTextAreaCustom
+                          placeholder={field.placeholder}
+                          disabled={isDisabled}
+                        />
+                      );
                     default:
                       return null;
                   }

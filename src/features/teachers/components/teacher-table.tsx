@@ -6,15 +6,15 @@ import {
   CheckOutlined,
 } from '@ant-design/icons';
 
-import type { Student } from '../types/student.type';
 import StatusTag from '@/shared/components/status/status-tag';
 import { STATUS } from '@/shared/types/status.type';
 import ActionGroup from '@/shared/components/table/action-group';
 import CardCustom from '@/shared/components/card/card-custom';
+import type { Teacher } from '../types/teacher.type';
 import TablePaginationCustom from '@/shared/components/table/table-pagination-custom';
 
-interface StudentTableProps {
-  data: Student[];
+interface TeacherTableProps {
+  data: Teacher[];
 
   loading: boolean;
 
@@ -26,16 +26,16 @@ interface StudentTableProps {
 
   onChangePage: (page: number, limit: number) => void;
 
-  onView: (student: Student) => void;
+  onView: (teacher: Teacher) => void;
 
-  onEdit: (student: Student) => void;
+  onEdit: (teacher: Teacher) => void;
 
-  onDelete: (student: Student) => void;
+  onDelete: (teacher: Teacher) => void;
 
-  onChangeStatus: (student: Student) => void;
+  onChangeStatus: (teacher: Teacher) => void;
 }
 
-const StudentTable: React.FC<StudentTableProps> = ({
+const TeacherTable: React.FC<TeacherTableProps> = ({
   data,
   loading,
   pagination,
@@ -47,8 +47,8 @@ const StudentTable: React.FC<StudentTableProps> = ({
 }) => {
   const columns = [
     {
-      title: 'Mã học sinh',
-      dataIndex: 'studentCode',
+      title: 'Mã giáo viên',
+      dataIndex: 'teacherCode',
     },
     {
       title: 'Họ tên',
@@ -82,9 +82,9 @@ const StudentTable: React.FC<StudentTableProps> = ({
     {
       title: 'Tác vụ',
       align: 'center' as const,
-      render: (_: any, record: Student) => {
+      render: (_: any, record: Teacher) => {
         return (
-          <ActionGroup<Student>
+          <ActionGroup<Teacher>
             record={record}
             actions={[
               {
@@ -135,7 +135,7 @@ const StudentTable: React.FC<StudentTableProps> = ({
 
   return (
     <CardCustom className="flex-1">
-      <TablePaginationCustom<Student>
+      <TablePaginationCustom<Teacher>
         columns={columns}
         data={data}
         loading={loading}
@@ -146,4 +146,4 @@ const StudentTable: React.FC<StudentTableProps> = ({
   );
 };
 
-export default StudentTable;
+export default TeacherTable;

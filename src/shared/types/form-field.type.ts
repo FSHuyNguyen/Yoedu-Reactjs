@@ -5,6 +5,7 @@ export const FormFieldType = {
   Select: 'select',
   Checkbox: 'checkbox',
   DatePicker: 'datePicker',
+  ImageUpload: 'imageUpload',
   TextArea: 'textArea',
 } as const;
 

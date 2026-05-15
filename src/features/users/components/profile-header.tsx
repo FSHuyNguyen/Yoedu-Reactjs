@@ -1,7 +1,8 @@
-import { Avatar, Flex, Space, Tag, Typography } from 'antd';
+import { Flex, Space, Tag, Typography } from 'antd';
 
 import CardCustom from '@/shared/components/card/card-custom';
 import { useAppSelector } from '@/app/store/hooks';
+import UserAvatar from '@/shared/components/avatar/user-avatar';
 
 const { Title, Text } = Typography;
 
@@ -13,7 +14,7 @@ const ProfileHeader = () => {
   return (
     <CardCustom>
       <Flex align="center" gap={20}>
-        <Avatar size={80}>{user.fullName?.charAt(0)}</Avatar>
+        <UserAvatar />
 
         <Flex vertical gap={4}>
           <Title level={3} className="mb-0!">

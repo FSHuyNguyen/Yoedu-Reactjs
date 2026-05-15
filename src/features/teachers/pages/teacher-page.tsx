@@ -1,28 +1,28 @@
 import useTablePage from '@/shared/hooks/use-table';
-import type { Student } from '../types/student.type';
 import PageHeader from '@/shared/components/page/page-header';
 import { Button } from 'antd';
-import StudentTable from '../components/student-table';
-import { studentFormFields } from '../constants/student-form-fields';
 import ModalFormCustom, { type SectionForm } from '@/shared/components/modal/modal-form-custom';
-import { studentRoleAdminApi } from '../api/student.api';
 import { useFormModal } from '@/shared/hooks/use-form-modal';
 import { FormModalMode } from '@/shared/types/form-modal-mode.type';
 import { userRoleAdminApi } from '@/features/users/api/user.api';
-import { studentFilters } from '../constants/student-filter-table';
-import type { StudentFilterParams } from '../types/student-filter-params.type';
 import FilterTableCustom from '@/shared/components/table/filter-table-custom';
 import { generalInfoFormFields } from '@/features/users/contants/general-info-form-fields';
+import { teacherRoleAdminApi } from '../api/teacher.api';
+import type { Teacher } from '../types/teacher.type';
+import type { TeacherFilterParams } from '../types/teacher-filter-params.type';
+import { teacherFormFields } from '../constants/teacher-form.fields';
+import { teacherFilters } from '../constants/teacher-filter-table';
+import TeacherTable from '../components/teacher-table';
 
-const StudentPage = () => {
-  const { getAll, create, update } = studentRoleAdminApi;
+const TeacherPage = () => {
+  const { getAll, create, update } = teacherRoleAdminApi;
   const { changeStatus, remove } = userRoleAdminApi;
 
   const { open, mode, selectedRecord, openCreate, openView, openEdit, close } =
-    useFormModal<Student>();
+    useFormModal<Teacher>();
 
   const {
-    data: students,
+    data: teachers,
 
     loading,
 
@@ -43,40 +43,40 @@ const StudentPage = () => {
     handleChangeStatus,
 
     refetch,
-  } = useTablePage<Student, StudentFilterParams>({
+  } = useTablePage<Teacher, TeacherFilterParams>({
     fetchApi: getAll,
     removeApi: remove,
     changeStatusApi: changeStatus,
   });
 
-  const sectionsStudentForm: SectionForm<Student>[] = [
+  const sectionsTeacherForm: SectionForm<Teacher>[] = [
     {
       key: 'general',
       label: 'Thông tin chung',
       fields: generalInfoFormFields,
     },
     {
-      key: 'student',
-      label: 'Thông tin học viên',
-      fields: studentFormFields,
+      key: 'teacher',
+      label: 'Thông tin giáo viên',
+      fields: teacherFormFields,
     },
   ];
 
   return (
     <div className="flex flex-col h-full">
       <PageHeader
-        title="Quản lý học viên"
-        subtitle="Danh sách học viên"
+        title="Quản lý giáo viên"
+        subtitle="Danh sách giáo viên"
         extra={
           <Button type="primary" onClick={openCreate}>
-            + Thêm học viên
+            + Thêm giáo viên
           </Button>
         }
       />
 
       <div className="mb-4">
         <FilterTableCustom
-          dataFilters={studentFilters}
+          dataFilters={teacherFilters}
           values={filterValues}
           onChange={handleFilterChange}
           onReset={handleFilterReset}
@@ -84,20 +84,20 @@ const StudentPage = () => {
         />
       </div>
 
-      <StudentTable
-        data={students}
+      <TeacherTable
+        data={teachers}
         loading={loading}
         pagination={pagination}
         onChangePage={handleChangePage}
         onView={openView}
         onEdit={openEdit}
-        onDelete={(student) => handleDelete(student.userId)}
-        onChangeStatus={(student) => handleChangeStatus(student.userId)}
+        onDelete={(teacher) => handleDelete(teacher.userId)}
+        onChangeStatus={(teacher) => handleChangeStatus(teacher.userId)}
       />
 
-      <ModalFormCustom<Student>
+      <ModalFormCustom<Teacher>
         open={open}
-        title="Học Viên"
+        title="Giáo Viên"
         mode={mode}
         initialValues={selectedRecord}
         disabled={mode === FormModalMode.VIEW}
@@ -108,10 +108,10 @@ const StudentPage = () => {
             ? create
             : (values) => update(selectedRecord!.userId, values)
         }
-        sections={sectionsStudentForm}
+        sections={sectionsTeacherForm}
       />
     </div>
   );
 };
 
-export default StudentPage;
+export default TeacherPage;

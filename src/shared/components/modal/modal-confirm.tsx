@@ -2,7 +2,7 @@ import { Button } from 'antd';
 
 import ModalCustom from './modal-custom';
 
-interface ConfirmModalProps {
+interface ModalConfirmProps {
   open: boolean;
 
   title?: string;
@@ -16,14 +16,14 @@ interface ConfirmModalProps {
   onConfirm: () => void;
 }
 
-const ConfirmModal = ({
+const ModalConfirm = ({
   open,
   title = 'Xác nhận',
   description = 'Bạn có chắc chắn muốn thực hiện hành động này?',
   loading = false,
   onCancel,
   onConfirm,
-}: ConfirmModalProps) => {
+}: ModalConfirmProps) => {
   return (
     <ModalCustom open={open} title={title} onCancel={onCancel} footer={null} width={400}>
       <p className="mb-6 text-gray-500">{description}</p>
@@ -39,4 +39,4 @@ const ConfirmModal = ({
   );
 };
 
-export default ConfirmModal;
+export default ModalConfirm;

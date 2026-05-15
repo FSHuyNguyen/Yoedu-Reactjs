@@ -1,6 +1,6 @@
 import { Avatar, Flex, Space, Tag, Typography } from 'antd';
 
-import CardCustom from '@/shared/components/card-custom';
+import CardCustom from '@/shared/components/card/card-custom';
 import { useAppSelector } from '@/app/store/hooks';
 
 const { Title, Text } = Typography;

@@ -1,19 +1,19 @@
 import { Button, Col, Form } from 'antd';
-import ModalCustom from '@/shared/components/modal-custom';
+import ModalCustom from '@/shared/components/modal/modal-custom';
 import { useState, useEffect } from 'react';
-import { FormFieldType, type FormFieldTypeKey } from '../types/form-field.type';
-import { useNotification } from '../hooks/use-notification';
-import RowCustom from './row-custom';
-import InputNumberCustom from './input-number-custom';
-import DatePickerCustom from './datepicker-custom';
-import { formatDateToPicker } from '../utils/date';
+import { FormFieldType, type FormFieldTypeKey } from '../../types/form-field.type';
+import { useNotification } from '../../hooks/use-notification';
+import RowCustom from '../row/row-custom';
+import DatePickerCustom from '../datepicker/datepicker-custom';
+import { formatDateToPicker } from '../../utils/date';
 import type { UserRole } from '@/features/users/types/user-role.type';
 import { useAppSelector } from '@/app/store/hooks';
-import { FormModalMode, type FormModalModeType } from '../types/form-modal-mode.type';
-import SelectCustom from './select-custom';
-import InputCustom from './input-custom';
-import InputPasswordCustom from './input-password-custom';
-import InputTextAreaCustom from './input-textarea-custom';
+import { FormModalMode, type FormModalModeType } from '../../types/form-modal-mode.type';
+import SelectCustom from '../select/select-custom';
+import InputCustom from '../input/input-custom';
+import InputNumberCustom from '../input/input-number-custom';
+import InputPasswordCustom from '../input/input-password-custom';
+import InputTextAreaCustom from '../input/input-textarea-custom';
 
 export interface FormContext {
   role: UserRole;
@@ -39,7 +39,7 @@ export interface FormField<T> {
   }[];
 }
 
-interface FormModalCustomProps<T> {
+interface ModalFormCustomProps<T> {
   open: boolean;
 
   title: string;
@@ -61,7 +61,7 @@ interface FormModalCustomProps<T> {
   onSubmit: (values: T) => Promise<void>;
 }
 
-const FormModalCustom = <T,>({
+const ModalFormCustom = <T,>({
   open,
   title,
   mode,
@@ -71,7 +71,7 @@ const FormModalCustom = <T,>({
   onSuccess,
   onSubmit,
   disabled,
-}: FormModalCustomProps<T>) => {
+}: ModalFormCustomProps<T>) => {
   const { user } = useAppSelector((state) => state.auth);
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
@@ -208,4 +208,4 @@ const FormModalCustom = <T,>({
   );
 };
 
-export default FormModalCustom;
+export default ModalFormCustom;

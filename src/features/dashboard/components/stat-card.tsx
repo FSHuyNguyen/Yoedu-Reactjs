@@ -1,4 +1,4 @@
-import CardCustom from '@/shared/components/card-custom';
+import CardCustom from '@/shared/components/card/card-custom';
 import type { Stat } from '@/features/dashboard/types/start-data.type';
 
 const StatCard: React.FC<Stat> = ({ title, value, extra, color }) => {

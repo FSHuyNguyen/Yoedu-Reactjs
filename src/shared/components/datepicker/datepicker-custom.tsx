@@ -1,5 +1,5 @@
 import { DatePicker, type DatePickerProps } from 'antd';
-import { FORMAT_DATE } from '../constants/format-date';
+import { FORMAT_DATE } from '../../constants/format-date';
 
 interface DatePickerCustomProps extends DatePickerProps {}
 

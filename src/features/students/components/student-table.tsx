@@ -6,13 +6,13 @@ import {
   CheckOutlined,
 } from '@ant-design/icons';
 
-import TableCustom from '@/shared/components/table-custom';
+import TableCustom from '@/shared/components/table/table-custom';
 
 import type { Student } from '../types/student.type';
-import StatusTag from '@/shared/components/status-tag';
+import StatusTag from '@/shared/components/status/status-tag';
 import { STATUS } from '@/shared/types/status.type';
-import ActionGroup from '@/shared/components/action-group';
-import CardCustom from '@/shared/components/card-custom';
+import ActionGroup from '@/shared/components/table/action-group';
+import CardCustom from '@/shared/components/card/card-custom';
 
 interface StudentTableProps {
   data: Student[];

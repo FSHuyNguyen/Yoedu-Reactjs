@@ -1,8 +1,8 @@
 import { Button, Form } from 'antd';
 import type { Teacher } from '../types/user.type';
-import CardCustom from '@/shared/components/card-custom';
+import CardCustom from '@/shared/components/card/card-custom';
 import { teacherFormFields } from '../contants/teacher-form-fields';
-import InputTextAreaCustom from '@/shared/components/input-textarea-custom';
+import InputTextAreaCustom from '@/shared/components/input/input-textarea-custom';
 
 interface Props {
   teacher: Teacher;

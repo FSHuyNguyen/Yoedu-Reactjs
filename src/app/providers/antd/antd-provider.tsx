@@ -2,7 +2,7 @@ import React from 'react';
 import { App, ConfigProvider, theme as antdTheme } from 'antd';
 
 import viVN from 'antd/locale/vi_VN';
-import EmptyCustom from '@/shared/components/empty-custom';
+import EmptyCustom from '@/shared/components/empty/empty-custom';
 import { AppColors } from '@/shared/theme/colors';
 import { AppFontFamily } from '@/shared/theme/fonts';
 import { useTheme } from '@/app/providers/theme/hooks/useTheme';

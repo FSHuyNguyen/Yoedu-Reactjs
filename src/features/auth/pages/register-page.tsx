@@ -4,15 +4,15 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import YoeduLogo from '@/assets/images/yoedu-logo.svg';
 
-import CardCustom from '@/shared/components/card-custom';
+import CardCustom from '@/shared/components/card/card-custom';
 
 import { FormFieldType } from '@/shared/types/form-field.type';
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
 import { registerThunk } from '@/features/auth/store/auth.thunk';
 import { registerFormFields } from '@/features/auth/constants/register-form-fields';
 import { useNotification } from '@/shared/hooks/use-notification';
-import InputCustom from '@/shared/components/input-custom';
-import InputPasswordCustom from '@/shared/components/input-password-custom';
+import InputCustom from '@/shared/components/input/input-custom';
+import InputPasswordCustom from '@/shared/components/input/input-password-custom';
 
 type RegisterFormValues = {
   email: string;

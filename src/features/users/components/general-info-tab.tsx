@@ -1,19 +1,19 @@
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
 import { Button, Col, Flex, Form } from 'antd';
 import { generalInfoFormFields } from '../contants/general-info-form-fields';
-import CardCustom from '@/shared/components/card-custom';
+import CardCustom from '@/shared/components/card/card-custom';
 import type { User } from '../types/user.type';
 import { useEffect } from 'react';
 import { getMeThunk } from '@/features/auth/store/auth.thunk';
 import { useNotification } from '@/shared/hooks/use-notification';
 import { userRoleUserApi } from '../api/user.api';
 import { FormFieldType } from '@/shared/types/form-field.type';
-import RowCustom from '@/shared/components/row-custom';
+import RowCustom from '@/shared/components/row/row-custom';
 import { formatDateToPicker } from '@/shared/utils/date';
-import DatePickerCustom from '@/shared/components/datepicker-custom';
-import SelectCustom from '@/shared/components/select-custom';
-import InputCustom from '@/shared/components/input-custom';
-import InputTextAreaCustom from '@/shared/components/input-textarea-custom';
+import DatePickerCustom from '@/shared/components/datepicker/datepicker-custom';
+import SelectCustom from '@/shared/components/select/select-custom';
+import InputCustom from '@/shared/components/input/input-custom';
+import InputTextAreaCustom from '@/shared/components/input/input-textarea-custom';
 
 const GeneralInfoTab = () => {
   const { user } = useAppSelector((state) => state.auth);

@@ -1,4 +1,4 @@
-import EmptyCustom from '@/shared/components/empty-custom';
+import EmptyCustom from '@/shared/components/empty/empty-custom';
 import StudentInfoForm from './student-info-form';
 import TeacherInfoForm from './teacher-info-form';
 import { useAppSelector } from '@/app/store/hooks';

@@ -1,7 +1,7 @@
 import { Timeline } from 'antd';
-import EmptyCustom from '@/shared/components/empty-custom';
+import EmptyCustom from '@/shared/components/empty/empty-custom';
 import { DollarOutlined, UserOutlined, HomeOutlined, ClockCircleOutlined } from '@ant-design/icons';
-import CardCustom from '@/shared/components/card-custom';
+import CardCustom from '@/shared/components/card/card-custom';
 import { ActivityType } from '@/features/dashboard/constants/activity';
 import type { RecentActivityItem } from '@/features/dashboard/types/recent-activity.type';
 

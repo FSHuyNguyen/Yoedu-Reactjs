@@ -1,17 +1,17 @@
 import useTablePage from '@/shared/hooks/use-table';
 import type { Student } from '../types/student.type';
-import PageHeader from '@/shared/components/page-header';
+import PageHeader from '@/shared/components/page/page-header';
 import { Button } from 'antd';
 import StudentTable from '../components/student-table';
 import { studentFormFields } from '../constants/student-form-fields';
-import FormModalCustom from '@/shared/components/form-modal-custom';
+import ModalFormCustom from '@/shared/components/modal/modal-form-custom';
 import { studentRoleAdminApi } from '../api/student.api';
 import { useFormModal } from '@/shared/hooks/use-form-modal';
 import { FormModalMode } from '@/shared/types/form-modal-mode.type';
 import { userRoleAdminApi } from '@/features/users/api/user.api';
 import { studentFilters } from '../constants/student-filter-table';
-import FilterCustom from '@/shared/components/filter-table-custom';
 import type { StudentFilterParams } from '../types/student-filter-params.type';
+import FilterTableCustom from '@/shared/components/table/filter-table-custom';
 
 const StudentPage = () => {
   const { getAll, create, update } = studentRoleAdminApi;
@@ -61,7 +61,7 @@ const StudentPage = () => {
       />
 
       <div className="mb-4">
-        <FilterCustom
+        <FilterTableCustom
           dataFilters={studentFilters}
           values={filterValues}
           onChange={handleFilterChange}
@@ -81,7 +81,7 @@ const StudentPage = () => {
         onChangeStatus={(student) => handleChangeStatus(student.userId)}
       />
 
-      <FormModalCustom<Student>
+      <ModalFormCustom<Student>
         open={open}
         title="Học Viên"
         mode={mode}

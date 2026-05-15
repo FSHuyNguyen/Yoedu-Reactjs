@@ -5,13 +5,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/app/store/hooks';
 
 import YoeduLogo from '@/assets/images/yoedu-logo.svg';
-import CardCustom from '@/shared/components/card-custom';
+import CardCustom from '@/shared/components/card/card-custom';
 import { FormFieldType } from '@/shared/types/form-field.type';
 import { loginFormFields } from '@/features/auth/constants/login-form-fields';
 import { loginThunk } from '@/features/auth/store/auth.thunk';
 import { useNotification } from '@/shared/hooks/use-notification';
-import InputCustom from '@/shared/components/input-custom';
-import InputPasswordCustom from '@/shared/components/input-password-custom';
+import InputPasswordCustom from '@/shared/components/input/input-password-custom';
+import InputCustom from '@/shared/components/input/input-custom';
 
 type LoginFormValues = {
   email: string;

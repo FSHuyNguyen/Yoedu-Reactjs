@@ -1,21 +1,21 @@
 import { useEffect } from 'react';
 
 import { Button, Col, Form } from 'antd';
-import CardCustom from '@/shared/components/card-custom';
+import CardCustom from '@/shared/components/card/card-custom';
 import { useAppDispatch } from '@/app/store/hooks';
 import { getMeThunk } from '@/features/auth/store/auth.thunk';
 import { useNotification } from '@/shared/hooks/use-notification';
 import type { Student } from '@/features/students/types/student.type';
 import { studentRoleStudentApi } from '@/features/students/api/student.api';
-import RowCustom from '@/shared/components/row-custom';
+import RowCustom from '@/shared/components/row/row-custom';
 import { FormFieldType } from '@/shared/types/form-field.type';
-import DatePickerCustom from '@/shared/components/datepicker-custom';
+import DatePickerCustom from '@/shared/components/datepicker/datepicker-custom';
 import { formatDateToPicker } from '@/shared/utils/date';
-import InputNumberCustom from '@/shared/components/input-number-custom';
 import { studentFormFields } from '@/features/students/constants/student-form-fields';
-import SelectCustom from '@/shared/components/select-custom';
-import InputCustom from '@/shared/components/input-custom';
-import InputTextAreaCustom from '@/shared/components/input-textarea-custom';
+import SelectCustom from '@/shared/components/select/select-custom';
+import InputCustom from '@/shared/components/input/input-custom';
+import InputNumberCustom from '@/shared/components/input/input-number-custom';
+import InputTextAreaCustom from '@/shared/components/input/input-textarea-custom';
 
 interface Props {
   student: Student;

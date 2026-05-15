@@ -1,12 +1,12 @@
 import { Button, Col } from 'antd';
 
 import { FormFieldType, type FormFieldTypeKey } from '@/shared/types/form-field.type';
-import DatePickerCustom from './datepicker-custom';
-import RowCustom from './row-custom';
-import CardCustom from './card-custom';
-import SelectCustom from './select-custom';
-import InputCustom from './input-custom';
 import { ReloadOutlined } from '@ant-design/icons';
+import RowCustom from '../row/row-custom';
+import InputCustom from '../input/input-custom';
+import SelectCustom from '../select/select-custom';
+import DatePickerCustom from '../datepicker/datepicker-custom';
+import CardCustom from '../card/card-custom';
 
 export interface DataFilter {
   name: string;
@@ -23,7 +23,7 @@ export interface DataFilter {
   }[];
 }
 
-interface FilterCustomProps {
+interface FilterTableCustomProps {
   dataFilters: DataFilter[];
 
   values: Record<string, any>;
@@ -35,7 +35,13 @@ interface FilterCustomProps {
   onSubmit?: () => void;
 }
 
-const FilterCustom = ({ dataFilters, values, onChange, onReset, onSubmit }: FilterCustomProps) => {
+const FilterTableCustom = ({
+  dataFilters,
+  values,
+  onChange,
+  onReset,
+  onSubmit,
+}: FilterTableCustomProps) => {
   const handleChange = (name: string, value: any) => {
     onChange({
       ...values,
@@ -106,4 +112,4 @@ const FilterCustom = ({ dataFilters, values, onChange, onReset, onSubmit }: Filt
   );
 };
 
-export default FilterCustom;
+export default FilterTableCustom;

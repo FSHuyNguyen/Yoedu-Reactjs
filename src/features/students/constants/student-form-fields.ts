@@ -2,7 +2,7 @@ import { FormFieldType } from '@/shared/types/form-field.type';
 import { rules } from '@/shared/utils/rules';
 import { optionsGrade } from './options-grade';
 import type { Student } from '../types/student.type';
-import type { FormContext, FormField } from '@/shared/components/form-modal-custom';
+import type { FormContext, FormField } from '@/shared/components/modal/modal-form-custom';
 import { UserRole } from '@/features/users/types/user-role.type';
 import { FormModalMode } from '@/shared/types/form-modal-mode.type';
 

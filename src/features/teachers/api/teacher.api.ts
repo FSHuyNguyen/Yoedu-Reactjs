@@ -1,16 +1,15 @@
 import { axiosClient } from '@/shared/lib/axios';
+import type { TeacherFilterParams } from '../types/teacher-filter-params.type';
 
-export interface GetTeacherParams {
-  page?: number;
+export const getTeachersOptions = async () => {
+  const res = await axiosClient.get('/teachers/options', {});
 
-  limit?: number;
-
-  keySearch?: string;
-}
+  return res.data;
+};
 
 /* ROLE ADMIN */
 export const teacherRoleAdminApi = {
-  getAll: async (params: GetTeacherParams) => {
+  getAll: async (params: TeacherFilterParams) => {
     const res = await axiosClient.get('/teachers', { params });
 
     return res.data;

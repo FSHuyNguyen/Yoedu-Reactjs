@@ -15,6 +15,7 @@ import InputNumberCustom from '../input/input-number-custom';
 import InputPasswordCustom from '../input/input-password-custom';
 import InputTextAreaCustom from '../input/input-textarea-custom';
 import UploadImageCustom from '../upload/upload-image-custom';
+import SelectFetchCustom from '../select/select-fetch-custom';
 
 export interface FormContext {
   role: UserRole;
@@ -39,7 +40,11 @@ export interface FormField<T> {
     value: string | number;
   }[];
 
+  fetchOptions?: () => Promise<any>;
+
   col?: number;
+
+  props?: any;
 }
 
 export interface SectionForm<T> {
@@ -171,6 +176,7 @@ const ModalFormCustom = <T,>({
                                 <InputCustom
                                   placeholder={field.placeholder}
                                   disabled={isDisabled || disabled}
+                                  {...field.props}
                                 />
                               );
                             case FormFieldType.ImageUpload:
@@ -178,6 +184,7 @@ const ModalFormCustom = <T,>({
                                 <UploadImageCustom
                                   value={form.getFieldValue(field.name)}
                                   onChange={(value) => form.setFieldsValue({ [field.name]: value })}
+                                  {...field.props}
                                 />
                               );
                             case FormFieldType.InputNumber:
@@ -185,6 +192,7 @@ const ModalFormCustom = <T,>({
                                 <InputNumberCustom
                                   placeholder={field.placeholder}
                                   disabled={isDisabled || disabled}
+                                  {...field.props}
                                 />
                               );
                             case FormFieldType.InputPassword:
@@ -192,6 +200,7 @@ const ModalFormCustom = <T,>({
                                 <InputPasswordCustom
                                   placeholder={field.placeholder}
                                   disabled={isDisabled || disabled}
+                                  {...field.props}
                                 />
                               );
                             case FormFieldType.Select:
@@ -200,6 +209,16 @@ const ModalFormCustom = <T,>({
                                   placeholder={field.placeholder}
                                   options={field.options}
                                   disabled={isDisabled || disabled}
+                                  {...field.props}
+                                />
+                              );
+                            case FormFieldType.SelectFetch:
+                              return (
+                                <SelectFetchCustom
+                                  placeholder={field.placeholder}
+                                  fetchOptions={field.fetchOptions}
+                                  disabled={isDisabled || disabled}
+                                  {...field.props}
                                 />
                               );
                             case FormFieldType.DatePicker:
@@ -207,6 +226,7 @@ const ModalFormCustom = <T,>({
                                 <DatePickerCustom
                                   placeholder={field.placeholder}
                                   disabled={isDisabled || disabled}
+                                  {...field.props}
                                 />
                               );
                             case FormFieldType.TextArea:
@@ -214,6 +234,7 @@ const ModalFormCustom = <T,>({
                                 <InputTextAreaCustom
                                   placeholder={field.placeholder}
                                   disabled={isDisabled || disabled}
+                                  {...field.props}
                                 />
                               );
                             default:

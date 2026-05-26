@@ -14,9 +14,16 @@ export interface UploadImageCustomProps {
   onChange?: (value?: string) => void;
 
   disabled?: boolean;
+
+  type?: 'avatar' | 'banner';
 }
 
-const UploadImageCustom = ({ value, onChange, disabled }: UploadImageCustomProps) => {
+const UploadImageCustom = ({
+  value,
+  onChange,
+  disabled,
+  type = 'avatar',
+}: UploadImageCustomProps) => {
   const [loading, setLoading] = useState(false);
 
   const handleUpload: UploadProps['customRequest'] = async (options) => {
@@ -71,27 +78,45 @@ const UploadImageCustom = ({ value, onChange, disabled }: UploadImageCustomProps
   return (
     <Upload
       accept="image/*"
-      listType="picture-circle"
+      listType={type === 'avatar' ? 'picture-circle' : 'picture-card'}
       maxCount={1}
       customRequest={handleUpload}
       beforeUpload={beforeUpload}
-      fileList={fileList}
+      fileList={type === 'avatar' ? fileList : []}
       disabled={disabled || loading}
       onRemove={() => {
         onChange?.(undefined);
-
         return true;
       }}
-      showUploadList={{
-        showPreviewIcon: true,
-        showRemoveIcon: !disabled,
-      }}
+      showUploadList={type === 'avatar'}
+      className={type === 'avatar' ? '' : 'upload-banner'}
     >
-      {!value && (
-        <div className="flex flex-col items-center justify-center">
-          {loading ? <LoadingOutlined /> : <PlusOutlined />}
+      {type === 'avatar' ? (
+        !value && (
+          <div className="flex flex-col items-center justify-center">
+            {loading ? <LoadingOutlined /> : <PlusOutlined />}
+            <div className="mt-2 text-sm">{loading ? 'Đang tải...' : 'Tải ảnh'}</div>
+          </div>
+        )
+      ) : (
+        <div className="w-full">
+          <div className="relative w-full overflow-hidden rounded-xl">
+            {value ? (
+              <>
+                <img src={value} alt="banner" className="h-full w-full object-cover" />
 
-          <div className="mt-2 text-sm">{loading ? 'Đang tải...' : 'Tải ảnh'}</div>
+                <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition hover:opacity-100">
+                  <div className="text-white">{loading ? 'Đang tải...' : 'Đổi banner'}</div>
+                </div>
+              </>
+            ) : (
+              <div className="flex h-full flex-col items-center justify-center">
+                {loading ? <LoadingOutlined /> : <PlusOutlined />}
+
+                <div className="mt-2 text-sm">{loading ? 'Đang tải...' : 'Tải banner'}</div>
+              </div>
+            )}
+          </div>
         </div>
       )}
     </Upload>

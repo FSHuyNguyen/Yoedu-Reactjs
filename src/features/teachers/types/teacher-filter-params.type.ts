@@ -1,9 +1,3 @@
-export interface TeacherFilterParams {
-  page: number;
+import type { FilterParams } from '@/shared/types/filter-params.type';
 
-  limit: number;
-
-  keySearch?: string;
-
-  status?: string;
-}
+export interface TeacherFilterParams extends FilterParams {}

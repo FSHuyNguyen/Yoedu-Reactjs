@@ -53,6 +53,12 @@ const FilterTableCustom = ({
     <CardCustom>
       <RowCustom>
         <div className="flex flex-col w-full gap-4">
+          <div className="flex items-end justify-end">
+            <Button onClick={onReset} className="h-10!">
+              <ReloadOutlined />
+            </Button>
+          </div>
+
           <div className="flex w-full flex-wrap">
             {dataFilters.map((filter) => (
               <Col span={8} key={filter.name}>
@@ -93,12 +99,6 @@ const FilterTableCustom = ({
                 })()}
               </Col>
             ))}
-
-            <Col>
-              <Button onClick={onReset} className="h-10!">
-                <ReloadOutlined />
-              </Button>
-            </Col>
           </div>
 
           <div className="flex justify-center">

@@ -1,9 +1,3 @@
-export interface StudentFilterParams {
-  page: number;
+import type { FilterParams } from '@/shared/types/filter-params.type';
 
-  limit: number;
-
-  keySearch?: string;
-
-  status?: string;
-}
+export interface StudentFilterParams extends FilterParams {}

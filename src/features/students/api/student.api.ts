@@ -1,16 +1,9 @@
 import { axiosClient } from '@/shared/lib/axios';
-
-export interface GetStudentsParams {
-  page?: number;
-
-  limit?: number;
-
-  keySearch?: string;
-}
+import type { StudentFilterParams } from '../types/student-filter-params.type';
 
 /* ROLE ADMIN */
 export const studentRoleAdminApi = {
-  getAll: async (params: GetStudentsParams) => {
+  getAll: async (params: StudentFilterParams) => {
     const res = await axiosClient.get('/students', { params });
 
     return res.data;

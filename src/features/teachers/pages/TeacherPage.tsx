@@ -12,7 +12,17 @@ import type { Teacher } from '../types/teacher-type';
 import type { TeacherFilterParams } from '../types/teacher-filter-params-type';
 import { teacherFormFields } from '../constants/teacher-form.fields';
 import { teacherFilters } from '../constants/teacher-filter-table';
-import TeacherTable from '../components/TeacherTable';
+import {
+  EyeOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  CheckOutlined,
+  CloseOutlined,
+} from '@ant-design/icons';
+import StatusTag from '@/shared/components/status/StatusTag';
+import ActionGroup from '@/shared/components/table/ActionGroup';
+import { STATUS } from '@/shared/types/status.type';
+import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
 
 const TeacherPage = () => {
   const { getAll, create, update } = teacherRoleAdminApi;
@@ -62,6 +72,94 @@ const TeacherPage = () => {
     },
   ];
 
+  const columns = [
+    {
+      title: 'Mã giáo viên',
+      dataIndex: 'teacherCode',
+    },
+    {
+      title: 'Họ tên',
+      dataIndex: 'fullName',
+    },
+
+    {
+      title: 'Email',
+      dataIndex: 'email',
+    },
+
+    {
+      title: 'Số điện thoại',
+      dataIndex: 'phone',
+    },
+
+    {
+      title: 'Địa chỉ',
+      dataIndex: 'address',
+    },
+
+    {
+      title: 'Trạng thái',
+      dataIndex: 'status',
+      align: 'center' as const,
+      render: (_: any, record: any) => {
+        return <StatusTag status={record.status} statusText={record.statusText} />;
+      },
+    },
+
+    {
+      title: 'Tác vụ',
+      align: 'center' as const,
+      render: (_: any, record: Teacher) => {
+        return (
+          <ActionGroup<Teacher>
+            record={record}
+            actions={[
+              {
+                show: () => true,
+                icon: <EyeOutlined />,
+                tooltip: 'Chi tiết',
+                onClick: openView,
+              },
+              {
+                show: (r) => r.status !== STATUS.DELETED,
+                icon: <EditOutlined />,
+                tooltip: 'Sửa',
+                onClick: openEdit,
+              },
+
+              {
+                show: (r) => r.status === STATUS.ACTIVE,
+                icon: <CloseOutlined />,
+                tooltip: 'Ngưng hoạt động',
+                danger: true,
+                onClick: () => handleChangeStatus(record.userId),
+                isPopconfirm: true,
+              },
+
+              {
+                show: (r) => r.status === STATUS.INACTIVE,
+                icon: <CheckOutlined />,
+                tooltip: 'Kích hoạt',
+                color: '#52c41a',
+                onClick: () => handleChangeStatus(record.userId),
+                isPopconfirm: true,
+              },
+
+              {
+                show: (r) => r.status === STATUS.INACTIVE,
+                icon: <DeleteOutlined />,
+                tooltip: 'Xóa',
+                danger: true,
+                onClick: () => handleDelete(record.userId),
+                isPopconfirm: true,
+              },
+            ]}
+          />
+        );
+      },
+    },
+  ];
+
   return (
     <div className="flex flex-col h-full">
       <PageHeader
@@ -84,15 +182,12 @@ const TeacherPage = () => {
         />
       </div>
 
-      <TeacherTable
+      <TablePaginationCustom<Teacher>
+        columns={columns}
         data={teachers}
         loading={loading}
         pagination={pagination}
         onChangePage={handleChangePage}
-        onView={openView}
-        onEdit={openEdit}
-        onDelete={(teacher) => handleDelete(teacher.userId)}
-        onChangeStatus={(teacher) => handleChangeStatus(teacher.userId)}
       />
 
       <ModalFormCustom<Teacher>

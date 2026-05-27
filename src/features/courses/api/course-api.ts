@@ -1,7 +1,12 @@
 import { axiosClient } from '@/shared/lib/axios';
 import type { CourseFilterParams } from '../types/course-filter-params-type';
 
-/* ROLE ADMIN */
+export const getCourseOptions = async () => {
+  const res = await axiosClient.get('/courses/options', {});
+
+  return res.data;
+};
+
 export const courseRoleAdminApi = {
   getAll: async (params: CourseFilterParams) => {
     const res = await axiosClient.get('/courses', { params });

@@ -2,7 +2,6 @@ import useTable from '@/shared/hooks/useTable';
 import type { Student } from '../types/student-type';
 import PageHeader from '@/shared/components/page/PageHeader';
 import { Button } from 'antd';
-import StudentTable from '../components/StudentTable';
 import { studentFormFields } from '../constants/student-form-fields';
 import ModalFormCustom, { type SectionForm } from '@/shared/components/modal/ModalFormCustom';
 import { studentRoleAdminApi } from '../api/student-api';
@@ -13,6 +12,17 @@ import { studentFilters } from '../constants/student-filter-table';
 import type { StudentFilterParams } from '../types/student-filter-params-type';
 import FilterTableCustom from '@/shared/components/table/FilterTableCustom';
 import { generalInfoFormFields } from '@/features/users/contants/general-info-form-fields';
+import ActionGroup from '@/shared/components/table/ActionGroup';
+import {
+  EyeOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  CheckOutlined,
+  CloseOutlined,
+} from '@ant-design/icons';
+import { STATUS } from '@/shared/types/status.type';
+import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
+import StatusTag from '@/shared/components/status/StatusTag';
 
 const StudentPage = () => {
   const { getAll, create, update } = studentRoleAdminApi;
@@ -62,6 +72,94 @@ const StudentPage = () => {
     },
   ];
 
+  const columns = [
+    {
+      title: 'Mã học sinh',
+      dataIndex: 'studentCode',
+    },
+    {
+      title: 'Họ tên',
+      dataIndex: 'fullName',
+    },
+
+    {
+      title: 'Email',
+      dataIndex: 'email',
+    },
+
+    {
+      title: 'Số điện thoại',
+      dataIndex: 'phone',
+    },
+
+    {
+      title: 'Địa chỉ',
+      dataIndex: 'address',
+    },
+
+    {
+      title: 'Trạng thái',
+      dataIndex: 'status',
+      align: 'center' as const,
+      render: (_: any, record: any) => {
+        return <StatusTag status={record.status} statusText={record.statusText} />;
+      },
+    },
+
+    {
+      title: 'Tác vụ',
+      align: 'center' as const,
+      render: (_: any, record: Student) => {
+        return (
+          <ActionGroup<Student>
+            record={record}
+            actions={[
+              {
+                show: () => true,
+                icon: <EyeOutlined />,
+                tooltip: 'Chi tiết',
+                onClick: openView,
+              },
+              {
+                show: (r) => r.status !== STATUS.DELETED,
+                icon: <EditOutlined />,
+                tooltip: 'Sửa',
+                onClick: openEdit,
+              },
+
+              {
+                show: (r) => r.status === STATUS.ACTIVE,
+                icon: <CloseOutlined />,
+                tooltip: 'Ngưng hoạt động',
+                danger: true,
+                onClick: () => handleChangeStatus(record.userId),
+                isPopconfirm: true,
+              },
+
+              {
+                show: (r) => r.status === STATUS.INACTIVE,
+                icon: <CheckOutlined />,
+                tooltip: 'Kích hoạt',
+                color: '#52c41a',
+                onClick: () => handleChangeStatus(record.userId),
+                isPopconfirm: true,
+              },
+
+              {
+                show: (r) => r.status === STATUS.INACTIVE,
+                icon: <DeleteOutlined />,
+                tooltip: 'Xóa',
+                danger: true,
+                onClick: () => handleDelete(record.userId),
+                isPopconfirm: true,
+              },
+            ]}
+          />
+        );
+      },
+    },
+  ];
+
   return (
     <div className="flex flex-col h-full">
       <PageHeader
@@ -84,15 +182,12 @@ const StudentPage = () => {
         />
       </div>
 
-      <StudentTable
+      <TablePaginationCustom<Student>
+        columns={columns}
         data={students}
         loading={loading}
         pagination={pagination}
         onChangePage={handleChangePage}
-        onView={openView}
-        onEdit={openEdit}
-        onDelete={(student) => handleDelete(student.userId)}
-        onChangeStatus={(student) => handleChangeStatus(student.userId)}
       />
 
       <ModalFormCustom<Student>

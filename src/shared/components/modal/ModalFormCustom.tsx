@@ -135,6 +135,11 @@ const ModalFormCustom = <T,>({
     }
   };
 
+  const handleCancel = () => {
+    form.resetFields();
+    onCancel();
+  };
+
   return (
     <ModalCustom
       open={open}
@@ -145,7 +150,7 @@ const ModalFormCustom = <T,>({
             ? `Cập nhật ${title.toLowerCase()}`
             : `Thông tin ${title.toLowerCase()}`
       }
-      onCancel={onCancel}
+      onCancel={handleCancel}
       footer={null}
     >
       <Form form={form} layout="vertical" onFinish={handleSubmit}>

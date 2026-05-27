@@ -6,11 +6,22 @@ import { useFormModal } from '@/shared/hooks/useFormModal';
 import { FormModalMode } from '@/shared/types/form-modal-mode.type';
 import FilterTableCustom from '@/shared/components/table/FilterTableCustom';
 import { courseRoleAdminApi } from '../api/course-api';
-import type { Course } from '../types/course-type';
+import { CourseStatus, type Course } from '../types/course-type';
 import type { CourseFilterParams } from '../types/course-filter-params-type';
 import { courseFilters } from '../constants/course-filter-table';
 import { courseFormFields } from '../constants/course-form-fields';
-import CourseTable from '../components/CourseTable';
+import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
+import { formatDate } from '@/shared/utils/date';
+import { formatCurrency } from '@/shared/utils/currecy';
+import StatusCourseTag from '../components/StatusCourseTag';
+import ActionGroup from '@/shared/components/table/ActionGroup';
+import {
+  EyeOutlined,
+  EditOutlined,
+  DeleteOutlined,
+  CloseOutlined,
+  CheckOutlined,
+} from '@ant-design/icons';
 
 const CoursePage = () => {
   const { getAll, create, update, changeStatus, remove } = courseRoleAdminApi;
@@ -54,6 +65,107 @@ const CoursePage = () => {
     },
   ];
 
+  const columns = [
+    {
+      title: 'Mã khóa học',
+      dataIndex: 'courseCode',
+    },
+    {
+      title: 'Tên khóa học',
+      dataIndex: 'name',
+    },
+    {
+      title: 'Giáo viên',
+      dataIndex: 'teacherName',
+    },
+    {
+      title: 'Giá khóa học',
+      dataIndex: 'price',
+      render: (value: any) => (value ? formatCurrency(value) : ''),
+    },
+    {
+      title: 'Cấp độ',
+      dataIndex: 'level',
+    },
+    {
+      title: 'Tổng số buổi học',
+      dataIndex: 'totalSessions',
+      align: 'center' as const,
+    },
+    {
+      title: 'Số học viên tối đa',
+      dataIndex: 'maxStudents',
+      align: 'center' as const,
+    },
+    {
+      title: 'Ngày bắt đầu',
+      dataIndex: 'startDate',
+      render: (value: any) => (value ? formatDate(value) : ''),
+    },
+    {
+      title: 'Ngày kết thúc',
+      dataIndex: 'endDate',
+      render: (value: any) => (value ? formatDate(value) : ''),
+    },
+    {
+      title: 'Trạng thái',
+      dataIndex: 'status',
+      align: 'center' as const,
+      render: (_: any, record: Course) => {
+        return <StatusCourseTag status={record.status} statusText={record.statusText} />;
+      },
+    },
+    {
+      title: 'Tác vụ',
+      align: 'center' as const,
+      render: (_: any, record: Course) => {
+        return (
+          <ActionGroup<Course>
+            record={record}
+            actions={[
+              {
+                show: () => true,
+                icon: <EyeOutlined />,
+                tooltip: 'Chi tiết',
+                onClick: openView,
+              },
+              {
+                show: (r) => r.status === CourseStatus.DRAFT,
+                icon: <EditOutlined />,
+                tooltip: 'Sửa',
+                onClick: openEdit,
+              },
+              {
+                show: (r) => r.status === CourseStatus.OPEN,
+                icon: <CloseOutlined />,
+                tooltip: 'Đóng khóa học',
+                danger: true,
+                onClick: () => handleChangeStatus(record.id),
+                isPopconfirm: true,
+              },
+              {
+                show: (r) => r.status === CourseStatus.DRAFT,
+                icon: <CheckOutlined />,
+                tooltip: 'Mở khóa học',
+                color: '#52c41a',
+                onClick: () => handleChangeStatus(record.id),
+                isPopconfirm: true,
+              },
+              {
+                show: (r) => r.status === CourseStatus.DRAFT,
+                icon: <DeleteOutlined />,
+                tooltip: 'Xóa',
+                danger: true,
+                onClick: () => handleDelete(record.id),
+                isPopconfirm: true,
+              },
+            ]}
+          />
+        );
+      },
+    },
+  ];
+
   return (
     <div className="flex flex-col h-full">
       <PageHeader
@@ -76,15 +188,12 @@ const CoursePage = () => {
         />
       </div>
 
-      <CourseTable
+      <TablePaginationCustom<Course>
+        columns={columns}
         data={courses}
         loading={loading}
         pagination={pagination}
         onChangePage={handleChangePage}
-        onView={openView}
-        onEdit={openEdit}
-        onDelete={(course) => handleDelete(course.id)}
-        onChangeStatus={(course) => handleChangeStatus(course.id)}
       />
 
       <ModalFormCustom<Course>

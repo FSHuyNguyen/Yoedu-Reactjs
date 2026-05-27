@@ -9,9 +9,11 @@ export interface Course {
   level: CourseLevelType;
   price: number;
   totalSessions: number;
+  maxStudents: number;
   startDate: string;
   endDate: string;
   status: CourseStatusType;
+  statusText: string;
   teacherId: string | null;
   teacher: Teacher | null;
   createdAt: string;

@@ -15,6 +15,7 @@ import UserProfilePage from '@/features/users/pages/UserProfilePage';
 import TeacherPage from '@/features/teachers/pages/TeacherPage';
 import CoursePage from '@/features/courses/pages/CoursePage';
 import DashboardPage from '@/features/dashboard/pages/Dashboard';
+import EnrollmentPage from '@/features/enrollments/pages/EnrollmentPage';
 
 export const router = createBrowserRouter([
   /******************** AUTH *********************/
@@ -69,6 +70,10 @@ export const router = createBrowserRouter([
           {
             path: 'courses',
             element: <CoursePage />,
+          },
+          {
+            path: 'enrollments',
+            element: <EnrollmentPage />,
           },
         ],
       },

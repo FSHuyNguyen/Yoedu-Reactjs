@@ -56,6 +56,13 @@ export const courseFormFields: FormField<Course>[] = [
   },
 
   {
+    name: 'maxStudents',
+    label: 'Số học viên tối đa',
+    type: FormFieldType.InputNumber,
+    placeholder: 'Nhập số học viên tối đa',
+  },
+
+  {
     name: 'startDate',
     label: 'Ngày bắt đầu',
     type: FormFieldType.DatePicker,

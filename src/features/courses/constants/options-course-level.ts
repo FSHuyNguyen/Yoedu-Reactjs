@@ -1,4 +1,4 @@
-import { CourseLevel } from '../types/course.type';
+import { CourseLevel } from '../types/course-type';
 
 export const optionsCourseLevel = [
   { label: 'Sơ cấp', value: CourseLevel.BEGINNER },

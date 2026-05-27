@@ -1,5 +1,5 @@
-import CardCustom from '@/shared/components/card/card-custom';
-import type { Stat } from '@/features/dashboard/types/start-data.type';
+import CardCustom from '@/shared/components/card/CardCustom';
+import type { Stat } from '@/features/dashboard/types/start-data-type';
 
 const StatCard: React.FC<Stat> = ({ title, value, extra, color }) => {
   return (

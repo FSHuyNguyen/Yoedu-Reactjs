@@ -1,8 +1,8 @@
 import { FormFieldType } from '@/shared/types/form-field.type';
-import type { FormField } from '@/shared/components/modal/modal-form-custom';
-import type { Course } from '../types/course.type';
+import type { FormField } from '@/shared/components/modal/ModalFormCustom';
+import type { Course } from '../types/course-type';
 import { optionsCourseLevel } from './options-course-level';
-import { getTeachersOptions } from '@/features/teachers/api/teacher.api';
+import { getTeachersOptions } from '@/features/teachers/api/teacher-api';
 
 export const courseFormFields: FormField<Course>[] = [
   {

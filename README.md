@@ -9,16 +9,9 @@ Thiết lập môi trường React + TypeScript chuẩn để:
 * Tránh bug cơ bản ngay từ đầu
 
 ## 📌 THỐNG NHẤT QUY TẮC ĐẶT TÊN
- *  Component → kebab-case, đuôi .tsx (ví dụ: app-header.tsx, main-layout.tsx)
- *	Hook → bắt đầu bằng use, đuôi .ts hoặc .tsx (ví dụ: use-form-modal.ts)
- *	API/service → nằm trong thư mục api/, đuôi .api.ts (ví dụ: auth.api.ts, student.api.ts)
- *	Store (slice, thunk) → đuôi .slice.ts, .thunk.ts (ví dụ: auth.slice.ts, auth.thunk.ts)
- *	Page → kebab-case, đuôi .tsx, nằm trong pages/ (ví dụ: login-page.tsx, dashboard.tsx)
- *	Type → đuôi .type.ts (ví dụ: auth.type.ts, dashboard.type.ts)
- *	Constant → đuôi .ts, tên mô tả rõ ràng (ví dụ: options-grade.ts, format-date.ts)
- *	Folder → lowercase, có thể dùng dấu gạch ngang nếu nhiều từ (ví dụ: app/, features/, shared/)
- *	Nếu có nhiều file cùng loại → gom vào thư mục riêng (components/, constants/, types/, pages/, api/, store/)
- *	index.ts → dùng cho export tập trung trong thư mục (nếu cần)
+* 🔠 **UpperCamelCase:** Class, Interface, Type Alias, Enum, Decorator, React/Vue Component.
+* 🔡 **lowerCamelCase:** Biến, Tham số (Parameter), Hàm, Thuộc tính (Property), Phương thức (Method).
+* 🔤 **CONSTANT_CASE:** Hằng số cấu hình toàn cục tĩnh, bất biến.
 
 ---
 

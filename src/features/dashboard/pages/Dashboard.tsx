@@ -1,7 +1,7 @@
 import StatCard from '@/features/dashboard/components/stat-card';
 import { useEffect, useState } from 'react';
 import { getDashboardData } from '../services';
-import type { Dashboard } from '@/features/dashboard/types/dashboard.type';
+import type { Dashboard } from '@/features/dashboard/types/dashboard-type';
 import RecentActivity from '@/features/dashboard/components/recent-activity';
 import TodayClasses from '@/features/dashboard/components/today-classes';
 

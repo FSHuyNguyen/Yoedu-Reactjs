@@ -1,19 +1,20 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import AuthLayout from '../layouts/auth-layout';
+import AppInit from '../init/AppInit';
 
-import MainLayout from '@/app/layouts/main-layout';
+import AuthLayout from '../layouts/AuthLayout';
 
-import ProtectedRoute from './protected-route';
+import MainLayout from '@/app/layouts/MainLayout';
 
-import LoginPage from '@/features/auth/pages/login-page';
-import RegisterPage from '@/features/auth/pages/register-page';
-import DashboardPage from '@/features/dashboard/pages/dashboard';
-import AppInit from '../init/app-init';
-import StudentPage from '@/features/students/pages/student-page';
-import UserProfilePage from '@/features/users/pages/user-profile-page';
-import TeacherPage from '@/features/teachers/pages/teacher-page';
-import CoursePage from '@/features/courses/pages/course-page';
+import ProtectedRoute from './ProtectedRoute';
+
+import LoginPage from '@/features/auth/pages/LoginPage';
+import RegisterPage from '@/features/auth/pages/RegisterPage';
+import StudentPage from '@/features/students/pages/StudentPage';
+import UserProfilePage from '@/features/users/pages/UserProfilePage';
+import TeacherPage from '@/features/teachers/pages/TeacherPage';
+import CoursePage from '@/features/courses/pages/CoursePage';
+import DashboardPage from '@/features/dashboard/pages/Dashboard';
 
 export const router = createBrowserRouter([
   /******************** AUTH *********************/

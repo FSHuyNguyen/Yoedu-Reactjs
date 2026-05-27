@@ -1,7 +1,7 @@
 import { Tag } from 'antd';
-import type { TodayClassesItem } from '@/features/dashboard/types/today-classes.type';
-import CardCustom from '@/shared/components/card/card-custom';
-import EmptyCustom from '@/shared/components/empty/empty-custom';
+import type { TodayClassesItem } from '@/features/dashboard/types/today-classes-type';
+import CardCustom from '@/shared/components/card/CardCustom';
+import EmptyCustom from '@/shared/components/empty/EmptyCustom';
 
 interface TodayClassesProps {
   data: TodayClassesItem[];

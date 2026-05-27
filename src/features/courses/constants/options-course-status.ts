@@ -1,4 +1,4 @@
-import { CourseStatus } from '../types/course.type';
+import { CourseStatus } from '../types/course-type';
 
 export const optionsCourseStatus = [
   { label: 'Bản nháp', value: CourseStatus.DRAFT },

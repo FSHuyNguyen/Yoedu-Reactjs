@@ -1,5 +1,6 @@
 import { Button, Col } from 'antd';
 
+import type { Dayjs } from 'dayjs';
 import { FormFieldType, type FormFieldTypeKey } from '@/shared/types/form-field.type';
 import { ReloadOutlined } from '@ant-design/icons';
 import RowCustom from '../row/RowCustom';
@@ -7,6 +8,8 @@ import InputCustom from '../input/InputCustom';
 import SelectCustom from '../select/SelectCustom';
 import DatePickerCustom from '../datepicker/DatePickerCustom';
 import CardCustom from '../card/CardCustom';
+import SelectFetchCustom from '../select/SelectFetchCustom';
+import { formatDateToPicker, formatDateToQuery } from '@/shared/utils/date';
 
 export interface DataFilter {
   name: string;
@@ -21,6 +24,8 @@ export interface DataFilter {
     label: string;
     value: string | number;
   }[];
+
+  fetchOptions?: () => Promise<any>;
 }
 
 interface FilterTableCustomProps {
@@ -61,7 +66,7 @@ const FilterTableCustom = ({
 
           <div className="flex w-full flex-wrap">
             {dataFilters.map((filter) => (
-              <Col span={8} key={filter.name}>
+              <Col span={8} key={filter.name} className="mb-4">
                 {(() => {
                   switch (filter.type) {
                     case FormFieldType.Input:
@@ -72,7 +77,6 @@ const FilterTableCustom = ({
                           onChange={(e) => handleChange(filter.name, e.target.value)}
                         />
                       );
-
                     case FormFieldType.Select:
                       return (
                         <SelectCustom
@@ -83,16 +87,25 @@ const FilterTableCustom = ({
                           onChange={(value) => handleChange(filter.name, value)}
                         />
                       );
-
-                    case FormFieldType.DatePicker:
+                    case FormFieldType.SelectFetch:
                       return (
-                        <DatePickerCustom
+                        <SelectFetchCustom
                           placeholder={filter.placeholder}
+                          fetchOptions={filter.fetchOptions}
                           value={values[filter.name]}
                           onChange={(value) => handleChange(filter.name, value)}
                         />
                       );
-
+                    case FormFieldType.DatePicker:
+                      return (
+                        <DatePickerCustom
+                          placeholder={filter.placeholder}
+                          value={formatDateToPicker(values[filter.name])}
+                          onChange={(value) =>
+                            handleChange(filter.name, formatDateToQuery(value as Dayjs))
+                          }
+                        />
+                      );
                     default:
                       return null;
                   }

@@ -22,14 +22,12 @@ export const courseFormFields: FormField<Course>[] = [
     placeholder: 'Mã khóa học',
     disabled: true,
   },
-
   {
     name: 'name',
     label: 'Tên khóa học',
     type: FormFieldType.Input,
     placeholder: 'Nhập tên khóa học',
   },
-
   {
     name: 'price',
     label: 'Giá khóa học',
@@ -39,7 +37,6 @@ export const courseFormFields: FormField<Course>[] = [
       isCurrency: true,
     },
   },
-
   {
     name: 'teacherId',
     label: 'Giáo viên',
@@ -47,35 +44,30 @@ export const courseFormFields: FormField<Course>[] = [
     fetchOptions: getTeachersOptions,
     placeholder: 'Chọn giáo viên',
   },
-
   {
     name: 'totalSessions',
     label: 'Tổng số buổi học',
     type: FormFieldType.InputNumber,
     placeholder: 'Nhập tổng số buổi học',
   },
-
   {
     name: 'maxStudents',
     label: 'Số học viên tối đa',
     type: FormFieldType.InputNumber,
     placeholder: 'Nhập số học viên tối đa',
   },
-
   {
     name: 'startDate',
     label: 'Ngày bắt đầu',
     type: FormFieldType.DatePicker,
     placeholder: 'Chọn ngày bắt đầu',
   },
-
   {
     name: 'endDate',
     label: 'Ngày kết thúc',
     type: FormFieldType.DatePicker,
     placeholder: 'Chọn ngày kết thúc',
   },
-
   {
     name: 'level',
     label: 'Cấp độ',
@@ -83,7 +75,6 @@ export const courseFormFields: FormField<Course>[] = [
     options: optionsCourseLevel,
     placeholder: 'Chọn cấp độ',
   },
-
   {
     name: 'description',
     label: 'Mô tả khóa học',

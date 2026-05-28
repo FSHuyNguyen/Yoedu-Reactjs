@@ -12,13 +12,13 @@ export const formatDateToPicker = (value?: string | Date | null): Dayjs | null =
 };
 
 /**
- * Convert dayjs -> ISO string
- * dùng khi submit form lên BE
+ * Convert dayjs -> YYYY-MM-DD
+ * dùng cho query params
  */
-export const formatDateToISOString = (value?: Dayjs | null): string | null => {
+export const formatDateToQuery = (value?: Dayjs | null): string | null => {
   if (!value) return null;
 
-  return value.toISOString();
+  return value.format('YYYY-MM-DD');
 };
 
 /**

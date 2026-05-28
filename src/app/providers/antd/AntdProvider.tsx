@@ -56,7 +56,7 @@ const AntdProvider: React.FC<AntdProviderProps> = ({ children }) => {
           },
 
           Button: {
-            borderRadius: 12,
+            borderRadius: 8,
             controlHeight: 44,
 
             fontWeight: 500,
@@ -65,7 +65,7 @@ const AntdProvider: React.FC<AntdProviderProps> = ({ children }) => {
           Input: {
             controlHeight: 40,
 
-            borderRadius: 12,
+            borderRadius: 8,
           },
         },
       }}

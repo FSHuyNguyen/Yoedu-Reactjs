@@ -30,7 +30,7 @@ const SelectFetchCustom: React.FC<SelectFetchCustomProps> = ({ fetchOptions, ...
     <Select
       showSearch={{ optionFilterProp: 'label' }}
       allowClear
-      notFoundContent={loading ? <Spin size="small" /> : null}
+      notFoundContent={loading ? <Spin size="small" /> : 'Không có dữ liệu'}
       options={options}
       className="w-full min-h-10"
       {...props}

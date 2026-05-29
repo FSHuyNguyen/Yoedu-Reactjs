@@ -3,7 +3,7 @@ import PageHeader from '@/shared/components/page/PageHeader';
 import { Button } from 'antd';
 import ModalFormCustom, { type SectionForm } from '@/shared/components/modal/ModalFormCustom';
 import { useFormModal } from '@/shared/hooks/useFormModal';
-import { FormModalMode } from '@/shared/types/form-modal-mode.type';
+import { FormModalMode } from '@/shared/types/form-modal-mode-type';
 import FilterTableCustom from '@/shared/components/table/FilterTableCustom';
 import { EnrollmentStatus, type Enrollment } from '../types/enrollment-type';
 import { enrollmentRoleAdminApi } from '../api/enrollment-api';

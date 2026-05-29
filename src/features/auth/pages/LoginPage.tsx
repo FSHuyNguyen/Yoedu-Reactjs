@@ -6,7 +6,7 @@ import { useAppSelector, useAppDispatch } from '@/app/redux/hooks';
 
 import YoeduLogo from '@/assets/images/yoedu-logo.svg';
 import CardCustom from '@/shared/components/card/CardCustom';
-import { FormFieldType } from '@/shared/types/form-field.type';
+import { FormFieldType } from '@/shared/types/form-field-type';
 import { loginFormFields } from '@/features/auth/constants/login-form-fields';
 import { loginThunk } from '@/features/auth/store/auth-thunk';
 import { useNotification } from '@/shared/hooks/useNotification';

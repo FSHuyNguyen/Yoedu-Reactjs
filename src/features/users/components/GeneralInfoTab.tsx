@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { getMeThunk } from '@/features/auth/store/auth-thunk';
 import { useNotification } from '@/shared/hooks/useNotification';
 import { userRoleUserApi } from '../api/user-api';
-import { FormFieldType } from '@/shared/types/form-field.type';
+import { FormFieldType } from '@/shared/types/form-field-type';
 import RowCustom from '@/shared/components/row/RowCustom';
 import { formatDateToPicker } from '@/shared/utils/date';
 import DatePickerCustom from '@/shared/components/datepicker/DatePickerCustom';

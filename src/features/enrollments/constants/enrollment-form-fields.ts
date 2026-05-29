@@ -1,6 +1,6 @@
 import type { FormField } from '@/shared/components/modal/ModalFormCustom';
 import type { Enrollment } from '../types/enrollment-type';
-import { FormFieldType } from '@/shared/types/form-field.type';
+import { FormFieldType } from '@/shared/types/form-field-type';
 import { getStudentOptions } from '@/features/students/api/student-api';
 import { getCourseOptions } from '@/features/courses/api/course-api';
 

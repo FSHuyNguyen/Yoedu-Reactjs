@@ -1,10 +1,10 @@
-import { FormFieldType } from '@/shared/types/form-field.type';
+import { FormFieldType } from '@/shared/types/form-field-type';
 import { rules } from '@/shared/utils/rules';
 import { studentGradeOptions } from './student-grade-options';
 import type { Student } from '../types/student-type';
 import type { FormContext, FormField } from '@/shared/components/modal/ModalFormCustom';
-import { UserRole } from '@/features/users/types/user-role-type';
-import { FormModalMode } from '@/shared/types/form-modal-mode.type';
+import { USER_ROLE } from '@/features/users/types/user-role-type';
+import { FormModalMode } from '@/shared/types/form-modal-mode-type';
 
 export const studentFormFields: FormField<Student>[] = [
   {
@@ -13,7 +13,7 @@ export const studentFormFields: FormField<Student>[] = [
     type: FormFieldType.Input,
     placeholder: 'Mã sinh viên',
     disabled: ({ role, mode }: FormContext) =>
-      role !== UserRole.ADMIN || (mode && mode === FormModalMode.CREATE),
+      role !== USER_ROLE.ADMIN || (mode && mode === FormModalMode.CREATE),
   },
 
   // ===== Parent Info =====
@@ -58,7 +58,7 @@ export const studentFormFields: FormField<Student>[] = [
     label: 'Điểm test gần nhất',
     type: FormFieldType.InputNumber,
     placeholder: 'Nhập điểm test gần nhất',
-    disabled: ({ role }: FormContext) => role !== UserRole.ADMIN,
+    disabled: ({ role }: FormContext) => role !== USER_ROLE.ADMIN,
   },
 
   // ===== Joined Date =====
@@ -67,7 +67,7 @@ export const studentFormFields: FormField<Student>[] = [
     label: 'Ngày tham gia',
     type: FormFieldType.DatePicker,
     placeholder: 'Chọn ngày tham gia',
-    disabled: ({ role }: FormContext) => role !== UserRole.ADMIN,
+    disabled: ({ role }: FormContext) => role !== USER_ROLE.ADMIN,
   },
 
   // ===== Learning =====

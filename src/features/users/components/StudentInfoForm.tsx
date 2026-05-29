@@ -8,7 +8,7 @@ import { useNotification } from '@/shared/hooks/useNotification';
 import type { Student } from '@/features/students/types/student-type';
 import { studentRoleStudentApi } from '@/features/students/api/student-api';
 import RowCustom from '@/shared/components/row/RowCustom';
-import { FormFieldType } from '@/shared/types/form-field.type';
+import { FormFieldType } from '@/shared/types/form-field-type';
 import DatePickerCustom from '@/shared/components/datepicker/DatePickerCustom';
 import { formatDateToPicker } from '@/shared/utils/date';
 import { studentFormFields } from '@/features/students/constants/student-form-fields';
@@ -16,7 +16,7 @@ import SelectCustom from '@/shared/components/select/SelectCustom';
 import InputCustom from '@/shared/components/input/InputCustom';
 import InputNumberCustom from '@/shared/components/input/InputNumberCustom';
 import InputTextAreaCustom from '@/shared/components/input/InputTextAreaCustom';
-import { UserRole } from '../types/user-role-type';
+import { USER_ROLE } from '../types/user-role-type';
 
 interface Props {
   student: Student;
@@ -76,7 +76,7 @@ const StudentInfoForm = ({ student }: Props) => {
                 {(() => {
                   const isDisabled =
                     typeof field.disabled === 'function'
-                      ? field.disabled({ role: UserRole.STUDENT })
+                      ? field.disabled({ role: USER_ROLE.STUDENT })
                       : field.disabled;
 
                   switch (field.type) {

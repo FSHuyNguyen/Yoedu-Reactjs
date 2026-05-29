@@ -1,7 +1,7 @@
 import type { Student } from '@/features/students/types/student-type';
-import type { StatusType } from '@/shared/types/status.type';
+import type { UserStatusType } from '@/features/users/types/user-status-type';
 import type { UserRole } from '@/features/users/types/user-role-type';
-import type { GenderType } from '@/shared/types/gender.type';
+import type { UserGenderType } from '@/features/users/types/user-gender-type';
 import type { Teacher } from '@/features/teachers/types/teacher-type';
 
 export type User = {
@@ -19,7 +19,7 @@ export type User = {
 
   avatarUrl?: string | null;
 
-  gender?: GenderType | null;
+  gender?: UserGenderType | null;
 
   dateOfBirth?: string | null;
 
@@ -27,7 +27,7 @@ export type User = {
 
   role: UserRole;
 
-  status: StatusType;
+  status: UserStatusType;
 
   createdAt: string;
 

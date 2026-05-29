@@ -6,7 +6,7 @@ import { studentFormFields } from '../constants/student-form-fields';
 import ModalFormCustom, { type SectionForm } from '@/shared/components/modal/ModalFormCustom';
 import { studentRoleAdminApi } from '../api/student-api';
 import { useFormModal } from '@/shared/hooks/useFormModal';
-import { FormModalMode } from '@/shared/types/form-modal-mode.type';
+import { FormModalMode } from '@/shared/types/form-modal-mode-type';
 import { userRoleAdminApi } from '@/features/users/api/user-api';
 import { studentFilters } from '../constants/student-filter-table';
 import type { StudentFilterParams } from '../types/student-filter-params-type';
@@ -20,7 +20,7 @@ import {
   CheckOutlined,
   CloseOutlined,
 } from '@ant-design/icons';
-import { STATUS } from '@/shared/types/status.type';
+import { USER_STATUS } from '@/features/users/types/user-status-type';
 import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
 import StatusTag from '@/shared/components/status/StatusTag';
 
@@ -121,14 +121,14 @@ const StudentPage = () => {
                 onClick: openView,
               },
               {
-                show: (r) => r.status !== STATUS.DELETED,
+                show: (r) => r.status !== USER_STATUS.DELETED,
                 icon: <EditOutlined />,
                 tooltip: 'Sửa',
                 onClick: openEdit,
               },
 
               {
-                show: (r) => r.status === STATUS.ACTIVE,
+                show: (r) => r.status === USER_STATUS.ACTIVE,
                 icon: <CloseOutlined />,
                 tooltip: 'Ngưng hoạt động',
                 danger: true,
@@ -137,7 +137,7 @@ const StudentPage = () => {
               },
 
               {
-                show: (r) => r.status === STATUS.INACTIVE,
+                show: (r) => r.status === USER_STATUS.INACTIVE,
                 icon: <CheckOutlined />,
                 tooltip: 'Kích hoạt',
                 color: '#52c41a',
@@ -146,7 +146,7 @@ const StudentPage = () => {
               },
 
               {
-                show: (r) => r.status === STATUS.INACTIVE,
+                show: (r) => r.status === USER_STATUS.INACTIVE,
                 icon: <DeleteOutlined />,
                 tooltip: 'Xóa',
                 danger: true,

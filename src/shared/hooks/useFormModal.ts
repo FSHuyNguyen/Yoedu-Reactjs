@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FormModalMode, type FormModalModeType } from '../types/form-modal-mode.type';
+import { FormModalMode, type FormModalModeType } from '../types/form-modal-mode-type';
 
 export const useFormModal = <T>() => {
   const [open, setOpen] = useState(false);

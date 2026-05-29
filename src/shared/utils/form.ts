@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { FormFieldType } from '@/shared/types/form-field.type';
+import { FormFieldType } from '@/shared/types/form-field-type';
 import type { SectionForm } from '../components/modal/ModalFormCustom';
 import { FORMAT_TIME } from '../constants/format-date';
 import { formatDateToPicker, formatTimeToPicker } from './date';

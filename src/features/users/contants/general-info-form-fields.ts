@@ -1,7 +1,7 @@
-import { FormFieldType } from '@/shared/types/form-field.type';
+import { FormFieldType } from '@/shared/types/form-field-type';
 
 import { rules } from '@/shared/utils/rules';
-import { optionsGender } from './options-gender';
+import { userGenderOptions } from './user-gender-options';
 import type { FormField } from '@/shared/components/modal/ModalFormCustom';
 import type { User } from '../types/user-type';
 
@@ -65,7 +65,7 @@ export const generalInfoFormFields: FormField<User>[] = [
     label: 'Giới tính',
     type: FormFieldType.Select,
     placeholder: 'Chọn giới tính',
-    options: optionsGender,
+    options: userGenderOptions,
   },
 
   {

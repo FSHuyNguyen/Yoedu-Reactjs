@@ -1,4 +1,4 @@
-import { FormFieldType } from '@/shared/types/form-field.type';
+import { FormFieldType } from '@/shared/types/form-field-type';
 import { courseStatusOptions } from './course-status-options';
 import { getTeachersOptions } from '@/features/teachers/api/teacher-api';
 import { courseLevelOptions } from './course-level-options';

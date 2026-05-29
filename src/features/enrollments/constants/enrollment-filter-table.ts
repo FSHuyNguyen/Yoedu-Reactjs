@@ -1,4 +1,4 @@
-import { FormFieldType } from '@/shared/types/form-field.type';
+import { FormFieldType } from '@/shared/types/form-field-type';
 import { enrollmentStatusOptions } from './enrollment-status-options';
 import { getCourseOptions } from '@/features/courses/api/course-api';
 import { getStudentOptions } from '@/features/students/api/student-api';

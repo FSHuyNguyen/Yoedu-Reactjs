@@ -6,7 +6,7 @@ import YoeduLogo from '@/assets/images/yoedu-logo.svg';
 
 import CardCustom from '@/shared/components/card/CardCustom';
 
-import { FormFieldType } from '@/shared/types/form-field.type';
+import { FormFieldType } from '@/shared/types/form-field-type';
 import { useAppSelector, useAppDispatch } from '@/app/redux/hooks';
 import { registerThunk } from '@/features/auth/store/auth-thunk';
 import { registerFormFields } from '@/features/auth/constants/register-form-fields';

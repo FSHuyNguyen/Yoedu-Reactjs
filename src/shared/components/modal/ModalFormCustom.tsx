@@ -1,13 +1,13 @@
 import { Button, Col, Form, Tabs } from 'antd';
 import ModalCustom from '@/shared/components/modal/ModalCustom';
 import { useState, useEffect } from 'react';
-import { FormFieldType, type FormFieldTypeKey } from '../../types/form-field.type';
+import { FormFieldType, type FormFieldTypeKey } from '../../types/form-field-type';
 import { useNotification } from '../../hooks/useNotification';
 import RowCustom from '../row/RowCustom';
 import DatePickerCustom from '../datepicker/DatePickerCustom';
 import type { UserRole } from '@/features/users/types/user-role-type';
 import { useAppSelector } from '@/app/redux/hooks';
-import { FormModalMode, type FormModalModeType } from '../../types/form-modal-mode.type';
+import { FormModalMode, type FormModalModeType } from '../../types/form-modal-mode-type';
 import SelectCustom from '../select/SelectCustom';
 import InputCustom from '../input/InputCustom';
 import InputNumberCustom from '../input/InputNumberCustom';

@@ -1,5 +1,5 @@
-import { optionsStatus } from '@/shared/constants/options-status';
-import { FormFieldType } from '@/shared/types/form-field.type';
+import { userStatusOptions } from '@/features/users/contants/user-status-options';
+import { FormFieldType } from '@/shared/types/form-field-type';
 
 export const teacherFilters = [
   {
@@ -11,6 +11,6 @@ export const teacherFilters = [
     name: 'status',
     type: FormFieldType.Select,
     placeholder: 'Trạng thái',
-    options: optionsStatus,
+    options: userStatusOptions,
   },
 ];

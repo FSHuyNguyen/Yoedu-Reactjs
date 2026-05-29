@@ -4,7 +4,7 @@ import { Button, Col, Form } from 'antd';
 import CardCustom from '@/shared/components/card/CardCustom';
 import InputTextAreaCustom from '@/shared/components/input/InputTextAreaCustom';
 import { teacherFormFields } from '@/features/teachers/constants/teacher-form-fields';
-import { FormFieldType } from '@/shared/types/form-field.type';
+import { FormFieldType } from '@/shared/types/form-field-type';
 import InputCustom from '@/shared/components/input/InputCustom';
 import InputNumberCustom from '@/shared/components/input/InputNumberCustom';
 import SelectCustom from '@/shared/components/select/SelectCustom';
@@ -16,7 +16,7 @@ import { useAppDispatch } from '@/app/redux/hooks';
 import { formatDateToPicker } from '@/shared/utils/date';
 import type { Teacher } from '@/features/teachers/types/teacher-type';
 import RowCustom from '@/shared/components/row/RowCustom';
-import { UserRole } from '../types/user-role-type';
+import { USER_ROLE } from '../types/user-role-type';
 
 interface Props {
   teacher: Teacher;
@@ -76,7 +76,7 @@ const TeacherInfoForm = ({ teacher }: Props) => {
                 {(() => {
                   const isDisabled =
                     typeof field.disabled === 'function'
-                      ? field.disabled({ role: UserRole.TEACHER })
+                      ? field.disabled({ role: USER_ROLE.TEACHER })
                       : field.disabled;
 
                   switch (field.type) {

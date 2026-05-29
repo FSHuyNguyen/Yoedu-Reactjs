@@ -3,7 +3,7 @@ import PageHeader from '@/shared/components/page/PageHeader';
 import { Button } from 'antd';
 import ModalFormCustom, { type SectionForm } from '@/shared/components/modal/ModalFormCustom';
 import { useFormModal } from '@/shared/hooks/useFormModal';
-import { FormModalMode } from '@/shared/types/form-modal-mode.type';
+import { FormModalMode } from '@/shared/types/form-modal-mode-type';
 import { userRoleAdminApi } from '@/features/users/api/user-api';
 import FilterTableCustom from '@/shared/components/table/FilterTableCustom';
 import { generalInfoFormFields } from '@/features/users/contants/general-info-form-fields';
@@ -21,7 +21,7 @@ import {
 } from '@ant-design/icons';
 import StatusTag from '@/shared/components/status/StatusTag';
 import ActionGroup from '@/shared/components/table/ActionGroup';
-import { STATUS } from '@/shared/types/status.type';
+import { USER_STATUS } from '@/features/users/types/user-status-type';
 import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
 
 const TeacherPage = () => {
@@ -121,14 +121,14 @@ const TeacherPage = () => {
                 onClick: openView,
               },
               {
-                show: (r) => r.status !== STATUS.DELETED,
+                show: (r) => r.status !== USER_STATUS.DELETED,
                 icon: <EditOutlined />,
                 tooltip: 'Sửa',
                 onClick: openEdit,
               },
 
               {
-                show: (r) => r.status === STATUS.ACTIVE,
+                show: (r) => r.status === USER_STATUS.ACTIVE,
                 icon: <CloseOutlined />,
                 tooltip: 'Ngưng hoạt động',
                 danger: true,
@@ -137,7 +137,7 @@ const TeacherPage = () => {
               },
 
               {
-                show: (r) => r.status === STATUS.INACTIVE,
+                show: (r) => r.status === USER_STATUS.INACTIVE,
                 icon: <CheckOutlined />,
                 tooltip: 'Kích hoạt',
                 color: '#52c41a',
@@ -146,7 +146,7 @@ const TeacherPage = () => {
               },
 
               {
-                show: (r) => r.status === STATUS.INACTIVE,
+                show: (r) => r.status === USER_STATUS.INACTIVE,
                 icon: <DeleteOutlined />,
                 tooltip: 'Xóa',
                 danger: true,

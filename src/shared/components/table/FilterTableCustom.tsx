@@ -1,7 +1,7 @@
 import { Button, Col } from 'antd';
 
 import type { Dayjs } from 'dayjs';
-import { FormFieldType, type FormFieldTypeKey } from '@/shared/types/form-field.type';
+import { FormFieldType, type FormFieldTypeKey } from '@/shared/types/form-field-type';
 import { ReloadOutlined } from '@ant-design/icons';
 import RowCustom from '../row/RowCustom';
 import InputCustom from '../input/InputCustom';

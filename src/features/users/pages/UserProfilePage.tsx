@@ -3,7 +3,7 @@ import ProfileHeader from '../components/ProfileHeader';
 import GeneralInfoTab from '../components/GeneralInfoTab';
 import RoleInfoTab from '../components/RoleInfoTab';
 import { useAppSelector } from '@/app/redux/hooks';
-import { UserRole } from '../types/user-role-type';
+import { USER_ROLE } from '../types/user-role-type';
 
 const UserProfilePage = () => {
   const { user } = useAppSelector((state) => state.auth);
@@ -22,12 +22,12 @@ const UserProfilePage = () => {
             label: 'Thông tin chung',
             children: <GeneralInfoTab />,
           },
-          ...(user.role === UserRole.STUDENT || user.role === UserRole.TEACHER
+          ...(user.role === USER_ROLE.STUDENT || user.role === USER_ROLE.TEACHER
             ? [
                 {
                   key: 'role',
                   label:
-                    user.role === UserRole.STUDENT ? 'Thông tin học viên' : 'Thông tin giáo viên',
+                    user.role === USER_ROLE.STUDENT ? 'Thông tin học viên' : 'Thông tin giáo viên',
                   children: <RoleInfoTab />,
                 },
               ]

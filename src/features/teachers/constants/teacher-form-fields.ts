@@ -1,7 +1,7 @@
-import { FormFieldType } from '@/shared/types/form-field.type';
+import { FormFieldType } from '@/shared/types/form-field-type';
 import type { FormContext, FormField } from '@/shared/components/modal/ModalFormCustom';
-import { UserRole } from '@/features/users/types/user-role-type';
-import { FormModalMode } from '@/shared/types/form-modal-mode.type';
+import { USER_ROLE } from '@/features/users/types/user-role-type';
+import { FormModalMode } from '@/shared/types/form-modal-mode-type';
 import type { Teacher } from '../types/teacher-type';
 
 export const teacherFormFields: FormField<Teacher>[] = [
@@ -11,7 +11,7 @@ export const teacherFormFields: FormField<Teacher>[] = [
     type: FormFieldType.Input,
     placeholder: 'Mã giáo viên',
     disabled: ({ role, mode }: FormContext) =>
-      role !== UserRole.ADMIN || mode === FormModalMode.CREATE,
+      role !== USER_ROLE.ADMIN || mode === FormModalMode.CREATE,
   },
   {
     name: 'bio',

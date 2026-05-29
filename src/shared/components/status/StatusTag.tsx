@@ -1,21 +1,21 @@
 import { Tag } from 'antd';
 
-import { STATUS, type StatusType } from '@/shared/types/status.type';
+import { USER_STATUS, type UserStatusType } from '@/features/users/types/user-status-type';
 
 interface StatusTagProps {
-  status?: StatusType;
+  status?: UserStatusType;
   statusText?: string;
 }
 
 const StatusTag = ({ status, statusText }: StatusTagProps) => {
   switch (status) {
-    case STATUS.ACTIVE:
+    case USER_STATUS.ACTIVE:
       return <Tag color="success">{statusText || 'Hoạt động'}</Tag>;
 
-    case STATUS.INACTIVE:
+    case USER_STATUS.INACTIVE:
       return <Tag color="error">{statusText || 'Ngưng hoạt động'}</Tag>;
 
-    case STATUS.DELETED:
+    case USER_STATUS.DELETED:
       return <Tag>{statusText || 'Đã xóa'}</Tag>;
 
     default:

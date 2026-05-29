@@ -18,20 +18,38 @@ export const generalInfoFormFields: FormField<User>[] = [
     label: 'Email',
     type: FormFieldType.Input,
     placeholder: 'Nhập email',
-    rules: [rules.email],
+    rules: [
+      {
+        required: true,
+        message: 'Vui lòng nhập email',
+      },
+      rules.email,
+    ],
   },
   {
     name: 'password',
     label: 'Mật khẩu',
     type: FormFieldType.InputPassword,
     placeholder: 'Nhập mật khẩu',
-    rules: [rules.password],
+    rules: [
+      {
+        required: true,
+        message: 'Vui lòng nhập mật khẩu',
+      },
+      rules.password,
+    ],
   },
   {
     name: 'fullName',
     label: 'Họ và tên',
     type: FormFieldType.Input,
     placeholder: 'Nhập họ và tên',
+    rules: [
+      {
+        required: true,
+        message: 'Vui lòng nhập họ và tên',
+      },
+    ],
   },
 
   {

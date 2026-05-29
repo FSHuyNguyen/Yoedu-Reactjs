@@ -1,5 +1,5 @@
 import { FormFieldType } from '@/shared/types/form-field.type';
-import { optionsEnrollmentStatus } from './options-status';
+import { enrollmentStatusOptions } from './enrollment-status-options';
 import { getCourseOptions } from '@/features/courses/api/course-api';
 import { getStudentOptions } from '@/features/students/api/student-api';
 
@@ -25,6 +25,6 @@ export const enrollmentFilters = [
     name: 'status',
     type: FormFieldType.Select,
     placeholder: 'Trạng thái',
-    options: optionsEnrollmentStatus,
+    options: enrollmentStatusOptions,
   },
 ];

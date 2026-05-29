@@ -1,4 +1,4 @@
-export const optionsGrade = [
+export const studentGradeOptions = [
   {
     label: 'Lớp 10',
     value: '10',

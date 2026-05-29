@@ -1,12 +1,12 @@
 import { Tag } from 'antd';
 import { CourseStatus, type CourseStatusType } from '../types/course-type';
 
-interface StatusCourseTagProps {
+interface CourseStatusTagProps {
   status?: CourseStatusType;
   statusText?: string;
 }
 
-const StatusCourseTag = ({ status, statusText }: StatusCourseTagProps) => {
+const CourseStatusTag = ({ status, statusText }: CourseStatusTagProps) => {
   switch (status) {
     case CourseStatus.DRAFT:
       return <Tag color="blue">{statusText || 'Bản nháp'}</Tag>;
@@ -25,4 +25,4 @@ const StatusCourseTag = ({ status, statusText }: StatusCourseTagProps) => {
   }
 };
 
-export default StatusCourseTag;
+export default CourseStatusTag;

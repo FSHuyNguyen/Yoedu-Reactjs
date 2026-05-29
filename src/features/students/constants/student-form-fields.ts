@@ -1,6 +1,6 @@
 import { FormFieldType } from '@/shared/types/form-field.type';
 import { rules } from '@/shared/utils/rules';
-import { optionsGrade } from './options-grade';
+import { studentGradeOptions } from './student-grade-options';
 import type { Student } from '../types/student-type';
 import type { FormContext, FormField } from '@/shared/components/modal/ModalFormCustom';
 import { UserRole } from '@/features/users/types/user-role-type';
@@ -42,7 +42,7 @@ export const studentFormFields: FormField<Student>[] = [
     name: 'grade',
     label: 'Lớp',
     type: FormFieldType.Select,
-    options: optionsGrade,
+    options: studentGradeOptions,
     placeholder: 'Vui lòng chọn lớp',
   },
 

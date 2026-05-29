@@ -8,13 +8,13 @@ import FilterTableCustom from '@/shared/components/table/FilterTableCustom';
 import { EnrollmentStatus, type Enrollment } from '../types/enrollment-type';
 import { enrollmentRoleAdminApi } from '../api/enrollment-api';
 import type { EnrollmentFilterParams } from '../types/enrollment-filter-params-type';
-import { enrollmentFilters } from '../constants/filter-table';
-import { enrollmentFormFields } from '../constants/form-fields';
+import { enrollmentFilters } from '../constants/enrollment-filter-table';
+import { enrollmentFormFields } from '../constants/enrollment-form-fields';
 import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
 import { formatCurrency } from '@/shared/utils/currecy';
 import ActionGroup from '@/shared/components/table/ActionGroup';
 import { EyeOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import StatusEnrollmentTag from '../components/StatusTag';
+import EnrollmentStatusTag from '../components/EnrollmentStatusTag';
 
 const EnrollmentPage = () => {
   const { getAll, create, update, remove } = enrollmentRoleAdminApi;
@@ -79,7 +79,7 @@ const EnrollmentPage = () => {
       dataIndex: 'status',
       align: 'center' as const,
       render: (_: any, record: Enrollment) => {
-        return <StatusEnrollmentTag status={record.status} statusText={record.statusText} />;
+        return <EnrollmentStatusTag status={record.status} statusText={record.statusText} />;
       },
     },
     {

@@ -1,7 +1,7 @@
 import { FormFieldType } from '@/shared/types/form-field.type';
-import { optionsCourseStatus } from './options-course-status';
-import { optionsCourseLevel } from './options-course-level';
+import { courseStatusOptions } from './course-status-options';
 import { getTeachersOptions } from '@/features/teachers/api/teacher-api';
+import { courseLevelOptions } from './course-level-options';
 
 export const courseFilters = [
   {
@@ -19,7 +19,7 @@ export const courseFilters = [
     name: 'level',
     type: FormFieldType.Select,
     placeholder: 'Cấp độ',
-    options: optionsCourseLevel,
+    options: courseLevelOptions,
   },
   {
     name: 'startDate',
@@ -37,6 +37,6 @@ export const courseFilters = [
     name: 'status',
     type: FormFieldType.Select,
     placeholder: 'Trạng thái',
-    options: optionsCourseStatus,
+    options: courseStatusOptions,
   },
 ];

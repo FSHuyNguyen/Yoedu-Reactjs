@@ -11,6 +11,7 @@ export const enrollmentFormFields: FormField<Enrollment>[] = [
     type: FormFieldType.SelectFetch,
     fetchOptions: getStudentOptions,
     placeholder: 'Chọn học viên',
+    rules: [{ required: true, message: 'Vui lòng chọn học viên' }],
   },
 
   {
@@ -19,6 +20,7 @@ export const enrollmentFormFields: FormField<Enrollment>[] = [
     type: FormFieldType.SelectFetch,
     fetchOptions: getCourseOptions,
     placeholder: 'Chọn khóa học',
+    rules: [{ required: true, message: 'Vui lòng chọn khóa học' }],
   },
 
   {

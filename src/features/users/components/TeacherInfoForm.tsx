@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { Button, Col, Form } from 'antd';
 import CardCustom from '@/shared/components/card/CardCustom';
 import InputTextAreaCustom from '@/shared/components/input/InputTextAreaCustom';
-import { teacherFormFields } from '@/features/teachers/constants/teacher-form.fields';
+import { teacherFormFields } from '@/features/teachers/constants/teacher-form-fields';
 import { FormFieldType } from '@/shared/types/form-field.type';
 import InputCustom from '@/shared/components/input/InputCustom';
 import InputNumberCustom from '@/shared/components/input/InputNumberCustom';

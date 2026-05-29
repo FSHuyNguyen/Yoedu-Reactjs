@@ -1,7 +1,7 @@
 import { FormFieldType } from '@/shared/types/form-field.type';
 import type { FormField } from '@/shared/components/modal/ModalFormCustom';
 import type { Course } from '../types/course-type';
-import { optionsCourseLevel } from './options-course-level';
+import { courseLevelOptions } from './course-level-options';
 import { getTeachersOptions } from '@/features/teachers/api/teacher-api';
 
 export const courseFormFields: FormField<Course>[] = [
@@ -27,6 +27,12 @@ export const courseFormFields: FormField<Course>[] = [
     label: 'Tên khóa học',
     type: FormFieldType.Input,
     placeholder: 'Nhập tên khóa học',
+    rules: [
+      {
+        required: true,
+        message: 'Vui lòng nhập tên khóa học',
+      },
+    ],
   },
   {
     name: 'price',
@@ -36,6 +42,12 @@ export const courseFormFields: FormField<Course>[] = [
     props: {
       isCurrency: true,
     },
+    rules: [
+      {
+        required: true,
+        message: 'Vui lòng nhập giá khóa học',
+      },
+    ],
   },
   {
     name: 'teacherId',
@@ -49,6 +61,12 @@ export const courseFormFields: FormField<Course>[] = [
     label: 'Tổng số buổi học',
     type: FormFieldType.InputNumber,
     placeholder: 'Nhập tổng số buổi học',
+    rules: [
+      {
+        required: true,
+        message: 'Vui lòng nhập tổng số buổi học',
+      },
+    ],
   },
   {
     name: 'maxStudents',
@@ -61,30 +79,54 @@ export const courseFormFields: FormField<Course>[] = [
     label: 'Ngày bắt đầu',
     type: FormFieldType.DatePicker,
     placeholder: 'Chọn ngày bắt đầu',
+    rules: [
+      {
+        required: true,
+        message: 'Vui lòng chọn ngày bắt đầu',
+      },
+    ],
   },
   {
     name: 'endDate',
     label: 'Ngày kết thúc',
     type: FormFieldType.DatePicker,
     placeholder: 'Chọn ngày kết thúc',
+    rules: [
+      {
+        required: true,
+        message: 'Vui lòng chọn ngày kết thúc',
+      },
+    ],
   },
   {
     name: 'startTime',
     label: 'Thời gian bắt đầu',
     type: FormFieldType.TimePicker,
     placeholder: 'Chọn thời gian bắt đầu',
+    rules: [
+      {
+        required: true,
+        message: 'Vui lòng chọn thời gian bắt đầu',
+      },
+    ],
   },
   {
     name: 'endTime',
     label: 'Thời gian kết thúc',
     type: FormFieldType.TimePicker,
     placeholder: 'Chọn thời gian kết thúc',
+    rules: [
+      {
+        required: true,
+        message: 'Vui lòng chọn thời gian kết thúc',
+      },
+    ],
   },
   {
     name: 'level',
     label: 'Cấp độ',
     type: FormFieldType.Select,
-    options: optionsCourseLevel,
+    options: courseLevelOptions,
     placeholder: 'Chọn cấp độ',
   },
   {

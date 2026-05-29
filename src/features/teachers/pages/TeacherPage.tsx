@@ -10,7 +10,7 @@ import { generalInfoFormFields } from '@/features/users/contants/general-info-fo
 import { teacherRoleAdminApi } from '../api/teacher-api';
 import type { Teacher } from '../types/teacher-type';
 import type { TeacherFilterParams } from '../types/teacher-filter-params-type';
-import { teacherFormFields } from '../constants/teacher-form.fields';
+import { teacherFormFields } from '../constants/teacher-form-fields';
 import { teacherFilters } from '../constants/teacher-filter-table';
 import {
   EyeOutlined,

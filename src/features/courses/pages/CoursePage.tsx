@@ -13,7 +13,6 @@ import { courseFormFields } from '../constants/course-form-fields';
 import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
 import { formatDate } from '@/shared/utils/date';
 import { formatCurrency } from '@/shared/utils/currecy';
-import StatusCourseTag from '../components/StatusCourseTag';
 import ActionGroup from '@/shared/components/table/ActionGroup';
 import {
   EyeOutlined,
@@ -22,6 +21,7 @@ import {
   CloseOutlined,
   CheckOutlined,
 } from '@ant-design/icons';
+import CourseStatusTag from '../components/CourseStatusTag';
 
 const CoursePage = () => {
   const { getAll, create, update, changeStatus, remove } = courseRoleAdminApi;
@@ -112,7 +112,7 @@ const CoursePage = () => {
       dataIndex: 'status',
       align: 'center' as const,
       render: (_: any, record: Course) => {
-        return <StatusCourseTag status={record.status} statusText={record.statusText} />;
+        return <CourseStatusTag status={record.status} statusText={record.statusText} />;
       },
     },
     {

@@ -1,12 +1,12 @@
 import { Tag } from 'antd';
 import { EnrollmentStatus, type EnrollmentStatusType } from '../types/enrollment-type';
 
-interface StatusEnrollmentTagProps {
+interface EnrollmentStatusTagProps {
   status?: EnrollmentStatusType;
   statusText?: string;
 }
 
-const StatusEnrollmentTag = ({ status, statusText }: StatusEnrollmentTagProps) => {
+const EnrollmentStatusTag = ({ status, statusText }: EnrollmentStatusTagProps) => {
   switch (status) {
     case EnrollmentStatus.STUDYING:
       return <Tag color="blue">{statusText || 'Đang học'}</Tag>;
@@ -22,4 +22,4 @@ const StatusEnrollmentTag = ({ status, statusText }: StatusEnrollmentTagProps) =
   }
 };
 
-export default StatusEnrollmentTag;
+export default EnrollmentStatusTag;

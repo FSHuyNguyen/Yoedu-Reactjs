@@ -5,7 +5,6 @@ import { FormFieldType, type FormFieldTypeKey } from '../../types/form-field.typ
 import { useNotification } from '../../hooks/useNotification';
 import RowCustom from '../row/RowCustom';
 import DatePickerCustom from '../datepicker/DatePickerCustom';
-import { formatDateToPicker } from '../../utils/date';
 import type { UserRole } from '@/features/users/types/user-role-type';
 import { useAppSelector } from '@/app/redux/hooks';
 import { FormModalMode, type FormModalModeType } from '../../types/form-modal-mode.type';
@@ -16,6 +15,8 @@ import InputPasswordCustom from '../input/InputPasswordCustom';
 import InputTextAreaCustom from '../input/InputTextAreaCustom';
 import UploadImageCustom from '../upload/UploadImageCustom';
 import SelectFetchCustom from '../select/SelectFetchCustom';
+import TimePickerCustom from '../timepicker/TimePickerCustom';
+import { formatFormValues } from '@/shared/utils/form';
 
 export interface FormContext {
   role: UserRole;
@@ -93,19 +94,7 @@ const ModalFormCustom = <T,>({
 
   useEffect(() => {
     if (open && initialValues) {
-      const formattedValues: Record<string, any> = {
-        ...initialValues,
-      };
-
-      sections.forEach((section) => {
-        section.fields.forEach((field) => {
-          const value = initialValues[field.name];
-
-          if (field.type === FormFieldType.DatePicker && value) {
-            formattedValues[field.name as string] = formatDateToPicker(value as string);
-          }
-        });
-      });
+      const formattedValues = formatFormValues(initialValues as T, sections);
 
       form.setFieldsValue(formattedValues);
     }
@@ -115,7 +104,9 @@ const ModalFormCustom = <T,>({
     try {
       setLoading(true);
 
-      await onSubmit(values);
+      const formattedValues = formatFormValues(values, sections);
+
+      await onSubmit(formattedValues);
 
       showNotification('success', 'Thành công', 'Dữ liệu đã được lưu thành công');
 
@@ -229,6 +220,14 @@ const ModalFormCustom = <T,>({
                             case FormFieldType.DatePicker:
                               return (
                                 <DatePickerCustom
+                                  placeholder={field.placeholder}
+                                  disabled={isDisabled || disabled}
+                                  {...field.props}
+                                />
+                              );
+                            case FormFieldType.TimePicker:
+                              return (
+                                <TimePickerCustom
                                   placeholder={field.placeholder}
                                   disabled={isDisabled || disabled}
                                   {...field.props}

@@ -130,7 +130,7 @@ const CoursePage = () => {
                 onClick: openView,
               },
               {
-                show: (r) => r.status === CourseStatus.DRAFT,
+                show: (r) => r.status === CourseStatus.DRAFT || r.status === CourseStatus.OPEN,
                 icon: <EditOutlined />,
                 tooltip: 'Sửa',
                 onClick: openEdit,

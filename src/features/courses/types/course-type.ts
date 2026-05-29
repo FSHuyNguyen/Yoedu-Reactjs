@@ -12,6 +12,8 @@ export interface Course {
   maxStudents: number;
   startDate: string;
   endDate: string;
+  startTime: string;
+  endTime: string;
   status: CourseStatusType;
   statusText: string;
   teacherId: string | null;

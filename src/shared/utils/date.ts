@@ -1,5 +1,5 @@
 import dayjs, { Dayjs } from 'dayjs';
-import { FORMAT_DATE } from '../constants/format-date';
+import { FORMAT_DATE, FORMAT_TIME } from '../constants/format-date';
 
 /**
  * Convert ISO string -> dayjs object
@@ -29,4 +29,17 @@ export const formatDate = (value?: string | Date | null, format = FORMAT_DATE): 
   if (!value) return '';
 
   return dayjs(value).format(format);
+};
+
+/**
+ * Convert string -> dayjs object
+ * dùng cho TimePicker setFieldsValue
+ */
+export const formatTimeToPicker = (
+  value?: string | Date | null,
+  format = FORMAT_TIME,
+): Dayjs | null => {
+  if (!value) return null;
+
+  return dayjs(value, format);
 };

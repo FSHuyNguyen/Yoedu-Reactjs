@@ -26,6 +26,9 @@ export const enrollmentFormFields: FormField<Enrollment>[] = [
     label: 'Số tiền đã thanh toán',
     type: FormFieldType.InputNumber,
     placeholder: 'Nhập số tiền đã thanh toán',
+    props: {
+      isCurrency: true,
+    },
   },
 
   {

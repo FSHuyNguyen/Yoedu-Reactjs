@@ -69,6 +69,18 @@ export const courseFormFields: FormField<Course>[] = [
     placeholder: 'Chọn ngày kết thúc',
   },
   {
+    name: 'startTime',
+    label: 'Thời gian bắt đầu',
+    type: FormFieldType.TimePicker,
+    placeholder: 'Chọn thời gian bắt đầu',
+  },
+  {
+    name: 'endTime',
+    label: 'Thời gian kết thúc',
+    type: FormFieldType.TimePicker,
+    placeholder: 'Chọn thời gian kết thúc',
+  },
+  {
     name: 'level',
     label: 'Cấp độ',
     type: FormFieldType.Select,

@@ -4,6 +4,7 @@ export const FormFieldType = {
   InputPassword: 'inputPassword',
   Select: 'select',
   SelectFetch: 'selectFetch',
+  TimePicker: 'timePicker',
   Checkbox: 'checkbox',
   DatePicker: 'datePicker',
   ImageUpload: 'imageUpload',

@@ -1,28 +1,29 @@
 import { Timeline } from 'antd';
 import EmptyCustom from '@/shared/components/empty/EmptyCustom';
-import { DollarOutlined, UserOutlined, HomeOutlined, ClockCircleOutlined } from '@ant-design/icons';
+import { UserOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import CardCustom from '@/shared/components/card/CardCustom';
 import { ActivityType } from '@/features/dashboard/constants/activity';
 import type { RecentActivityItem } from '@/features/dashboard/types/recent-activity-type';
+import { formatDate } from '@/shared/utils/date';
 
 interface RecentActivityProps {
   data: RecentActivityItem[];
 }
 
 const activityConfig = {
-  [ActivityType.STUDENT]: {
+  [ActivityType.STUDENT_CREATED]: {
     icon: <UserOutlined />,
     color: 'text-green-500',
   },
-  [ActivityType.PAYMENT]: {
-    icon: <DollarOutlined />,
+  [ActivityType.TEACHER_CREATED]: {
+    icon: <UserOutlined />,
     color: 'text-blue-500',
   },
-  [ActivityType.CLASS]: {
-    icon: <HomeOutlined />,
+  [ActivityType.COURSE_CREATED]: {
+    icon: <ClockCircleOutlined />,
     color: 'text-purple-500',
   },
-  [ActivityType.ABSENCE]: {
+  [ActivityType.STUDENT_ENROLLED]: {
     icon: <ClockCircleOutlined />,
     color: 'text-red-500',
   },
@@ -40,8 +41,9 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
               icon: <span className={config.color}>{config.icon}</span>,
               content: (
                 <>
+                  <div className="font-bold">{item.title}</div>
                   <div className="font-medium">{item.message}</div>
-                  <div className="text-sm text-gray-400">{item.time}</div>
+                  <div className="text-sm text-gray-400">{formatDate(item.date)}</div>
                 </>
               ),
             };

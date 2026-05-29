@@ -1,17 +1,20 @@
 import StatCard from '@/features/dashboard/components/stat-card';
 import { useEffect, useState } from 'react';
-import { getDashboardData } from '../services';
 import type { Dashboard } from '@/features/dashboard/types/dashboard-type';
 import RecentActivity from '@/features/dashboard/components/recent-activity';
 import TodayClasses from '@/features/dashboard/components/today-classes';
+import { dashboardRoleAdminApi } from '../api/dashboard-api';
+
+const mapColor = ['green', 'blue', 'purple', 'red'];
 
 const DashboardPage = () => {
+  const { getDashboard } = dashboardRoleAdminApi;
   const [data, setData] = useState<Dashboard | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getDashboardData();
-      setData(res);
+      const res = await getDashboard();
+      setData(res.data);
     };
 
     fetchData();
@@ -33,7 +36,7 @@ const DashboardPage = () => {
             title={item.title}
             value={item.value}
             extra={item.extra}
-            color={item.color}
+            color={mapColor[index % mapColor.length]}
           />
         ))}
       </div>

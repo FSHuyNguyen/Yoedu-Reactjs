@@ -5,7 +5,7 @@ import ThemeProvider from './app/providers/theme/ThemeProvider';
 import AntdProvider from './app/providers/antd/AntdProvider';
 
 import { RouterProvider } from 'react-router-dom';
-import { router } from './app/router/Routes';
+import { router } from './app/router/routes';
 
 function App() {
   return (

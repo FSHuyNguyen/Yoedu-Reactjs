@@ -11,7 +11,6 @@ import type { CourseFilterParams } from '../types/course-filter-params-type';
 import { courseFilters } from '../constants/course-filter-table';
 import { courseFormFields } from '../constants/course-form-fields';
 import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
-import { formatDate } from '@/shared/utils/date';
 import { formatCurrency } from '@/shared/utils/currecy';
 import ActionGroup from '@/shared/components/table/ActionGroup';
 import {
@@ -24,7 +23,7 @@ import {
 import CourseStatusTag from '../components/CourseStatusTag';
 
 const CoursePage = () => {
-  const { getAll, create, update, changeStatus, remove } = courseRoleAdminApi;
+  const { getAll, create, update, open: openCourse, close: closeCourse, remove } = courseRoleAdminApi;
 
   const { open, mode, selectedRecord, openCreate, openView, openEdit, close } =
     useFormModal<Course>();
@@ -48,13 +47,16 @@ const CoursePage = () => {
 
     handleDelete,
 
-    handleChangeStatus,
+    handleActive,
+
+    handleUnActive,
 
     refetch,
   } = useTable<Course, CourseFilterParams>({
     fetchApi: getAll,
     removeApi: remove,
-    changeStatusApi: changeStatus,
+    activeApi: openCourse,
+    unActiveApi: closeCourse,
   });
 
   const sectionsCourseForm: SectionForm<Course>[] = [
@@ -75,12 +77,8 @@ const CoursePage = () => {
       dataIndex: 'name',
     },
     {
-      title: 'Giáo viên',
-      dataIndex: 'teacherName',
-    },
-    {
       title: 'Giá khóa học',
-      dataIndex: 'price',
+      dataIndex: 'tuitionFee',
       render: (value: any) => (value ? formatCurrency(value) : ''),
     },
     {
@@ -96,16 +94,6 @@ const CoursePage = () => {
       title: 'Số học viên tối đa',
       dataIndex: 'maxStudents',
       align: 'center' as const,
-    },
-    {
-      title: 'Ngày bắt đầu',
-      dataIndex: 'startDate',
-      render: (value: any) => (value ? formatDate(value) : ''),
-    },
-    {
-      title: 'Ngày kết thúc',
-      dataIndex: 'endDate',
-      render: (value: any) => (value ? formatDate(value) : ''),
     },
     {
       title: 'Trạng thái',
@@ -140,15 +128,15 @@ const CoursePage = () => {
                 icon: <CloseOutlined />,
                 tooltip: 'Đóng khóa học',
                 danger: true,
-                onClick: () => handleChangeStatus(record.id),
+                onClick: () => handleUnActive(record.id),
                 isPopconfirm: true,
               },
               {
-                show: (r) => r.status === CourseStatus.DRAFT,
+                show: (r) => r.status === CourseStatus.DRAFT || r.status === CourseStatus.CLOSED,
                 icon: <CheckOutlined />,
                 tooltip: 'Mở khóa học',
                 color: '#52c41a',
-                onClick: () => handleChangeStatus(record.id),
+                onClick: () => handleActive(record.id),
                 isPopconfirm: true,
               },
               {

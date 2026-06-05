@@ -33,8 +33,8 @@ export const teacherRoleAdminApi = {
     return res.data;
   },
 
-  unActive: async (id: string) => {
-    const res = await axiosClient.patch(`/teachers/${id}/inactive`);
+  paused: async (id: string) => {
+    const res = await axiosClient.patch(`/teachers/${id}/paused`);
 
     return res.data;
   },

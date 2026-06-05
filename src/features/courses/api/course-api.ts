@@ -32,8 +32,14 @@ export const courseRoleAdminApi = {
     return res.data;
   },
 
-  changeStatus: async (id: string) => {
-    const res = await axiosClient.patch(`/courses/${id}/change-status`);
+  open: async (id: string) => {
+    const res = await axiosClient.patch(`/courses/${id}/open`);
+
+    return res.data;
+  },
+
+  close: async (id: string) => {
+    const res = await axiosClient.patch(`/courses/${id}/close`);
 
     return res.data;
   },

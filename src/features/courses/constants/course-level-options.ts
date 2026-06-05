@@ -1,7 +1,7 @@
 import { CourseLevel } from '../types/course-type';
 
 export const courseLevelOptions = [
-  { label: 'Sơ cấp', value: CourseLevel.BEGINNER },
-  { label: 'Trung cấp', value: CourseLevel.INTERMEDIATE },
-  { label: 'Cao cấp', value: CourseLevel.ADVANCED },
+  { label: 'BEGINNER', value: CourseLevel.BEGINNER },
+  { label: 'INTERMEDIATE', value: CourseLevel.INTERMEDIATE },
+  { label: 'ADVANCED', value: CourseLevel.ADVANCED },
 ];

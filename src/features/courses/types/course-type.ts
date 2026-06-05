@@ -1,5 +1,3 @@
-import type { Teacher } from '@/features/teachers/types/teacher-type';
-
 export interface Course {
   id: string;
   courseCode: string;
@@ -7,17 +5,11 @@ export interface Course {
   description: string;
   thumbnailUrl: string;
   level: CourseLevelType;
-  price: number;
+  tuitionFee: number;
   totalSessions: number;
   maxStudents: number;
-  startDate: string;
-  endDate: string;
-  startTime: string;
-  endTime: string;
   status: CourseStatusType;
   statusText: string;
-  teacherId: string | null;
-  teacher: Teacher | null;
   createdAt: string;
   updatedAt: string;
 }

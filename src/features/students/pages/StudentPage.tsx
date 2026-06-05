@@ -24,7 +24,7 @@ import StudentStatusTag from '../components/StudentStatusTag';
 import { STUDENT_STATUS } from '../types/student-status-type';
 
 const StudentPage = () => {
-  const { getAll, create, update, active, unActive, remove } = studentRoleAdminApi;
+  const { getAll, create, update, active, paused, remove } = studentRoleAdminApi;
 
   const { open, mode, selectedRecord, openCreate, openView, openEdit, close } =
     useFormModal<Student>();
@@ -57,7 +57,7 @@ const StudentPage = () => {
     fetchApi: getAll,
     removeApi: remove,
     activeApi: active,
-    unActiveApi: unActive,
+    unActiveApi: paused,
   });
 
   const sectionsStudentForm: SectionForm<Student>[] = [

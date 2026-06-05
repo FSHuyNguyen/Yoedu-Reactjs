@@ -24,7 +24,7 @@ import TeacherStatusTag from '../components/TeacherStatusTag';
 import { TEACHER_STATUS } from '../types/teacher-status-type';
 
 const TeacherPage = () => {
-  const { getAll, create, update, active, unActive, remove } = teacherRoleAdminApi;
+  const { getAll, create, update, active, paused, remove } = teacherRoleAdminApi;
 
   const { open, mode, selectedRecord, openCreate, openView, openEdit, close } =
     useFormModal<Teacher>();
@@ -57,7 +57,7 @@ const TeacherPage = () => {
     fetchApi: getAll,
     removeApi: remove,
     activeApi: active,
-    unActiveApi: unActive,
+    unActiveApi: paused,
   });
 
   const sectionsTeacherForm: SectionForm<Teacher>[] = [

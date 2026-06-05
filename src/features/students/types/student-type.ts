@@ -1,33 +1,30 @@
 import type { User } from '@/features/users/types/user-type';
+import type { StudentStatusType } from './student-status-type';
 
 export interface Student extends User {
   id: string;
 
   userId: string;
 
-  // mã học viên
   studentCode: string;
 
-  // phụ huynh
+  parentId?: string | null;
+
   parentName?: string | null;
-  parentPhone?: string | null;
 
-  // trường / lớp
   schoolName?: string | null;
-  grade?: string | null;
 
-  // học lực
+  gradeLevel?: string | null;
+
   entryAcademicLevel?: string | null;
 
-  // điểm test
   latestTestScore?: number | null;
 
-  // mục tiêu học
   learningGoal?: string | null;
 
-  // ghi chú
   note?: string | null;
 
-  // ngày tham gia
-  joinedAt?: string | null;
+  studentStatus: StudentStatusType;
+
+  studentStatusText: string;
 }

@@ -1,14 +1,17 @@
 import type { User } from '@/features/users/types/user-type';
+import type { TeacherRoleType } from './teacher-role';
+import type { TeacherStatusType } from './teacher-status-type';
 
 export interface Teacher extends User {
   id: string;
 
   userId: string;
 
-  // mã giáo viên
   teacherCode: string;
 
-  bio?: string | null;
+  teacherRole: TeacherRoleType;
+
+  teacherRoleText: string;
 
   specialization?: string | null;
 
@@ -16,9 +19,9 @@ export interface Teacher extends User {
 
   yearsOfExperience?: number | null;
 
-  // ghi chú
   note?: string | null;
 
-  // ngày tham gia
-  joinedAt?: string | null;
+  teacherStatus: TeacherStatusType;
+
+  teacherStatusText: string;
 }

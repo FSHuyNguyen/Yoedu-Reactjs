@@ -1,6 +1,4 @@
 import { FormFieldType } from '@/shared/types/form-field-type';
-import { rules } from '@/shared/utils/rules';
-import { studentGradeOptions } from './student-grade-options';
 import type { Student } from '../types/student-type';
 import type { FormContext, FormField } from '@/shared/components/modal/ModalFormCustom';
 import { USER_ROLE } from '@/features/users/types/user-role-type';
@@ -17,36 +15,27 @@ export const studentFormFields: FormField<Student>[] = [
   },
 
   // ===== Parent Info =====
-  {
-    name: 'parentName',
-    label: 'Tên phụ huynh',
-    type: FormFieldType.Input,
-    placeholder: 'Nhập tên phụ huynh',
-  },
-  {
-    name: 'parentPhone',
-    label: 'Số điện thoại phụ huynh',
-    type: FormFieldType.Input,
-    placeholder: 'Nhập số điện thoại phụ huynh',
-    rules: [rules.phone],
-  },
+  // {
+  //   name: 'parentId',
+  //   label: 'Tên phụ huynh',
+  //   type: FormFieldType.Input,
+  //   placeholder: 'Nhập tên phụ huynh',
+  // },
 
-  // ===== School Info =====
   {
     name: 'schoolName',
     label: 'Trường học',
     type: FormFieldType.Input,
     placeholder: 'Nhập tên trường học',
   },
+
   {
-    name: 'grade',
+    name: 'gradeLevel',
     label: 'Lớp',
-    type: FormFieldType.Select,
-    options: studentGradeOptions,
-    placeholder: 'Vui lòng chọn lớp',
+    type: FormFieldType.Input,
+    placeholder: 'Vui lòng nhập lớp',
   },
 
-  // ===== Academic =====
   {
     name: 'entryAcademicLevel',
     label: 'Học lực đầu vào',
@@ -58,15 +47,6 @@ export const studentFormFields: FormField<Student>[] = [
     label: 'Điểm test gần nhất',
     type: FormFieldType.InputNumber,
     placeholder: 'Nhập điểm test gần nhất',
-    disabled: ({ role }: FormContext) => role !== USER_ROLE.ADMIN,
-  },
-
-  // ===== Joined Date =====
-  {
-    name: 'joinedAt',
-    label: 'Ngày tham gia',
-    type: FormFieldType.DatePicker,
-    placeholder: 'Chọn ngày tham gia',
     disabled: ({ role }: FormContext) => role !== USER_ROLE.ADMIN,
   },
 

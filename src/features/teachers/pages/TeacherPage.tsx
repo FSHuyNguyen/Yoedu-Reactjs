@@ -4,7 +4,6 @@ import { Button } from 'antd';
 import ModalFormCustom, { type SectionForm } from '@/shared/components/modal/ModalFormCustom';
 import { useFormModal } from '@/shared/hooks/useFormModal';
 import { FormModalMode } from '@/shared/types/form-modal-mode-type';
-import { userRoleAdminApi } from '@/features/users/api/user-api';
 import FilterTableCustom from '@/shared/components/table/FilterTableCustom';
 import { generalInfoFormFields } from '@/features/users/contants/general-info-form-fields';
 import { teacherRoleAdminApi } from '../api/teacher-api';
@@ -19,14 +18,13 @@ import {
   CheckOutlined,
   CloseOutlined,
 } from '@ant-design/icons';
-import StatusTag from '@/shared/components/status/StatusTag';
 import ActionGroup from '@/shared/components/table/ActionGroup';
-import { USER_STATUS } from '@/features/users/types/user-status-type';
 import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
+import TeacherStatusTag from '../components/TeacherStatusTag';
+import { TEACHER_STATUS } from '../types/teacher-status-type';
 
 const TeacherPage = () => {
-  const { getAll, create, update } = teacherRoleAdminApi;
-  const { changeStatus, remove } = userRoleAdminApi;
+  const { getAll, create, update, active, unActive, remove } = teacherRoleAdminApi;
 
   const { open, mode, selectedRecord, openCreate, openView, openEdit, close } =
     useFormModal<Teacher>();
@@ -50,13 +48,16 @@ const TeacherPage = () => {
 
     handleDelete,
 
-    handleChangeStatus,
+    handleActive,
+
+    handleUnActive,
 
     refetch,
   } = useTable<Teacher, TeacherFilterParams>({
     fetchApi: getAll,
     removeApi: remove,
-    changeStatusApi: changeStatus,
+    activeApi: active,
+    unActiveApi: unActive,
   });
 
   const sectionsTeacherForm: SectionForm<Teacher>[] = [
@@ -88,6 +89,11 @@ const TeacherPage = () => {
     },
 
     {
+      title: 'Vai trò',
+      dataIndex: 'teacherRoleText'
+    },
+
+    {
       title: 'Số điện thoại',
       dataIndex: 'phone',
     },
@@ -102,7 +108,7 @@ const TeacherPage = () => {
       dataIndex: 'status',
       align: 'center' as const,
       render: (_: any, record: any) => {
-        return <StatusTag status={record.status} statusText={record.statusText} />;
+        return <TeacherStatusTag status={record.teacherStatus} statusText={record.teacherStatusText} />;
       },
     },
 
@@ -121,36 +127,36 @@ const TeacherPage = () => {
                 onClick: openView,
               },
               {
-                show: (r) => r.status !== USER_STATUS.DELETED,
+                show: (r) => r.teacherStatus !== TEACHER_STATUS.INACTIVE,
                 icon: <EditOutlined />,
                 tooltip: 'Sửa',
                 onClick: openEdit,
               },
 
               {
-                show: (r) => r.status === USER_STATUS.ACTIVE,
+                show: (r) => r.teacherStatus === TEACHER_STATUS.ACTIVE,
                 icon: <CloseOutlined />,
-                tooltip: 'Ngưng hoạt động',
+                tooltip: 'Tạm nghỉ',
                 danger: true,
-                onClick: () => handleChangeStatus(record.userId),
+                onClick: () => handleUnActive(record.id),
                 isPopconfirm: true,
               },
 
               {
-                show: (r) => r.status === USER_STATUS.INACTIVE,
+                show: (r) => r.teacherStatus === TEACHER_STATUS.PAUSED,
                 icon: <CheckOutlined />,
-                tooltip: 'Kích hoạt',
+                tooltip: 'Hoạt động',
                 color: '#52c41a',
-                onClick: () => handleChangeStatus(record.userId),
+                onClick: () => handleActive(record.id),
                 isPopconfirm: true,
               },
 
               {
-                show: (r) => r.status === USER_STATUS.INACTIVE,
+                show: (r) => r.teacherStatus === TEACHER_STATUS.PAUSED,
                 icon: <DeleteOutlined />,
-                tooltip: 'Xóa',
+                tooltip: 'Ngừng công tác',
                 danger: true,
-                onClick: () => handleDelete(record.userId),
+                onClick: () => handleDelete(record.id),
                 isPopconfirm: true,
               },
             ]}

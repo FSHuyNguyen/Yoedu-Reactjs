@@ -26,6 +26,24 @@ export const teacherRoleAdminApi = {
 
     return res.data;
   },
+
+  active: async (id: string) => {
+    const res = await axiosClient.patch(`/teachers/${id}/active`);
+
+    return res.data;
+  },
+
+  unActive: async (id: string) => {
+    const res = await axiosClient.patch(`/teachers/${id}/inactive`);
+
+    return res.data;
+  },
+
+  remove: async (id: string) => {
+    const res = await axiosClient.delete(`/teachers/${id}`);
+
+    return res.data;
+  },
 };
 
 /* ROLE TEACHER */

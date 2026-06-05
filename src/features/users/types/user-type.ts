@@ -36,4 +36,6 @@ export type User = {
   student?: Student | null;
 
   teacher?: Teacher | null;
+
+  // parent?: Parent | null;
 };

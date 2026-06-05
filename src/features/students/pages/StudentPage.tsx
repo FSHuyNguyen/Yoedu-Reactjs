@@ -7,7 +7,6 @@ import ModalFormCustom, { type SectionForm } from '@/shared/components/modal/Mod
 import { studentRoleAdminApi } from '../api/student-api';
 import { useFormModal } from '@/shared/hooks/useFormModal';
 import { FormModalMode } from '@/shared/types/form-modal-mode-type';
-import { userRoleAdminApi } from '@/features/users/api/user-api';
 import { studentFilters } from '../constants/student-filter-table';
 import type { StudentFilterParams } from '../types/student-filter-params-type';
 import FilterTableCustom from '@/shared/components/table/FilterTableCustom';
@@ -20,13 +19,12 @@ import {
   CheckOutlined,
   CloseOutlined,
 } from '@ant-design/icons';
-import { USER_STATUS } from '@/features/users/types/user-status-type';
 import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
-import StatusTag from '@/shared/components/status/StatusTag';
+import StudentStatusTag from '../components/StudentStatusTag';
+import { STUDENT_STATUS } from '../types/student-status-type';
 
 const StudentPage = () => {
-  const { getAll, create, update } = studentRoleAdminApi;
-  const { changeStatus, remove } = userRoleAdminApi;
+  const { getAll, create, update, active, unActive, remove } = studentRoleAdminApi;
 
   const { open, mode, selectedRecord, openCreate, openView, openEdit, close } =
     useFormModal<Student>();
@@ -50,13 +48,16 @@ const StudentPage = () => {
 
     handleDelete,
 
-    handleChangeStatus,
+    handleActive,
+
+    handleUnActive,
 
     refetch,
   } = useTable<Student, StudentFilterParams>({
     fetchApi: getAll,
     removeApi: remove,
-    changeStatusApi: changeStatus,
+    activeApi: active,
+    unActiveApi: unActive,
   });
 
   const sectionsStudentForm: SectionForm<Student>[] = [
@@ -98,11 +99,16 @@ const StudentPage = () => {
     },
 
     {
+      title: 'Tên phụ huynh',
+      dataIndex: 'parentName',
+    },
+
+    {
       title: 'Trạng thái',
       dataIndex: 'status',
       align: 'center' as const,
       render: (_: any, record: any) => {
-        return <StatusTag status={record.status} statusText={record.statusText} />;
+        return <StudentStatusTag status={record.studentStatus} statusText={record.studentStatusText} />;
       },
     },
 
@@ -121,36 +127,36 @@ const StudentPage = () => {
                 onClick: openView,
               },
               {
-                show: (r) => r.status !== USER_STATUS.DELETED,
+                show: (r) => r.studentStatus !== STUDENT_STATUS.DROPPED,
                 icon: <EditOutlined />,
                 tooltip: 'Sửa',
                 onClick: openEdit,
               },
 
               {
-                show: (r) => r.status === USER_STATUS.ACTIVE,
+                show: (r) => r.studentStatus === STUDENT_STATUS.ACTIVE,
                 icon: <CloseOutlined />,
-                tooltip: 'Ngưng hoạt động',
+                tooltip: 'Tạm ngưng',
                 danger: true,
-                onClick: () => handleChangeStatus(record.userId),
+                onClick: () => handleUnActive(record.id),
                 isPopconfirm: true,
               },
 
               {
-                show: (r) => r.status === USER_STATUS.INACTIVE,
+                show: (r) => r.studentStatus === STUDENT_STATUS.PAUSED,
                 icon: <CheckOutlined />,
-                tooltip: 'Kích hoạt',
+                tooltip: 'Tham gia',
                 color: '#52c41a',
-                onClick: () => handleChangeStatus(record.userId),
+                onClick: () => handleActive(record.id),
                 isPopconfirm: true,
               },
 
               {
-                show: (r) => r.status === USER_STATUS.INACTIVE,
+                show: (r) => r.studentStatus === STUDENT_STATUS.PAUSED,
                 icon: <DeleteOutlined />,
-                tooltip: 'Xóa',
+                tooltip: 'Bỏ học',
                 danger: true,
-                onClick: () => handleDelete(record.userId),
+                onClick: () => handleDelete(record.id),
                 isPopconfirm: true,
               },
             ]}

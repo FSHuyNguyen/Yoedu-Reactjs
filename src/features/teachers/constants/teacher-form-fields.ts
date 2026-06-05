@@ -3,6 +3,7 @@ import type { FormContext, FormField } from '@/shared/components/modal/ModalForm
 import { USER_ROLE } from '@/features/users/types/user-role-type';
 import { FormModalMode } from '@/shared/types/form-modal-mode-type';
 import type { Teacher } from '../types/teacher-type';
+import { teacherRoleOptions } from './teacher-role-options';
 
 export const teacherFormFields: FormField<Teacher>[] = [
   {
@@ -14,10 +15,11 @@ export const teacherFormFields: FormField<Teacher>[] = [
       role !== USER_ROLE.ADMIN || mode === FormModalMode.CREATE,
   },
   {
-    name: 'bio',
-    label: 'Tiểu sử',
-    type: FormFieldType.TextArea,
-    placeholder: 'Nhập tiểu sử',
+    name: 'teacherRole',
+    type: FormFieldType.Select,
+    label: 'Vai trò',
+    placeholder: 'Chọn vai trò',
+    options: teacherRoleOptions,
   },
   {
     name: 'specialization',
@@ -36,12 +38,6 @@ export const teacherFormFields: FormField<Teacher>[] = [
     label: 'Số năm kinh nghiệm',
     type: FormFieldType.InputNumber,
     placeholder: 'Nhập số năm kinh nghiệm',
-  },
-  {
-    name: 'joinedAt',
-    label: 'Ngày tham gia',
-    type: FormFieldType.DatePicker,
-    placeholder: 'Chọn ngày tham gia',
   },
   {
     name: 'note',

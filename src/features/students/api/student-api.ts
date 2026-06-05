@@ -26,6 +26,24 @@ export const studentRoleAdminApi = {
 
     return res.data;
   },
+
+  active: async (id: string) => {
+    const res = await axiosClient.patch(`/students/${id}/active`);
+
+    return res.data;
+  },
+
+  unActive: async (id: string) => {
+    const res = await axiosClient.patch(`/students/${id}/inactive`);
+
+    return res.data;
+  },
+
+  remove: async (id: string) => {
+    const res = await axiosClient.delete(`/students/${id}`);
+
+    return res.data;
+  },
 };
 
 /* ROLE STUDENT */

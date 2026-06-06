@@ -1,6 +1,6 @@
 import { Image, Layout, Menu } from 'antd';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { DashboardOutlined, UserOutlined, BookOutlined } from '@ant-design/icons';
+import { DashboardOutlined, UserOutlined, BookOutlined, UsergroupDeleteOutlined } from '@ant-design/icons';
 import YoeduLogo from '@/assets/images/yoedu-logo.svg';
 import { useTheme } from '@/app/providers/theme/hooks/useTheme';
 
@@ -22,25 +22,45 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
       icon: <DashboardOutlined />,
       label: 'Dashboard',
     },
+
     {
-      key: '/students',
-      icon: <UserOutlined />,
-      label: 'Học viên',
+      key: 'management',
+      label: 'Quản trị',
+      children: [
+        {
+          key: '/students',
+          icon: <UserOutlined />,
+          label: 'Học viên',
+        },
+        {
+          key: '/teachers',
+          icon: <UsergroupDeleteOutlined />,
+          label: 'Giáo viên',
+        },
+        {
+          key: '/courses',
+          icon: <BookOutlined />,
+          label: 'Khóa đào tạo',
+        },
+      ],
     },
+
     {
-      key: '/teachers',
-      icon: <UserOutlined />,
-      label: 'Giáo viên',
+      key: 'academic',
+      label: 'Học vụ',
+      children: [
+        {
+          key: '/enrollments',
+          icon: <BookOutlined />,
+          label: 'Tuyển sinh',
+        },
+      ],
     },
+
     {
-      key: '/courses',
-      icon: <BookOutlined />,
-      label: 'Khóa học',
-    },
-    {
-      key: '/enrollments',
-      icon: <BookOutlined />,
-      label: 'Tuyển sinh',
+      key: 'finance',
+      label: 'Thu tiền',
+      children: [],
     },
   ];
 

@@ -51,12 +51,18 @@ const DynamicForm = <T,>({
                                             <InputCustom
                                                 placeholder={field.placeholder}
                                                 disabled={isDisabled || disabled}
+                                                prefix={field.icon ? <field.icon /> : null}
                                                 {...field.props}
                                             />
                                         );
                                     case FormFieldType.InputPassword:
                                         return (
-                                            <InputPasswordCustom placeholder={field.placeholder} prefix={<field.icon />} />
+                                            <InputPasswordCustom
+                                                placeholder={field.placeholder}
+                                                disabled={isDisabled || disabled}
+                                                prefix={field.icon ? <field.icon /> : null}
+                                                {...field.props}
+                                            />
                                         );
                                     case FormFieldType.ImageUpload:
                                         return (
@@ -69,14 +75,6 @@ const DynamicForm = <T,>({
                                     case FormFieldType.InputNumber:
                                         return (
                                             <InputNumberCustom
-                                                placeholder={field.placeholder}
-                                                disabled={isDisabled || disabled}
-                                                {...field.props}
-                                            />
-                                        );
-                                    case FormFieldType.InputPassword:
-                                        return (
-                                            <InputPasswordCustom
                                                 placeholder={field.placeholder}
                                                 disabled={isDisabled || disabled}
                                                 {...field.props}

@@ -1,6 +1,6 @@
 import { Image, Layout, Menu } from 'antd';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { DashboardOutlined, UserOutlined, BookOutlined, UsergroupDeleteOutlined } from '@ant-design/icons';
+import { DashboardOutlined, TeamOutlined, SolutionOutlined, UserOutlined, BookOutlined, AuditOutlined, ReadOutlined, WalletOutlined } from '@ant-design/icons';
 import YoeduLogo from '@/assets/images/yoedu-logo.svg';
 import { useTheme } from '@/app/providers/theme/hooks/useTheme';
 
@@ -26,6 +26,7 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
     {
       key: 'management',
       label: 'Quản trị',
+      icon: <TeamOutlined />,
       children: [
         {
           key: '/students',
@@ -34,22 +35,22 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
         },
         {
           key: '/parents',
-          icon: <UserOutlined />,
+          icon: <TeamOutlined />,
           label: 'Phụ huynh',
         },
         {
           key: '/teachers',
-          icon: <UsergroupDeleteOutlined />,
+          icon: <SolutionOutlined />,
           label: 'Giáo viên',
         },
         {
           key: '/accounts',
-          icon: <UserOutlined />,
+          icon: <AuditOutlined />,
           label: 'Tài khoản',
         },
         {
           key: '/courses',
-          icon: <BookOutlined />,
+          icon: <ReadOutlined />,
           label: 'Khóa đào tạo',
         },
       ],
@@ -58,10 +59,11 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
     {
       key: 'academic',
       label: 'Học vụ',
+      icon: <BookOutlined />,
       children: [
         {
           key: '/enrollments',
-          icon: <BookOutlined />,
+          icon: <SolutionOutlined />,
           label: 'Tuyển sinh',
         },
       ],
@@ -70,6 +72,7 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
     {
       key: 'finance',
       label: 'Thu tiền',
+      icon: <WalletOutlined />,
       children: [],
     },
   ];

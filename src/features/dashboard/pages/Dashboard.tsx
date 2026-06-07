@@ -4,6 +4,7 @@ import type { Dashboard } from '@/features/dashboard/types/dashboard-type';
 import RecentActivity from '@/features/dashboard/components/recent-activity';
 import TodayClasses from '@/features/dashboard/components/today-classes';
 import { dashboardRoleAdminApi } from '../api/dashboard-api';
+import PageHeader from '@/shared/components/page/PageHeader';
 
 const mapColor = ['green', 'blue', 'purple', 'red'];
 
@@ -23,10 +24,7 @@ const DashboardPage = () => {
   return (
     <div className="flex flex-col gap-6">
       {/* Title */}
-      <div>
-        <h1 className="text-2xl font-semibold mb-3">Dashboard</h1>
-        <p className="text-gray-500 text-xs">Tổng quan hệ thống quản lý YOEDU</p>
-      </div>
+      <PageHeader title="Dashboard" subtitle="Tổng quan hệ thống quản lý YOEDU" />
 
       {/* Stats */}
       <div className="grid grid-cols-4 gap-4">

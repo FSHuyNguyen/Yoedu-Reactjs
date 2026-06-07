@@ -120,7 +120,6 @@ const FormCustom = <T,>({
         }
     };
 
-
     return (
         <Form form={form} layout="vertical" onFinish={handleSubmit}>
             <Tabs
@@ -129,7 +128,8 @@ const FormCustom = <T,>({
                     label: section.label,
                     children: (
                         <DynamicForm<T>
-                            fields={section.fields.filter((field) => mode === FormModalMode.CREATE || field.name !== 'password')} disabled={disabled}
+                            fields={section.fields.filter((field) => mode === FormModalMode.CREATE || field.name !== 'password')}
+                            disabled={disabled}
                             mode={mode}
                         />
                     ),

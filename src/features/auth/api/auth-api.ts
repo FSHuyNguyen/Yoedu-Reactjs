@@ -6,7 +6,7 @@ export const loginApi = (payload: LoginPayload) => {
   return axiosClient.post('/auth/login', payload);
 };
 
-export const registerApi = (payload: RegisterPayload) => {
+export const registerApi = (payload: Omit<RegisterPayload, 'confirmPassword'>) => {
   return axiosClient.post('/auth/register', payload);
 };
 

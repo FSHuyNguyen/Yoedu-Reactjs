@@ -29,6 +29,11 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
       icon: <TeamOutlined />,
       children: [
         {
+          key: '/accounts',
+          icon: <AuditOutlined />,
+          label: 'Tài khoản',
+        },
+        {
           key: '/students',
           icon: <UserOutlined />,
           label: 'Học viên',
@@ -42,11 +47,6 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
           key: '/teachers',
           icon: <SolutionOutlined />,
           label: 'Giáo viên',
-        },
-        {
-          key: '/accounts',
-          icon: <AuditOutlined />,
-          label: 'Tài khoản',
         },
         {
           key: '/courses',

@@ -13,12 +13,6 @@ import { useNotification } from '@/shared/hooks/useNotification';
 import DynamicForm from '@/shared/components/form/DynamicForm';
 import type { RegisterPayload } from '../types/auth-type';
 
-type RegisterFormValues = {
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
-
 const RegisterPage = () => {
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.auth);
@@ -27,12 +21,13 @@ const RegisterPage = () => {
 
   const navigate = useNavigate();
 
-  const [form] = Form.useForm<RegisterFormValues>();
+  const [form] = Form.useForm<RegisterPayload>();
 
-  const onFinish = async (values: RegisterFormValues) => {
+  const onFinish = async (values: RegisterPayload) => {
     try {
       await dispatch(
         registerThunk({
+          fullName: values.fullName,
           email: values.email,
           password: values.password,
         }),

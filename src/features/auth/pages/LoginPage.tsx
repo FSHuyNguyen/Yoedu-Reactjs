@@ -12,11 +12,6 @@ import { useNotification } from '@/shared/hooks/useNotification';
 import DynamicForm from '@/shared/components/form/DynamicForm';
 import type { LoginPayload } from '../types/auth-type';
 
-type LoginFormValues = {
-  email: string;
-  password: string;
-};
-
 const LoginPage = () => {
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.auth);
@@ -24,9 +19,9 @@ const LoginPage = () => {
 
   const navigate = useNavigate();
 
-  const [form] = Form.useForm<LoginFormValues>();
+  const [form] = Form.useForm<LoginPayload>();
 
-  const onFinish = async (values: LoginFormValues) => {
+  const onFinish = async (values: LoginPayload) => {
     try {
       await dispatch(
         loginThunk({

@@ -6,6 +6,20 @@ import type { FormField } from '@/shared/components/form/FormCustom';
 
 export const registerFormFields: FormField<RegisterPayload>[] = [
   {
+    name: 'fullName',
+    label: 'Họ và tên',
+    type: FormFieldType.Input,
+    placeholder: 'Nhập họ và tên',
+    icon: MailOutlined,
+    rules: [
+      {
+        required: true,
+        message: 'Vui lòng nhập họ và tên',
+      },
+    ],
+    col: 24,
+  },
+  {
     name: 'email',
     label: 'Email',
     type: FormFieldType.Input,

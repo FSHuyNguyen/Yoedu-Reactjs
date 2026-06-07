@@ -1,16 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { getMeApi, loginApi, registerApi } from '../api/auth-api';
+import type { LoginPayload, RegisterPayload } from '../types/auth-type';
 
 export const loginThunk = createAsyncThunk(
   'auth/login',
-  async (
-    payload: {
-      email: string;
-      password: string;
-    },
-    thunkAPI,
-  ) => {
+  async (payload: LoginPayload, thunkAPI) => {
     try {
       const res = await loginApi(payload);
 
@@ -23,13 +18,7 @@ export const loginThunk = createAsyncThunk(
 
 export const registerThunk = createAsyncThunk(
   'auth/register',
-  async (
-    payload: {
-      email: string;
-      password: string;
-    },
-    thunkAPI,
-  ) => {
+  async (payload: Omit<RegisterPayload, 'confirmPassword'>, thunkAPI) => {
     try {
       const res = await registerApi(payload);
 

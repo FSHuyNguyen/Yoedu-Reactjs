@@ -3,6 +3,7 @@ import type { UserStatusType } from '@/features/users/types/user-status-type';
 import type { UserRole } from '@/features/users/types/user-role-type';
 import type { UserGenderType } from '@/features/users/types/user-gender-type';
 import type { Teacher } from '@/features/teachers/types/teacher-type';
+import type { Parent } from '@/features/parents/types/parent-type';
 
 export type User = {
   id: string;
@@ -37,5 +38,5 @@ export type User = {
 
   teacher?: Teacher | null;
 
-  // parent?: Parent | null;
+  parent?: Parent | null;
 };

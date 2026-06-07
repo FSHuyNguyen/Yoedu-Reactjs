@@ -1,11 +1,11 @@
 import useTable from '@/shared/hooks/useTable';
 import PageHeader from '@/shared/components/page/PageHeader';
 import { Button } from 'antd';
-import ModalFormCustom, { type SectionForm } from '@/shared/components/modal/ModalFormCustom';
+import ModalFormCustom from '@/shared/components/modal/ModalFormCustom';
 import { useFormModal } from '@/shared/hooks/useFormModal';
 import { FormModalMode } from '@/shared/types/form-modal-mode-type';
 import FilterTableCustom from '@/shared/components/table/FilterTableCustom';
-import { generalInfoFormFields } from '@/features/users/contants/general-info-form-fields';
+import { generalInfoFormFields } from '@/features/users/constants/general-info-form-fields';
 import { teacherRoleAdminApi } from '../api/teacher-api';
 import type { Teacher } from '../types/teacher-type';
 import type { TeacherFilterParams } from '../types/teacher-filter-params-type';
@@ -22,6 +22,7 @@ import ActionGroup from '@/shared/components/table/ActionGroup';
 import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
 import TeacherStatusTag from '../components/TeacherStatusTag';
 import { TEACHER_STATUS } from '../types/teacher-status-type';
+import type { SectionForm } from '@/shared/components/form/FormCustom';
 
 const TeacherPage = () => {
   const { getAll, create, update, active, paused, remove } = teacherRoleAdminApi;

@@ -1,8 +1,10 @@
+import type { FormField } from '@/shared/components/form/FormCustom';
 import { FormFieldType } from '@/shared/types/form-field-type';
 import { rules } from '@/shared/utils/rules';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
+import type { LoginPayload } from '../types/auth-type';
 
-export const loginFormFields = [
+export const loginFormFields: FormField<LoginPayload>[] = [
   {
     name: 'email',
     label: 'Email',
@@ -16,6 +18,7 @@ export const loginFormFields = [
       },
       rules.email,
     ],
+    col: 24,
   },
   {
     name: 'password',
@@ -30,5 +33,6 @@ export const loginFormFields = [
       },
       rules.password,
     ],
+    col: 24,
   },
 ];

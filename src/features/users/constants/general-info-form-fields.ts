@@ -2,8 +2,8 @@ import { FormFieldType } from '@/shared/types/form-field-type';
 
 import { rules } from '@/shared/utils/rules';
 import { userGenderOptions } from './user-gender-options';
-import type { FormField } from '@/shared/components/modal/ModalFormCustom';
 import type { User } from '../types/user-type';
+import type { FormField } from '@/shared/components/form/FormCustom';
 
 export const generalInfoFormFields: FormField<User>[] = [
   {

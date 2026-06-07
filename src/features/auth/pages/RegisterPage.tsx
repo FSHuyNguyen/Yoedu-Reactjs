@@ -6,13 +6,12 @@ import YoeduLogo from '@/assets/images/yoedu-logo.svg';
 
 import CardCustom from '@/shared/components/card/CardCustom';
 
-import { FormFieldType } from '@/shared/types/form-field-type';
 import { useAppSelector, useAppDispatch } from '@/app/redux/hooks';
 import { registerThunk } from '@/features/auth/store/auth-thunk';
 import { registerFormFields } from '@/features/auth/constants/register-form-fields';
 import { useNotification } from '@/shared/hooks/useNotification';
-import InputCustom from '@/shared/components/input/InputCustom';
-import InputPasswordCustom from '@/shared/components/input/InputPasswordCustom';
+import DynamicForm from '@/shared/components/form/DynamicForm';
+import type { RegisterPayload } from '../types/auth-type';
 
 type RegisterFormValues = {
   email: string;
@@ -67,21 +66,7 @@ const RegisterPage = () => {
 
       {/* FORM */}
       <Form form={form} layout="vertical" autoComplete="off" onFinish={onFinish}>
-        {registerFormFields.map((field) => (
-          <Form.Item key={field.name} label={field.label} name={field.name} rules={field.rules}>
-            {(() => {
-              switch (field.type) {
-                case FormFieldType.InputPassword:
-                  return (
-                    <InputPasswordCustom placeholder={field.placeholder} prefix={<field.icon />} />
-                  );
-                case FormFieldType.Input:
-                default:
-                  return <InputCustom placeholder={field.placeholder} prefix={<field.icon />} />;
-              }
-            })()}
-          </Form.Item>
-        ))}
+        <DynamicForm<RegisterPayload> fields={registerFormFields} />
 
         {/* SUBMIT */}
         <Form.Item className="mb-4!">

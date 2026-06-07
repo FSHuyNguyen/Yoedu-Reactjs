@@ -6,12 +6,11 @@ import { useAppSelector, useAppDispatch } from '@/app/redux/hooks';
 
 import YoeduLogo from '@/assets/images/yoedu-logo.svg';
 import CardCustom from '@/shared/components/card/CardCustom';
-import { FormFieldType } from '@/shared/types/form-field-type';
 import { loginFormFields } from '@/features/auth/constants/login-form-fields';
 import { loginThunk } from '@/features/auth/store/auth-thunk';
 import { useNotification } from '@/shared/hooks/useNotification';
-import InputPasswordCustom from '@/shared/components/input/InputPasswordCustom';
-import InputCustom from '@/shared/components/input/InputCustom';
+import DynamicForm from '@/shared/components/form/DynamicForm';
+import type { LoginPayload } from '../types/auth-type';
 
 type LoginFormValues = {
   email: string;
@@ -61,21 +60,7 @@ const LoginPage = () => {
       </div>
 
       <Form form={form} layout="vertical" autoComplete="off" onFinish={onFinish}>
-        {loginFormFields.map((field) => (
-          <Form.Item key={field.name} label={field.label} name={field.name} rules={field.rules}>
-            {(() => {
-              switch (field.type) {
-                case FormFieldType.InputPassword:
-                  return (
-                    <InputPasswordCustom placeholder={field.placeholder} prefix={<field.icon />} />
-                  );
-                case FormFieldType.Input:
-                default:
-                  return <InputCustom placeholder={field.placeholder} prefix={<field.icon />} />;
-              }
-            })()}
-          </Form.Item>
-        ))}
+        <DynamicForm<LoginPayload> fields={loginFormFields} />
 
         <div className="mb-6 flex items-center justify-end">
           <Link to="/auth/forgot-password" className="text-sm text-blue-600 hover:text-blue-500">

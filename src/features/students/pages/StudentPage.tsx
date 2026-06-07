@@ -3,14 +3,14 @@ import type { Student } from '../types/student-type';
 import PageHeader from '@/shared/components/page/PageHeader';
 import { Button } from 'antd';
 import { studentFormFields } from '../constants/student-form-fields';
-import ModalFormCustom, { type SectionForm } from '@/shared/components/modal/ModalFormCustom';
+import ModalFormCustom from '@/shared/components/modal/ModalFormCustom';
 import { studentRoleAdminApi } from '../api/student-api';
 import { useFormModal } from '@/shared/hooks/useFormModal';
 import { FormModalMode } from '@/shared/types/form-modal-mode-type';
 import { studentFilters } from '../constants/student-filter-table';
 import type { StudentFilterParams } from '../types/student-filter-params-type';
 import FilterTableCustom from '@/shared/components/table/FilterTableCustom';
-import { generalInfoFormFields } from '@/features/users/contants/general-info-form-fields';
+import { generalInfoFormFields } from '@/features/users/constants/general-info-form-fields';
 import ActionGroup from '@/shared/components/table/ActionGroup';
 import {
   EyeOutlined,
@@ -22,6 +22,8 @@ import {
 import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
 import StudentStatusTag from '../components/StudentStatusTag';
 import { STUDENT_STATUS } from '../types/student-status-type';
+import type { SectionForm } from '@/shared/components/form/FormCustom';
+
 
 const StudentPage = () => {
   const { getAll, create, update, active, paused, remove } = studentRoleAdminApi;

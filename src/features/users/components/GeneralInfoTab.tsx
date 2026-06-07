@@ -1,6 +1,6 @@
 import { useAppSelector, useAppDispatch } from '@/app/redux/hooks';
 import { Button, Col, Flex, Form } from 'antd';
-import { generalInfoFormFields } from '../contants/general-info-form-fields';
+import { generalInfoFormFields } from '../constants/general-info-form-fields';
 import CardCustom from '@/shared/components/card/CardCustom';
 import type { User } from '../types/user-type';
 import { useEffect } from 'react';

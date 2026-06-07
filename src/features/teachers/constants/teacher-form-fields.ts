@@ -1,9 +1,9 @@
 import { FormFieldType } from '@/shared/types/form-field-type';
-import type { FormContext, FormField } from '@/shared/components/modal/ModalFormCustom';
 import { USER_ROLE } from '@/features/users/types/user-role-type';
 import { FormModalMode } from '@/shared/types/form-modal-mode-type';
 import type { Teacher } from '../types/teacher-type';
 import { teacherRoleOptions } from './teacher-role-options';
+import type { FormContext, FormField } from '@/shared/components/form/FormCustom';
 
 export const teacherFormFields: FormField<Teacher>[] = [
   {

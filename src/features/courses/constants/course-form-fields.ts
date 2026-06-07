@@ -1,7 +1,7 @@
 import { FormFieldType } from '@/shared/types/form-field-type';
-import type { FormField } from '@/shared/components/modal/ModalFormCustom';
 import type { Course } from '../types/course-type';
 import { courseLevelOptions } from './course-level-options';
+import type { FormField } from '@/shared/components/form/FormCustom';
 
 export const courseFormFields: FormField<Course>[] = [
   {

@@ -1,7 +1,7 @@
 import useTable from '@/shared/hooks/useTable';
 import PageHeader from '@/shared/components/page/PageHeader';
 import { Button } from 'antd';
-import ModalFormCustom, { type SectionForm } from '@/shared/components/modal/ModalFormCustom';
+import ModalFormCustom from '@/shared/components/modal/ModalFormCustom';
 import { useFormModal } from '@/shared/hooks/useFormModal';
 import { FormModalMode } from '@/shared/types/form-modal-mode-type';
 import FilterTableCustom from '@/shared/components/table/FilterTableCustom';
@@ -21,6 +21,7 @@ import {
   CheckOutlined,
 } from '@ant-design/icons';
 import CourseStatusTag from '../components/CourseStatusTag';
+import type { SectionForm } from '@/shared/components/form/FormCustom';
 
 const CoursePage = () => {
   const { getAll, create, update, open: openCourse, close: closeCourse, remove } = courseRoleAdminApi;

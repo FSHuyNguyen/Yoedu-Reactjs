@@ -1,7 +1,7 @@
 import useTable from '@/shared/hooks/useTable';
 import PageHeader from '@/shared/components/page/PageHeader';
 import { Button } from 'antd';
-import ModalFormCustom, { type SectionForm } from '@/shared/components/modal/ModalFormCustom';
+import ModalFormCustom from '@/shared/components/modal/ModalFormCustom';
 import { useFormModal } from '@/shared/hooks/useFormModal';
 import { FormModalMode } from '@/shared/types/form-modal-mode-type';
 import FilterTableCustom from '@/shared/components/table/FilterTableCustom';
@@ -15,6 +15,7 @@ import { formatCurrency } from '@/shared/utils/currecy';
 import ActionGroup from '@/shared/components/table/ActionGroup';
 import { EyeOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import EnrollmentStatusTag from '../components/EnrollmentStatusTag';
+import type { SectionForm } from '@/shared/components/form/FormCustom';
 
 const EnrollmentPage = () => {
   const { getAll, create, update, remove } = enrollmentRoleAdminApi;

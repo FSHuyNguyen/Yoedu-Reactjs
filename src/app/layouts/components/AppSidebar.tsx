@@ -43,6 +43,11 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
           label: 'Giáo viên',
         },
         {
+          key: '/accounts',
+          icon: <UserOutlined />,
+          label: 'Tài khoản',
+        },
+        {
           key: '/courses',
           icon: <BookOutlined />,
           label: 'Khóa đào tạo',

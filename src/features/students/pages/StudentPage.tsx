@@ -52,14 +52,14 @@ const StudentPage = () => {
 
     handleActive,
 
-    handleUnActive,
+    handleInActive,
 
     refetch,
   } = useTable<Student, StudentFilterParams>({
     fetchApi: getAll,
     removeApi: remove,
     activeApi: active,
-    unActiveApi: paused,
+    inActiveApi: paused,
   });
 
   const sectionsStudentForm: SectionForm<Student>[] = [
@@ -140,7 +140,7 @@ const StudentPage = () => {
                 icon: <CloseOutlined />,
                 tooltip: 'Tạm ngưng',
                 danger: true,
-                onClick: () => handleUnActive(record.id),
+                onClick: () => handleInActive(record.id),
                 isPopconfirm: true,
               },
 

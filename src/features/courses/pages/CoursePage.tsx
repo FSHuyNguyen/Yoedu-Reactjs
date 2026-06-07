@@ -50,14 +50,14 @@ const CoursePage = () => {
 
     handleActive,
 
-    handleUnActive,
+    handleInActive,
 
     refetch,
   } = useTable<Course, CourseFilterParams>({
     fetchApi: getAll,
     removeApi: remove,
     activeApi: openCourse,
-    unActiveApi: closeCourse,
+    inActiveApi: closeCourse,
   });
 
   const sectionsCourseForm: SectionForm<Course>[] = [
@@ -129,7 +129,7 @@ const CoursePage = () => {
                 icon: <CloseOutlined />,
                 tooltip: 'Đóng khóa học',
                 danger: true,
-                onClick: () => handleUnActive(record.id),
+                onClick: () => handleInActive(record.id),
                 isPopconfirm: true,
               },
               {

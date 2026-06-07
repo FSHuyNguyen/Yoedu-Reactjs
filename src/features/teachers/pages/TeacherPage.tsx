@@ -51,14 +51,14 @@ const TeacherPage = () => {
 
     handleActive,
 
-    handleUnActive,
+    handleInActive,
 
     refetch,
   } = useTable<Teacher, TeacherFilterParams>({
     fetchApi: getAll,
     removeApi: remove,
     activeApi: active,
-    unActiveApi: paused,
+    inActiveApi: paused,
   });
 
   const sectionsTeacherForm: SectionForm<Teacher>[] = [
@@ -139,7 +139,7 @@ const TeacherPage = () => {
                 icon: <CloseOutlined />,
                 tooltip: 'Tạm nghỉ',
                 danger: true,
-                onClick: () => handleUnActive(record.id),
+                onClick: () => handleInActive(record.id),
                 isPopconfirm: true,
               },
 

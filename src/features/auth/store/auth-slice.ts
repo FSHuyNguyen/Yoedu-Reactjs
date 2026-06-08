@@ -5,14 +5,14 @@ import type { User } from '@/features/users/types/user-type';
 
 type AuthState = {
   user: User | null;
-  accessToken: string | null;
+  initialized: boolean; // Dùng để đánh dấu đã kiểm tra token và lấy thông tin user hay chưa
   loading: boolean;
   error: string | null;
 };
 
 const initialState: AuthState = {
   user: null,
-  accessToken: localStorage.getItem('accessToken'),
+  initialized: false,
   loading: false,
   error: null,
 };
@@ -23,11 +23,15 @@ const authSlice = createSlice({
   reducers: {
     logout: (state) => {
       state.user = null;
-      state.accessToken = null;
+
       localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
     },
     clearError: (state) => {
       state.error = null;
+    },
+    markInitialized: (state) => {
+      state.initialized = true;
     },
   },
 
@@ -41,9 +45,10 @@ const authSlice = createSlice({
       .addCase(loginThunk.fulfilled, (state, action) => {
         state.loading = false;
 
-        state.accessToken = action.payload.accessToken;
+        state.user = action.payload.user;
 
         localStorage.setItem('accessToken', action.payload.accessToken);
+        localStorage.setItem('refreshToken', action.payload.refreshToken);
       })
       .addCase(loginThunk.rejected, (state, action) => {
         state.loading = false;
@@ -69,15 +74,23 @@ const authSlice = createSlice({
       })
       .addCase(getMeThunk.fulfilled, (state, action) => {
         state.loading = false;
+
         state.user = action.payload;
+
+        state.initialized = true;
       })
       .addCase(getMeThunk.rejected, (state, action) => {
         state.loading = false;
+
+        state.user = null;
+
+        state.initialized = true;
+
         state.error = action.payload as string;
       });
   },
 });
 
-export const { logout, clearError } = authSlice.actions;
+export const { logout, clearError, markInitialized } = authSlice.actions;
 
 export default authSlice.reducer;

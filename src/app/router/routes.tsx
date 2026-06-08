@@ -1,7 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import AppInit from '../init/AppInit';
-
 import AuthLayout from '../layouts/AuthLayout';
 
 import MainLayout from '@/app/layouts/MainLayout';
@@ -47,11 +45,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: (
-          <AppInit>
-            <MainLayout />
-          </AppInit>
-        ),
+        element: <MainLayout />,
         children: [
           {
             index: true,

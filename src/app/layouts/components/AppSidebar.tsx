@@ -9,6 +9,7 @@ import {
   AuditOutlined,
   ReadOutlined,
   WalletOutlined,
+  ScheduleOutlined,
 } from '@ant-design/icons';
 import YoeduLogo from '@/assets/images/yoedu-logo.svg';
 import { useTheme } from '@/app/providers/theme/hooks/useTheme';
@@ -68,6 +69,11 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
           key: '/rooms',
           icon: <SolutionOutlined />,
           label: 'Phòng học',
+        },
+        {
+          key: '/schedules',
+          icon: <ScheduleOutlined />,
+          label: 'Ca học',
         },
         {
           key: '/courses',

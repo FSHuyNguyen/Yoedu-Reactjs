@@ -43,3 +43,13 @@ export const formatTimeToPicker = (
 
   return dayjs(value, format);
 };
+
+/**
+ * Convert dayjs -> HH:mm
+ * dùng cho query params
+ */
+export const formatTimeToQuery = (value?: Dayjs | null): string | null => {
+  if (!value) return null;
+
+  return value.format(FORMAT_TIME);
+};

@@ -17,6 +17,7 @@ import EnrollmentPage from '@/features/enrollments/pages/EnrollmentPage';
 import ParentPage from '@/features/parents/pages/ParentPage';
 import UserPage from '@/features/users/pages/UserPage';
 import RoomPage from '@/features/rooms/pages/RoomPage';
+import SchedulePage from '@/features/schedule/pages/SchedulePage';
 
 export const router = createBrowserRouter([
   /******************** AUTH *********************/
@@ -79,6 +80,10 @@ export const router = createBrowserRouter([
           {
             path: 'rooms',
             element: <RoomPage />,
+          },
+          {
+            path: 'schedules',
+            element: <SchedulePage />,
           },
           {
             path: 'enrollments',

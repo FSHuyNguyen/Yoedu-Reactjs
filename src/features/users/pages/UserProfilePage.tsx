@@ -8,8 +8,6 @@ import { USER_ROLE } from '../types/user-role-type';
 const UserProfilePage = () => {
   const { user } = useAppSelector((state) => state.auth);
 
-  if (!user) return null;
-
   return (
     <Flex vertical gap={24}>
       <ProfileHeader />
@@ -22,15 +20,15 @@ const UserProfilePage = () => {
             label: 'Thông tin chung',
             children: <GeneralInfoTab />,
           },
-          ...(user.role === USER_ROLE.STUDENT || user.role === USER_ROLE.TEACHER
+          ...(user?.role === USER_ROLE.STUDENT || user?.role === USER_ROLE.TEACHER
             ? [
-              {
-                key: 'role',
-                label:
-                  user.role === USER_ROLE.STUDENT ? 'Thông tin học viên' : 'Thông tin giáo viên',
-                children: <RoleInfoTab />,
-              },
-            ]
+                {
+                  key: 'role',
+                  label:
+                    user?.role === USER_ROLE.STUDENT ? 'Thông tin học viên' : 'Thông tin giáo viên',
+                  children: <RoleInfoTab />,
+                },
+              ]
             : []),
         ]}
       />

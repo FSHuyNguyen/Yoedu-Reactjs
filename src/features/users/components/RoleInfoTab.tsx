@@ -7,8 +7,6 @@ import { USER_ROLE } from '../types/user-role-type';
 const RoleInfoTab = () => {
   const { user } = useAppSelector((state) => state.auth);
 
-  if (!user) return null;
-
   switch (user?.role) {
     case USER_ROLE.STUDENT:
       if (!user.student) return null;

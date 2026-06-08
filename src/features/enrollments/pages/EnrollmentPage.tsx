@@ -15,7 +15,7 @@ import { formatCurrency } from '@/shared/utils/currecy';
 import ActionGroup from '@/shared/components/table/ActionGroup';
 import { EyeOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import EnrollmentStatusTag from '../components/EnrollmentStatusTag';
-import type { SectionForm } from '@/shared/components/form/FormCustom';
+import type { SectionForm } from '@/shared/components/modal/ModalFormCustom';
 
 const EnrollmentPage = () => {
   const { getAll, create, update, remove } = enrollmentRoleAdminApi;

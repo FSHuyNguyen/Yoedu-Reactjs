@@ -2,7 +2,7 @@ import { FormFieldType } from '@/shared/types/form-field-type';
 import type { Student } from '../types/student-type';
 import { USER_ROLE } from '@/features/users/types/user-role-type';
 import { FormModalMode } from '@/shared/types/form-modal-mode-type';
-import type { FormContext, FormField } from '@/shared/components/form/FormCustom';
+import type { FormContext, FormField } from '@/shared/components/modal/ModalFormCustom';
 
 export const studentFormFields: FormField<Student>[] = [
   {

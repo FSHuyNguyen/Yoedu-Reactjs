@@ -1,6 +1,50 @@
+import { useEffect, useState } from 'react';
 import { FormModalMode, type FormModalModeType } from '../../types/form-modal-mode-type';
-import FormCustom, { type SectionForm } from '../form/FormCustom';
 import ModalCustom from './ModalCustom';
+import { useNotification } from '@/shared/hooks/useNotification';
+import { Button, Form, Tabs } from 'antd';
+import { formatFormValues } from '@/shared/utils/form';
+import DynamicForm from '../form/DynamicForm';
+import type { UserRole } from '@/features/users/types/user-role-type';
+import type { FormFieldTypeKey } from '@/shared/types/form-field-type';
+
+export interface FormContext {
+  role: UserRole;
+  mode?: FormModalModeType;
+}
+
+export interface FormField<T> {
+  name: keyof T;
+
+  label: string;
+
+  type: FormFieldTypeKey;
+
+  placeholder?: string;
+
+  disabled?: any;
+
+  rules?: any[];
+
+  options?: {
+    label: string;
+    value: string | number;
+  }[];
+
+  fetchOptions?: () => Promise<any>;
+
+  col?: number;
+
+  props?: any;
+
+  icon?: any;
+}
+
+export interface SectionForm<T> {
+  key: string;
+  label: string;
+  fields: FormField<T>[];
+}
 
 interface ModalFormCustomProps<T> {
   open: boolean;
@@ -35,6 +79,49 @@ const ModalFormCustom = <T,>({
   onSubmit,
   disabled,
 }: ModalFormCustomProps<T>) => {
+  const [form] = Form.useForm();
+  const [loading, setLoading] = useState(false);
+  const { showNotification } = useNotification();
+
+  useEffect(() => {
+    if (!open) {
+      form.resetFields();
+      return;
+    }
+
+    if (initialValues) {
+      const formattedValues = formatFormValues(initialValues as T, sections);
+
+      form.setFieldsValue(formattedValues);
+    }
+  }, [open, initialValues, sections, form]);
+
+  const handleSubmit = async (values: T) => {
+    try {
+      setLoading(true);
+
+      const formattedValues = formatFormValues(values, sections);
+
+      await onSubmit(formattedValues);
+
+      showNotification('success', 'Thành công', 'Dữ liệu đã được lưu thành công');
+
+      form.resetFields();
+
+      onCancel();
+
+      onSuccess();
+    } catch (error: any) {
+      showNotification(
+        'error',
+        'Lỗi',
+        error?.response?.data?.message || 'Không thể lưu dữ liệu. Vui lòng thử lại',
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <ModalCustom
       open={open}
@@ -48,16 +135,23 @@ const ModalFormCustom = <T,>({
       onCancel={onCancel}
       footer={null}
     >
-      <FormCustom
-        open={open}
-        mode={mode}
-        initialValues={initialValues}
-        sections={sections}
-        onCancel={onCancel}
-        onSuccess={onSuccess}
-        onSubmit={onSubmit}
-        disabled={disabled}
-      />
+      <Form form={form} layout="vertical" onFinish={handleSubmit}>
+        <Tabs
+          items={sections.map((section) => ({
+            key: section.key,
+            label: section.label,
+            children: <DynamicForm<T> fields={section.fields} disabled={disabled} mode={mode} />,
+          }))}
+        />
+
+        <div className="flex justify-end gap-2">
+          <Button onClick={onCancel}>Hủy</Button>
+
+          <Button type="primary" htmlType="submit" loading={loading} disabled={disabled}>
+            Lưu
+          </Button>
+        </div>
+      </Form>
     </ModalCustom>
   );
 };

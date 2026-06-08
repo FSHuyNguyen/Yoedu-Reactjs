@@ -7,7 +7,7 @@ import { FormModalMode } from '@/shared/types/form-modal-mode-type';
 import FilterTableCustom from '@/shared/components/table/FilterTableCustom';
 import { generalInfoFormFields } from '@/features/users/constants/general-info-form-fields';
 import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
-import type { SectionForm } from '@/shared/components/form/FormCustom';
+import type { SectionForm } from '@/shared/components/modal/ModalFormCustom';
 import { parentRoleAdminApi } from '../api/parent-api';
 import type { Parent } from '../types/parent-type';
 import type { ParentFilterParams } from '../types/parent-filter-params-type';
@@ -37,7 +37,6 @@ const ParentPage = () => {
     handleFilterReset,
 
     handleChangePage,
-
 
     refetch,
   } = useTable<Parent, ParentFilterParams>({

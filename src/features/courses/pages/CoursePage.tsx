@@ -21,10 +21,17 @@ import {
   CheckOutlined,
 } from '@ant-design/icons';
 import CourseStatusTag from '../components/CourseStatusTag';
-import type { SectionForm } from '@/shared/components/form/FormCustom';
+import type { SectionForm } from '@/shared/components/modal/ModalFormCustom';
 
 const CoursePage = () => {
-  const { getAll, create, update, open: openCourse, close: closeCourse, remove } = courseRoleAdminApi;
+  const {
+    getAll,
+    create,
+    update,
+    open: openCourse,
+    close: closeCourse,
+    remove,
+  } = courseRoleAdminApi;
 
   const { open, mode, selectedRecord, openCreate, openView, openEdit, close } =
     useFormModal<Course>();

@@ -10,7 +10,6 @@ import { studentRoleStudentApi } from '@/features/students/api/student-api';
 import RowCustom from '@/shared/components/row/RowCustom';
 import { FormFieldType } from '@/shared/types/form-field-type';
 import DatePickerCustom from '@/shared/components/datepicker/DatePickerCustom';
-import { formatDateToPicker } from '@/shared/utils/date';
 import { studentFormFields } from '@/features/students/constants/student-form-fields';
 import SelectCustom from '@/shared/components/select/SelectCustom';
 import InputCustom from '@/shared/components/input/InputCustom';
@@ -61,7 +60,6 @@ const StudentInfoForm = ({ student }: Props) => {
     if (student) {
       form.setFieldsValue({
         ...student,
-        joinedAt: student.joinedAt ? formatDateToPicker(student.joinedAt) : null,
       });
     }
   }, [student, form]);

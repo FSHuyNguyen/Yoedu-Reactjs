@@ -13,7 +13,6 @@ import { teacherRoleTeacherApi } from '@/features/teachers/api/teacher-api';
 import { getMeThunk } from '@/features/auth/store/auth-thunk';
 import { useNotification } from '@/shared/hooks/useNotification';
 import { useAppDispatch } from '@/app/redux/hooks';
-import { formatDateToPicker } from '@/shared/utils/date';
 import type { Teacher } from '@/features/teachers/types/teacher-type';
 import RowCustom from '@/shared/components/row/RowCustom';
 import { USER_ROLE } from '../types/user-role-type';
@@ -61,7 +60,6 @@ const TeacherInfoForm = ({ teacher }: Props) => {
     if (teacher) {
       form.setFieldsValue({
         ...teacher,
-        joinedAt: teacher.joinedAt ? formatDateToPicker(teacher.joinedAt) : null,
       });
     }
   }, [teacher, form]);

@@ -12,8 +12,8 @@ import {
 } from '@ant-design/icons';
 import YoeduLogo from '@/assets/images/yoedu-logo.svg';
 import { useTheme } from '@/app/providers/theme/hooks/useTheme';
-import { useAppSelector } from '@/app/redux/hooks';
 import { USER_ROLE, type UserRole } from '@/features/users/types/user-role-type';
+import { useAppSelector } from '@/app/redux/hooks';
 
 const { Sider } = Layout;
 

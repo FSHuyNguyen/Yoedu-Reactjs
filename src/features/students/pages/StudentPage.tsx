@@ -22,8 +22,7 @@ import {
 import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
 import StudentStatusTag from '../components/StudentStatusTag';
 import { STUDENT_STATUS } from '../types/student-status-type';
-import type { SectionForm } from '@/shared/components/form/FormCustom';
-
+import type { SectionForm } from '@/shared/components/modal/ModalFormCustom';
 
 const StudentPage = () => {
   const { getAll, create, update, active, paused, remove } = studentRoleAdminApi;
@@ -110,7 +109,9 @@ const StudentPage = () => {
       dataIndex: 'status',
       align: 'center' as const,
       render: (_: any, record: any) => {
-        return <StudentStatusTag status={record.studentStatus} statusText={record.studentStatusText} />;
+        return (
+          <StudentStatusTag status={record.studentStatus} statusText={record.studentStatusText} />
+        );
       },
     },
 

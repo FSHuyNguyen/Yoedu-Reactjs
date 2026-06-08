@@ -22,7 +22,7 @@ import ActionGroup from '@/shared/components/table/ActionGroup';
 import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
 import TeacherStatusTag from '../components/TeacherStatusTag';
 import { TEACHER_STATUS } from '../types/teacher-status-type';
-import type { SectionForm } from '@/shared/components/form/FormCustom';
+import type { SectionForm } from '@/shared/components/modal/ModalFormCustom';
 
 const TeacherPage = () => {
   const { getAll, create, update, active, paused, remove } = teacherRoleAdminApi;
@@ -91,7 +91,7 @@ const TeacherPage = () => {
 
     {
       title: 'Vai trò',
-      dataIndex: 'teacherRoleText'
+      dataIndex: 'teacherRoleText',
     },
 
     {
@@ -109,7 +109,9 @@ const TeacherPage = () => {
       dataIndex: 'status',
       align: 'center' as const,
       render: (_: any, record: any) => {
-        return <TeacherStatusTag status={record.teacherStatus} statusText={record.teacherStatusText} />;
+        return (
+          <TeacherStatusTag status={record.teacherStatus} statusText={record.teacherStatusText} />
+        );
       },
     },
 

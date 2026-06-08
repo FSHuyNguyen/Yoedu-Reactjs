@@ -2,7 +2,7 @@ import { FormFieldType } from '@/shared/types/form-field-type';
 import { rules } from '@/shared/utils/rules';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import type { RegisterPayload } from '../types/auth-type';
-import type { FormField } from '@/shared/components/form/FormCustom';
+import type { FormField } from '@/shared/components/modal/ModalFormCustom';
 
 export const registerFormFields: FormField<RegisterPayload>[] = [
   {

@@ -12,10 +12,9 @@ export const studentFormFields: FormField<Student>[] = [
     type: FormFieldType.Input,
     placeholder: 'Mã sinh viên',
     disabled: ({ role, mode }: FormContext) =>
-      role !== USER_ROLE.ADMIN || (mode && mode === FormModalMode.CREATE),
+      role !== USER_ROLE.ADMIN || mode === FormModalMode.CREATE,
   },
 
-  // ===== Parent Info =====
   {
     name: 'parentId',
     label: 'Phụ huynh',

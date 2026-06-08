@@ -10,7 +10,7 @@ import type { FormFieldTypeKey } from '@/shared/types/form-field-type';
 
 export interface FormContext {
   role: UserRole;
-  mode?: FormModalModeType;
+  mode: FormModalModeType;
 }
 
 export interface FormField<T> {

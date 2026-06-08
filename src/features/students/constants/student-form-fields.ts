@@ -3,6 +3,7 @@ import type { Student } from '../types/student-type';
 import { USER_ROLE } from '@/features/users/types/user-role-type';
 import { FormModalMode } from '@/shared/types/form-modal-mode-type';
 import type { FormContext, FormField } from '@/shared/components/modal/ModalFormCustom';
+import { getParentOptions } from '@/features/parents/api/parent-api';
 
 export const studentFormFields: FormField<Student>[] = [
   {
@@ -15,12 +16,13 @@ export const studentFormFields: FormField<Student>[] = [
   },
 
   // ===== Parent Info =====
-  // {
-  //   name: 'parentId',
-  //   label: 'Tên phụ huynh',
-  //   type: FormFieldType.Input,
-  //   placeholder: 'Nhập tên phụ huynh',
-  // },
+  {
+    name: 'parentId',
+    label: 'Phụ huynh',
+    type: FormFieldType.SelectFetch,
+    fetchOptions: getParentOptions,
+    placeholder: 'Chọn phụ huynh',
+  },
 
   {
     name: 'schoolName',

@@ -1,6 +1,15 @@
 import { Image, Layout, Menu, type MenuProps } from 'antd';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { DashboardOutlined, TeamOutlined, SolutionOutlined, UserOutlined, BookOutlined, AuditOutlined, ReadOutlined, WalletOutlined } from '@ant-design/icons';
+import {
+  DashboardOutlined,
+  TeamOutlined,
+  SolutionOutlined,
+  UserOutlined,
+  BookOutlined,
+  AuditOutlined,
+  ReadOutlined,
+  WalletOutlined,
+} from '@ant-design/icons';
 import YoeduLogo from '@/assets/images/yoedu-logo.svg';
 import { useTheme } from '@/app/providers/theme/hooks/useTheme';
 import { useAppSelector } from '@/app/redux/hooks';
@@ -23,8 +32,6 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
 
   const navigate = useNavigate();
   const location = useLocation();
-
-  console.log('User role:', user?.role);
 
   const menuItems: MenuItem[] = [
     {
@@ -77,7 +84,6 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
         },
       ],
     },
-
     {
       key: 'academic',
       label: 'Học vụ',
@@ -92,7 +98,6 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
         },
       ],
     },
-
     {
       key: 'finance',
       label: 'Thu tiền',
@@ -102,28 +107,24 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
     },
   ];
 
-  const filterMenuByRole = (
-    items: MenuItem[],
-    role?: UserRole
-  ): MenuItem[] => {
+  const filterMenuByRole = (items: MenuItem[], role?: UserRole): MenuItem[] => {
+    return (
+      items
+        // Nếu item không có trường roles hoặc trường roles có chứa role của user thì giữ lại
+        .filter((item) => !item.roles || item.roles.includes(role!))
+        // Với các item có children, tiếp tục lọc children theo cùng logic
+        .map((item) => ({
+          ...item,
+          children: item.children ? filterMenuByRole(item.children, role) : undefined,
+        }))
+        // Sau khi lọc, loại bỏ các item có children nhưng không còn children nào sau khi lọc
+        .filter((item) => {
+          const isLeaf = !item.children;
+          const hasChildren = item.children?.length;
 
-    return items
-      // Nếu item không có trường roles hoặc trường roles có chứa role của user thì giữ lại
-      .filter((item) => !item.roles || item.roles.includes(role!))
-      // Với các item có children, tiếp tục lọc children theo cùng logic
-      .map((item) => ({
-        ...item,
-        children: item.children
-          ? filterMenuByRole(item.children, role)
-          : undefined,
-      }))
-      // Sau khi lọc, loại bỏ các item có children nhưng không còn children nào sau khi lọc
-      .filter((item) => {
-        const isLeaf = !item.children;
-        const hasChildren = item.children?.length;
-
-        return isLeaf || hasChildren;
-      }) as MenuItem[];
+          return isLeaf || hasChildren;
+        }) as MenuItem[]
+    );
   };
 
   return (

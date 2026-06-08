@@ -38,49 +38,41 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
       key: '/',
       icon: <DashboardOutlined />,
       label: 'Dashboard',
-      roles: Object.values(USER_ROLE),
     },
     {
       key: 'management',
       label: 'Quản trị',
       icon: <TeamOutlined />,
-      roles: [USER_ROLE.ADMIN, USER_ROLE.STAFF],
       children: [
         {
           key: '/accounts',
           icon: <AuditOutlined />,
           label: 'Tài khoản',
-          roles: [USER_ROLE.ADMIN],
         },
         {
           key: '/students',
           icon: <UserOutlined />,
           label: 'Học viên',
-          roles: [USER_ROLE.ADMIN, USER_ROLE.STAFF],
         },
         {
           key: '/parents',
           icon: <TeamOutlined />,
           label: 'Phụ huynh',
-          roles: [USER_ROLE.ADMIN, USER_ROLE.STAFF],
         },
         {
           key: '/teachers',
           icon: <SolutionOutlined />,
           label: 'Giáo viên',
-          roles: [USER_ROLE.ADMIN, USER_ROLE.STAFF],
+        },
+        {
+          key: '/rooms',
+          icon: <SolutionOutlined />,
+          label: 'Phòng học',
         },
         {
           key: '/courses',
           icon: <ReadOutlined />,
           label: 'Khóa đào tạo',
-          roles: [
-            USER_ROLE.ADMIN,
-            USER_ROLE.STAFF,
-            USER_ROLE.TEACHER,
-            USER_ROLE.STUDENT,
-            USER_ROLE.PARENT,
-          ],
         },
       ],
     },
@@ -102,7 +94,6 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
       key: 'finance',
       label: 'Thu tiền',
       icon: <WalletOutlined />,
-      roles: [USER_ROLE.ADMIN, USER_ROLE.STAFF, USER_ROLE.PARENT],
       children: [],
     },
   ];

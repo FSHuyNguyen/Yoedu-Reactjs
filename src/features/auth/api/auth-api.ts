@@ -2,14 +2,16 @@ import { axiosClient } from '@/shared/lib/axios';
 
 import type { LoginPayload, RegisterPayload } from '../types/auth-type';
 
-export const loginApi = (payload: LoginPayload) => {
-  return axiosClient.post('/auth/login', payload);
+const API_URL_PREFIX = '/auth';
+
+export const loginApi = async (payload: LoginPayload) => {
+  const res = await axiosClient.post(`${API_URL_PREFIX}/login`, payload);
+
+  return res.data;
 };
 
-export const registerApi = (payload: Omit<RegisterPayload, 'confirmPassword'>) => {
-  return axiosClient.post('/auth/register', payload);
-};
+export const registerApi = async (payload: Omit<RegisterPayload, 'confirmPassword'>) => {
+  const res = await axiosClient.post(`${API_URL_PREFIX}/register`, payload);
 
-export const getMeApi = () => {
-  return axiosClient.get('/users/me');
+  return res.data;
 };

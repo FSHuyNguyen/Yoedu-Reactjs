@@ -41,8 +41,8 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
       label: 'Dashboard',
     },
     {
-      key: 'management',
-      label: 'Quản trị',
+      key: 'user-management',
+      label: 'Quản lý người dùng',
       icon: <TeamOutlined />,
       children: [
         {
@@ -65,6 +65,18 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
           icon: <SolutionOutlined />,
           label: 'Giáo viên',
         },
+      ],
+    },
+    {
+      key: 'academic-management',
+      label: 'Quản lý đào tạo',
+      icon: <BookOutlined />,
+      children: [
+        {
+          key: '/course-classes',
+          icon: <ReadOutlined />,
+          label: 'Lớp học',
+        },
         {
           key: '/rooms',
           icon: <SolutionOutlined />,
@@ -80,18 +92,6 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
           icon: <ReadOutlined />,
           label: 'Khóa đào tạo',
         },
-      ],
-    },
-    {
-      key: 'academic',
-      label: 'Học vụ',
-      icon: <BookOutlined />,
-      children: [
-        {
-          key: '/course-classes',
-          icon: <ReadOutlined />,
-          label: 'Lớp học',
-        },
         {
           key: '/enrollments',
           icon: <SolutionOutlined />,
@@ -101,7 +101,7 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
     },
     {
       key: 'finance',
-      label: 'Thu tiền',
+      label: 'Quản lý học phí',
       icon: <WalletOutlined />,
       children: [],
     },

@@ -1,5 +1,18 @@
 import dayjs, { Dayjs } from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import 'dayjs/locale/vi';
 import { FORMAT_DATE, FORMAT_TIME } from '../constants/format-date';
+
+dayjs.extend(relativeTime);
+dayjs.locale('vi');
+
+/*
+ * Format hiển thị thời gian tương đối
+ * vd: 5 phút trước, 2 giờ trước, 1 ngày trước
+ */
+export const formatRelativeTime = (date: string | Date): string => {
+  return dayjs(date).fromNow();
+};
 
 /**
  * Convert ISO string -> dayjs object

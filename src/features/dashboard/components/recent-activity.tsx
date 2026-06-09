@@ -4,26 +4,26 @@ import { UserOutlined, ClockCircleOutlined } from '@ant-design/icons';
 import CardCustom from '@/shared/components/card/CardCustom';
 import { ActivityType } from '@/features/dashboard/constants/activity';
 import type { RecentActivityItem } from '@/features/dashboard/types/recent-activity-type';
-import { formatDate } from '@/shared/utils/date';
+import { formatRelativeTime } from '@/shared/utils/date';
 
 interface RecentActivityProps {
   data: RecentActivityItem[];
 }
 
 const activityConfig = {
-  [ActivityType.STUDENT_CREATED]: {
+  [ActivityType.STUDENT]: {
     icon: <UserOutlined />,
     color: 'text-green-500',
   },
-  [ActivityType.TEACHER_CREATED]: {
+  [ActivityType.TEACHER]: {
     icon: <UserOutlined />,
     color: 'text-blue-500',
   },
-  [ActivityType.COURSE_CREATED]: {
+  [ActivityType.COURSE_CLASS]: {
     icon: <ClockCircleOutlined />,
     color: 'text-purple-500',
   },
-  [ActivityType.STUDENT_ENROLLED]: {
+  [ActivityType.ENROLLMENT]: {
     icon: <ClockCircleOutlined />,
     color: 'text-red-500',
   },
@@ -43,7 +43,7 @@ const RecentActivity: React.FC<RecentActivityProps> = ({ data }) => {
                 <>
                   <div className="font-bold">{item.title}</div>
                   <div className="font-medium">{item.message}</div>
-                  <div className="text-sm text-gray-400">{formatDate(item.date)}</div>
+                  <div className="text-sm text-gray-400">{formatRelativeTime(item.date)}</div>
                 </>
               ),
             };

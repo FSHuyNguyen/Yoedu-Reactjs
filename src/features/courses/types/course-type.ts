@@ -5,9 +5,7 @@ export interface Course {
   description: string;
   thumbnailUrl: string;
   level: CourseLevelType;
-  tuitionFee: number;
   totalSessions: number;
-  maxStudents: number;
   status: CourseStatusType;
   statusText: string;
   createdAt: string;

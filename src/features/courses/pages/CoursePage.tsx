@@ -11,7 +11,6 @@ import type { CourseFilterParams } from '../types/course-filter-params-type';
 import { courseFilters } from '../constants/course-filter-table';
 import { courseFormFields } from '../constants/course-form-fields';
 import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
-import { formatCurrency } from '@/shared/utils/currecy';
 import ActionGroup from '@/shared/components/table/ActionGroup';
 import {
   EyeOutlined,
@@ -85,22 +84,12 @@ const CoursePage = () => {
       dataIndex: 'name',
     },
     {
-      title: 'Giá khóa học',
-      dataIndex: 'tuitionFee',
-      render: (value: any) => (value ? formatCurrency(value) : ''),
-    },
-    {
       title: 'Cấp độ',
       dataIndex: 'level',
     },
     {
       title: 'Tổng số buổi học',
       dataIndex: 'totalSessions',
-      align: 'center' as const,
-    },
-    {
-      title: 'Số học viên tối đa',
-      dataIndex: 'maxStudents',
       align: 'center' as const,
     },
     {

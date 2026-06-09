@@ -36,6 +36,9 @@ const DynamicForm = <T,>({ fields, disabled, mode }: DynamicFormProps<T>) => {
                   ? field.disabled({ role: user?.role as UserRole, mode })
                   : field.disabled;
 
+              const fieldProps =
+                typeof field.props === 'function' ? field.props(form) : field.props;
+
               switch (field.type) {
                 case FormFieldType.Input:
                   return (
@@ -43,7 +46,7 @@ const DynamicForm = <T,>({ fields, disabled, mode }: DynamicFormProps<T>) => {
                       placeholder={field.placeholder}
                       disabled={isDisabled || disabled}
                       prefix={field.icon ? <field.icon /> : null}
-                      {...field.props}
+                      {...fieldProps}
                     />
                   );
                 case FormFieldType.InputPassword:
@@ -52,7 +55,7 @@ const DynamicForm = <T,>({ fields, disabled, mode }: DynamicFormProps<T>) => {
                       placeholder={field.placeholder}
                       disabled={isDisabled || disabled}
                       prefix={field.icon ? <field.icon /> : null}
-                      {...field.props}
+                      {...fieldProps}
                     />
                   );
                 case FormFieldType.ImageUpload:
@@ -60,7 +63,7 @@ const DynamicForm = <T,>({ fields, disabled, mode }: DynamicFormProps<T>) => {
                     <UploadImageCustom
                       value={form.getFieldValue(field.name)}
                       onChange={(value) => form.setFieldsValue({ [field.name]: value })}
-                      {...field.props}
+                      {...fieldProps}
                     />
                   );
                 case FormFieldType.InputNumber:
@@ -68,7 +71,7 @@ const DynamicForm = <T,>({ fields, disabled, mode }: DynamicFormProps<T>) => {
                     <InputNumberCustom
                       placeholder={field.placeholder}
                       disabled={isDisabled || disabled}
-                      {...field.props}
+                      {...fieldProps}
                     />
                   );
                 case FormFieldType.Select:
@@ -77,7 +80,7 @@ const DynamicForm = <T,>({ fields, disabled, mode }: DynamicFormProps<T>) => {
                       placeholder={field.placeholder}
                       options={field.options}
                       disabled={isDisabled || disabled}
-                      {...field.props}
+                      {...fieldProps}
                     />
                   );
                 case FormFieldType.SelectFetch:
@@ -86,7 +89,7 @@ const DynamicForm = <T,>({ fields, disabled, mode }: DynamicFormProps<T>) => {
                       placeholder={field.placeholder}
                       fetchOptions={field.fetchOptions}
                       disabled={isDisabled || disabled}
-                      {...field.props}
+                      {...fieldProps}
                     />
                   );
                 case FormFieldType.DatePicker:
@@ -94,7 +97,7 @@ const DynamicForm = <T,>({ fields, disabled, mode }: DynamicFormProps<T>) => {
                     <DatePickerCustom
                       placeholder={field.placeholder}
                       disabled={isDisabled || disabled}
-                      {...field.props}
+                      {...fieldProps}
                     />
                   );
                 case FormFieldType.TimePicker:
@@ -102,7 +105,7 @@ const DynamicForm = <T,>({ fields, disabled, mode }: DynamicFormProps<T>) => {
                     <TimePickerCustom
                       placeholder={field.placeholder}
                       disabled={isDisabled || disabled}
-                      {...field.props}
+                      {...fieldProps}
                     />
                   );
                 case FormFieldType.TextArea:
@@ -110,7 +113,7 @@ const DynamicForm = <T,>({ fields, disabled, mode }: DynamicFormProps<T>) => {
                     <InputTextAreaCustom
                       placeholder={field.placeholder}
                       disabled={isDisabled || disabled}
-                      {...field.props}
+                      {...fieldProps}
                     />
                   );
                 default:

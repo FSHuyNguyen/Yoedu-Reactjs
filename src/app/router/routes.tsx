@@ -18,6 +18,7 @@ import ParentPage from '@/features/parents/pages/ParentPage';
 import UserPage from '@/features/users/pages/UserPage';
 import RoomPage from '@/features/rooms/pages/RoomPage';
 import SchedulePage from '@/features/schedule/pages/SchedulePage';
+import CourseClassPage from '@/features/course-class/pages/CourseClassPage';
 
 export const router = createBrowserRouter([
   /******************** AUTH *********************/
@@ -84,6 +85,10 @@ export const router = createBrowserRouter([
           {
             path: 'schedules',
             element: <SchedulePage />,
+          },
+          {
+            path: 'course-classes',
+            element: <CourseClassPage />,
           },
           {
             path: 'enrollments',

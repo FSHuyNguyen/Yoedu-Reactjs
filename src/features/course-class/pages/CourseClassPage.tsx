@@ -7,22 +7,24 @@ import { FormModalMode } from '@/shared/types/form-modal-mode-type';
 import FilterTableCustom from '@/shared/components/table/FilterTableCustom';
 import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
 import ActionGroup from '@/shared/components/table/ActionGroup';
-import { EyeOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EyeOutlined, EditOutlined } from '@ant-design/icons';
 import type { SectionForm } from '@/shared/components/modal/ModalFormCustom';
-import { roomsRoleAdminApi } from '../api/room.api';
-import type { Room } from '../types/room-type';
-import type { RoomFilterParams } from '../types/room-filter-params-type';
-import { roomFormFields } from '../constants/room-form-fields';
-import { roomFilters } from '../constants/room-filter-table';
+import { courseClassRoleAdminApi } from '../api/course-class-api';
+import { CourseClassStatus, type CourseClass } from '../types/course-class-type';
+import { courseClassFormFields } from '../constants/course-class-form-fields';
+import type { CourseClassFilterParams } from '../types/course-class-filter-params-type';
+import CourseClassStatusTag from '../components/CourseClassStatusTag';
+import { courseClassFilters } from '../constants/course-class-filter-table';
+import { formatDate } from '@/shared/utils/date';
 
-const RoomPage = () => {
-  const { getAll, create, update, remove } = roomsRoleAdminApi;
+const CourseClassPage = () => {
+  const { getAll, create, update } = courseClassRoleAdminApi;
 
   const { open, mode, selectedRecord, openCreate, openView, openEdit, close } =
-    useFormModal<Room>();
+    useFormModal<CourseClass>();
 
   const {
-    data: rooms,
+    data: courseClasses,
 
     loading,
 
@@ -38,42 +40,70 @@ const RoomPage = () => {
 
     handleChangePage,
 
-    handleDelete,
-
     refetch,
-  } = useTable<Room, RoomFilterParams>({
+  } = useTable<CourseClass, CourseClassFilterParams>({
     fetchApi: getAll,
-    removeApi: remove,
   });
 
-  const sectionsRoomForm: SectionForm<Room>[] = [
+  const sectionsCourseClassForm: SectionForm<CourseClass>[] = [
     {
-      key: 'room',
-      label: 'Thông tin phòng học',
-      fields: roomFormFields,
+      key: 'courseClass',
+      label: 'Thông tin lớp học',
+      fields: courseClassFormFields,
     },
   ];
 
   const columns = [
     {
-      title: 'Mã phòng',
-      dataIndex: 'roomCode',
+      title: 'Mã lớp học',
+      dataIndex: 'classCode',
     },
     {
-      title: 'Tên phòng',
+      title: 'Tên lớp học',
       dataIndex: 'name',
     },
     {
-      title: 'Sức chứa',
-      dataIndex: 'capacity',
+      title: 'Tên khóa học',
+      dataIndex: 'courseName',
+    },
+    {
+      title: 'Giáo viên chính',
+      dataIndex: 'mainTeacherName',
+    },
+    {
+      title: 'Lịch học',
+      dataIndex: 'scheduleInformation',
+    },
+    {
+      title: 'Phòng học',
+      dataIndex: 'roomName',
+    },
+    {
+      title: 'Ngày bắt đầu',
+      dataIndex: 'startDate',
       align: 'center' as const,
+      render: (value: string) => formatDate(value),
+    },
+    {
+      title: 'Ngày kết thúc',
+      dataIndex: 'endDate',
+      align: 'center' as const,
+      render: (value: string) => formatDate(value),
+    },
+    {
+      title: 'Trạng thái',
+      dataIndex: 'status',
+      align: 'center' as const,
+      render: (_: any, record: CourseClass) => {
+        return <CourseClassStatusTag status={record.status} statusText={record.statusText} />;
+      },
     },
     {
       title: 'Tác vụ',
       align: 'center' as const,
-      render: (_: any, record: Room) => {
+      render: (_: any, record: CourseClass) => {
         return (
-          <ActionGroup<Room>
+          <ActionGroup<CourseClass>
             record={record}
             actions={[
               {
@@ -83,18 +113,10 @@ const RoomPage = () => {
                 onClick: openView,
               },
               {
-                show: () => true,
+                show: (r) => r.status === CourseClassStatus.OPEN,
                 icon: <EditOutlined />,
                 tooltip: 'Sửa',
                 onClick: openEdit,
-              },
-              {
-                show: () => true,
-                icon: <DeleteOutlined />,
-                tooltip: 'Xóa',
-                danger: true,
-                onClick: () => handleDelete(record.id),
-                isPopconfirm: true,
               },
             ]}
           />
@@ -106,18 +128,18 @@ const RoomPage = () => {
   return (
     <div className="flex flex-col h-full">
       <PageHeader
-        title="Quản lý phòng học"
-        subtitle="Danh sách phòng học"
+        title="Quản lý lớp học"
+        subtitle="Danh sách lớp học"
         extra={
           <Button type="primary" onClick={openCreate}>
-            + Thêm phòng học
+            + Thêm lớp học
           </Button>
         }
       />
 
       <div className="mb-4">
         <FilterTableCustom
-          dataFilters={roomFilters}
+          dataFilters={courseClassFilters}
           values={filterValues}
           onChange={handleFilterChange}
           onReset={handleFilterReset}
@@ -125,17 +147,17 @@ const RoomPage = () => {
         />
       </div>
 
-      <TablePaginationCustom<Room>
+      <TablePaginationCustom<CourseClass>
         columns={columns}
-        data={rooms}
+        data={courseClasses}
         loading={loading}
         pagination={pagination}
         onChangePage={handleChangePage}
       />
 
-      <ModalFormCustom<Room>
+      <ModalFormCustom<CourseClass>
         open={open}
-        title="Phòng học"
+        title="Lớp học"
         mode={mode}
         initialValues={selectedRecord}
         disabled={mode === FormModalMode.VIEW}
@@ -144,10 +166,10 @@ const RoomPage = () => {
         onSubmit={
           mode === FormModalMode.CREATE ? create : (values) => update(selectedRecord!.id, values)
         }
-        sections={sectionsRoomForm}
+        sections={sectionsCourseClassForm}
       />
     </div>
   );
 };
 
-export default RoomPage;
+export default CourseClassPage;

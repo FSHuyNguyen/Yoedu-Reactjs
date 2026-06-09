@@ -1,7 +1,7 @@
 import { axiosClient } from '@/shared/lib/axios';
 import type { CourseFilterParams } from '../types/course-filter-params-type';
 
-const API_URL_PREFIX = '/course';
+const API_URL_PREFIX = '/courses';
 
 export const getCourseOptions = async () => {
   const res = await axiosClient.get(`${API_URL_PREFIX}/options`, {});

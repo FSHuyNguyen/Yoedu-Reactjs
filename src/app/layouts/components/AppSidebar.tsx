@@ -89,6 +89,11 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
       roles: [USER_ROLE.ADMIN, USER_ROLE.STAFF],
       children: [
         {
+          key: '/course-classes',
+          icon: <ReadOutlined />,
+          label: 'Lớp học',
+        },
+        {
           key: '/enrollments',
           icon: <SolutionOutlined />,
           label: 'Tuyển sinh',

@@ -140,7 +140,13 @@ const ModalFormCustom = <T,>({
           items={sections.map((section) => ({
             key: section.key,
             label: section.label,
-            children: <DynamicForm<T> fields={section.fields} disabled={disabled} mode={mode} />,
+            children: (
+              <DynamicForm<T>
+                fields={section.fields.filter((field) => field.name !== 'password')}
+                disabled={disabled}
+                mode={mode}
+              />
+            ),
           }))}
         />
 

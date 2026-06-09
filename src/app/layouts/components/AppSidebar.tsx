@@ -13,7 +13,7 @@ import {
 } from '@ant-design/icons';
 import YoeduLogo from '@/assets/images/yoedu-logo.svg';
 import { useTheme } from '@/app/providers/theme/hooks/useTheme';
-import { USER_ROLE, type UserRole } from '@/features/users/types/user-role-type';
+import { type UserRole } from '@/features/users/types/user-role-type';
 import { useAppSelector } from '@/app/redux/hooks';
 
 const { Sider } = Layout;
@@ -86,7 +86,6 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
       key: 'academic',
       label: 'Học vụ',
       icon: <BookOutlined />,
-      roles: [USER_ROLE.ADMIN, USER_ROLE.STAFF],
       children: [
         {
           key: '/course-classes',
@@ -97,7 +96,6 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
           key: '/enrollments',
           icon: <SolutionOutlined />,
           label: 'Tuyển sinh',
-          roles: [USER_ROLE.ADMIN, USER_ROLE.STAFF],
         },
       ],
     },

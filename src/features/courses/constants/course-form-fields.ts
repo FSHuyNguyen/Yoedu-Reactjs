@@ -33,21 +33,6 @@ export const courseFormFields: FormField<Course>[] = [
       },
     ],
   },
-  // {
-  //   name: 'tuitionFee',
-  //   label: 'Giá khóa học',
-  //   type: FormFieldType.InputNumber,
-  //   placeholder: 'Nhập giá khóa học',
-  //   props: {
-  //     isCurrency: true,
-  //   },
-  //   rules: [
-  //     {
-  //       required: true,
-  //       message: 'Vui lòng nhập giá khóa học',
-  //     },
-  //   ],
-  // },
   {
     name: 'totalSessions',
     label: 'Tổng số buổi học',
@@ -60,12 +45,6 @@ export const courseFormFields: FormField<Course>[] = [
       },
     ],
   },
-  // {
-  //   name: 'maxStudents',
-  //   label: 'Số học viên tối đa',
-  //   type: FormFieldType.InputNumber,
-  //   placeholder: 'Nhập số học viên tối đa',
-  // },
   {
     name: 'level',
     label: 'Cấp độ',

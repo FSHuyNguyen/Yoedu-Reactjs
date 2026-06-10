@@ -2,7 +2,7 @@ import type { FormField } from '@/shared/components/modal/ModalFormCustom';
 import type { Enrollment } from '../types/enrollment-type';
 import { FormFieldType } from '@/shared/types/form-field-type';
 import { getStudentOptions } from '@/features/students/api/student-api';
-import { getCourseOptions } from '@/features/courses/api/course-api';
+import { getCourseClassOptions } from '@/features/course-class/api/course-class-api';
 
 export const enrollmentFormFields: FormField<Enrollment>[] = [
   {
@@ -15,24 +15,13 @@ export const enrollmentFormFields: FormField<Enrollment>[] = [
   },
 
   {
-    name: 'courseId',
-    label: 'Khóa học',
+    name: 'courseClassId',
+    label: 'Lớp học',
     type: FormFieldType.SelectFetch,
-    fetchOptions: getCourseOptions,
-    placeholder: 'Chọn khóa học',
-    rules: [{ required: true, message: 'Vui lòng chọn khóa học' }],
+    fetchOptions: getCourseClassOptions,
+    placeholder: 'Chọn lớp học',
+    rules: [{ required: true, message: 'Vui lòng chọn lớp học' }],
   },
-
-  {
-    name: 'paidAmount',
-    label: 'Số tiền đã thanh toán',
-    type: FormFieldType.InputNumber,
-    placeholder: 'Nhập số tiền đã thanh toán',
-    props: {
-      isCurrency: true,
-    },
-  },
-
   {
     name: 'note',
     label: 'Ghi chú',

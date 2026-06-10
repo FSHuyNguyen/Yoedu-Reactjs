@@ -1,7 +1,9 @@
 import { EnrollmentStatus } from '../types/enrollment-type';
 
 export const enrollmentStatusOptions = [
-  { label: 'Đang học', value: EnrollmentStatus.STUDYING },
+  { label: 'Đang học', value: EnrollmentStatus.ACTIVE },
+  { label: 'Bảo lưu', value: EnrollmentStatus.PAUSED },
+  { label: 'Đã thôi học', value: EnrollmentStatus.DROPPED },
   { label: 'Hoàn thành', value: EnrollmentStatus.COMPLETED },
-  { label: 'Hủy bỏ', value: EnrollmentStatus.CANCELLED },
+  { label: 'Hủy đăng ký', value: EnrollmentStatus.CANCELLED },
 ];

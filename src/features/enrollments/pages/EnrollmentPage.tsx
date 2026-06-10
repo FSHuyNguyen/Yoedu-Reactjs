@@ -11,7 +11,6 @@ import type { EnrollmentFilterParams } from '../types/enrollment-filter-params-t
 import { enrollmentFilters } from '../constants/enrollment-filter-table';
 import { enrollmentFormFields } from '../constants/enrollment-form-fields';
 import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
-import { formatCurrency } from '@/shared/utils/currecy';
 import ActionGroup from '@/shared/components/table/ActionGroup';
 import { EyeOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import EnrollmentStatusTag from '../components/EnrollmentStatusTag';
@@ -58,22 +57,16 @@ const EnrollmentPage = () => {
 
   const columns = [
     {
-      title: 'Tên khóa học',
-      dataIndex: 'courseName',
-    },
-    {
       title: 'Học viên',
       dataIndex: 'studentName',
     },
     {
-      title: 'Giá gốc',
-      dataIndex: 'originalPrice',
-      render: (value: any) => (value ? formatCurrency(value) : ''),
+      title: 'Lớp học',
+      dataIndex: 'courseClassName',
     },
     {
-      title: 'Học phí đã đóng',
-      dataIndex: 'paidAmount',
-      render: (value: any) => (value ? formatCurrency(value) : ''),
+      title: 'Tên khóa học',
+      dataIndex: 'courseName',
     },
     {
       title: 'Trạng thái',
@@ -98,13 +91,13 @@ const EnrollmentPage = () => {
                 onClick: openView,
               },
               {
-                show: (r) => r.status === EnrollmentStatus.STUDYING,
+                show: (r) => r.status === EnrollmentStatus.ACTIVE,
                 icon: <EditOutlined />,
                 tooltip: 'Sửa',
                 onClick: openEdit,
               },
               {
-                show: (r) => r.status === EnrollmentStatus.STUDYING,
+                show: (r) => r.status === EnrollmentStatus.ACTIVE,
                 icon: <DeleteOutlined />,
                 tooltip: 'Hủy đăng ký',
                 danger: true,

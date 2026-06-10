@@ -2,20 +2,28 @@ export interface Enrollment {
   id: string;
   studentId: string;
   studentName: string | null;
+
+  courseClassId: string;
+  courseClassName: string | null;
+
   courseId: string;
   courseName: string;
 
-  originalPrice: number;
-  paidAmount: number;
   status: EnrollmentStatusType;
   statusText?: string;
+
   note: string | null;
+
+  enrolledAt: string;
+
   createdAt: string;
   updatedAt: string;
 }
 
 export const EnrollmentStatus = {
-  STUDYING: 'STUDYING',
+  ACTIVE: 'ACTIVE',
+  PAUSED: 'PAUSED',
+  DROPPED: 'DROPPED',
   COMPLETED: 'COMPLETED',
   CANCELLED: 'CANCELLED',
 } as const;

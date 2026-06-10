@@ -8,11 +8,11 @@ import ProtectedRoute from './ProtectedRoute';
 
 import LoginPage from '@/features/auth/pages/LoginPage';
 import RegisterPage from '@/features/auth/pages/RegisterPage';
+import DashboardPage from '@/features/dashboard/pages/DashboardPage';
 import StudentPage from '@/features/students/pages/StudentPage';
 import UserProfilePage from '@/features/users/pages/UserProfilePage';
 import TeacherPage from '@/features/teachers/pages/TeacherPage';
 import CoursePage from '@/features/courses/pages/CoursePage';
-import DashboardPage from '@/features/dashboard/pages/Dashboard';
 import EnrollmentPage from '@/features/enrollments/pages/EnrollmentPage';
 import ParentPage from '@/features/parents/pages/ParentPage';
 import UserPage from '@/features/users/pages/UserPage';

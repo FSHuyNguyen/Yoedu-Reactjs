@@ -1,25 +1,35 @@
-import StatCard from '@/features/dashboard/components/stat-card';
+import StatCard from '@/features/dashboard/components/StatCard';
 import { useEffect, useState } from 'react';
 import type { Dashboard } from '@/features/dashboard/types/dashboard-type';
-import RecentActivity from '@/features/dashboard/components/recent-activity';
-import TodayClasses from '@/features/dashboard/components/today-classes';
+import RecentActivity from '@/features/dashboard/components/RecentActivity';
+import TodayClasses from '@/features/dashboard/components/TodayClasses';
 import { dashboardRoleAdminApi } from '../api/dashboard-api';
 import PageHeader from '@/shared/components/page/PageHeader';
+import DashboardSkeleton from '../components/DashboardSkeleton';
 
 const mapColor = ['green', 'blue', 'purple', 'red'];
 
 const DashboardPage = () => {
   const { getDashboard } = dashboardRoleAdminApi;
   const [data, setData] = useState<Dashboard | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getDashboard();
-      setData(res.data);
+      try {
+        const res = await getDashboard();
+        setData(res.data);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchData();
   }, []);
+
+  if (loading) {
+    return <DashboardSkeleton />;
+  }
 
   return (
     <div className="flex flex-col gap-6">

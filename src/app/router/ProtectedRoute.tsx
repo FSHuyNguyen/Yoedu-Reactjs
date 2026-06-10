@@ -10,7 +10,7 @@ interface ProtectedRouteProps {
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ requireAuth = true }) => {
   const { user, initialized } = useAppSelector((state) => state.auth);
 
-  if (initialized) {
+  if (!initialized) {
     return <Spin size="large" className="flex! items-center justify-center h-screen" />;
   }
 

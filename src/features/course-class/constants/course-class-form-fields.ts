@@ -76,11 +76,14 @@ export const courseClassFormFields: FormField<CourseClass>[] = [
     ],
   },
   {
-    name: 'scheduleSlotId',
+    name: 'scheduleSlotIds',
     label: 'Ca học',
     type: FormFieldType.SelectFetch,
     fetchOptions: getScheduleOptions,
     placeholder: 'Chọn ca học',
+    props: {
+      mode: 'multiple',
+    },
     rules: [
       {
         required: true,

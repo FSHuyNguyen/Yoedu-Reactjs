@@ -73,6 +73,13 @@ const CourseClassPage = () => {
     {
       title: 'Lịch học',
       dataIndex: 'scheduleInformation',
+      render: (value: string[]) => (
+        <div className="flex flex-col">
+          {value?.map((item) => (
+            <span key={item}>{item}</span>
+          ))}
+        </div>
+      ),
     },
     {
       title: 'Phòng học',

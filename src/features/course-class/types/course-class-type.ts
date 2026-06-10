@@ -6,7 +6,7 @@ export interface CourseClass {
   courseName: string;
   roomId: string;
   roomName: string;
-  scheduleSlotId: string;
+  scheduleSlotIds: string[];
   scheduleInformation: string;
   mainTeacherId: string;
   mainTeacherName: string;

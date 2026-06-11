@@ -15,6 +15,16 @@ export const formatRelativeTime = (date: string | Date): string => {
 };
 
 /**
+ * Convert dayjs object -> ISO string
+ * Gửi lên BE
+ */
+export const formatDateTimeQuery = (value?: Dayjs | null): string | null => {
+  if (!value) return null;
+
+  return value.toISOString();
+};
+
+/**
  * Convert ISO string -> dayjs object
  * dùng cho DatePicker setFieldsValue
  */
@@ -22,16 +32,6 @@ export const formatDateToPicker = (value?: string | Date | null): Dayjs | null =
   if (!value) return null;
 
   return dayjs(value);
-};
-
-/**
- * Convert dayjs object -> ISO string
- * Gửi lên BE
- */
-export const formatDateToISO = (value?: Dayjs | null): string | null => {
-  if (!value) return null;
-
-  return value.toISOString();
 };
 
 /**

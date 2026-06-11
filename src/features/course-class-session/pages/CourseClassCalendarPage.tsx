@@ -12,7 +12,7 @@ import { courseClassSessionRoleAdminApi } from '../api/course-class-session-api'
 import type { CalendarSession } from '../types/course-class-session-calendar-type';
 import { type CourseClassSessionStatusType } from '../types/course-class-session-type';
 import { mappedColorByStatus } from '../constants/calendar-color';
-import { formatDateToISO } from '@/shared/utils/date';
+import { formatDateTimeQuery } from '@/shared/utils/date';
 import DrawerCourseClassInformation from '../components/DrawerCourseClassInformation';
 
 const CourseClassCalendarPage = () => {
@@ -30,8 +30,8 @@ const CourseClassCalendarPage = () => {
       }
 
       const res = await getCalendarSessions({
-        startDate: formatDateToISO(arg.start) as string,
-        endDate: formatDateToISO(arg.end) as string,
+        startDate: formatDateTimeQuery(arg.start) as string,
+        endDate: formatDateTimeQuery(arg.end) as string,
       });
 
       if (!res.success) {

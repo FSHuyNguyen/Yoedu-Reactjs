@@ -1,0 +1,171 @@
+import useTable from '@/shared/hooks/useTable';
+import PageHeader from '@/shared/components/page/PageHeader';
+import ModalFormCustom from '@/shared/components/modal/ModalFormCustom';
+import { useFormModal } from '@/shared/hooks/useFormModal';
+import { FormModalMode } from '@/shared/types/form-modal-mode-type';
+import FilterTableCustom from '@/shared/components/table/FilterTableCustom';
+import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
+import ActionGroup from '@/shared/components/table/ActionGroup';
+import { CheckOutlined, EyeOutlined, DeleteOutlined } from '@ant-design/icons';
+import type { SectionForm } from '@/shared/components/modal/ModalFormCustom';
+import { formatDate } from '@/shared/utils/date';
+import { courseClassSessionRoleAdminApi } from '../api/course-class-session-api';
+import {
+  CourseClassSessionStatus,
+  type CourseClassSession,
+} from '../types/course-class-session-type';
+import CourseClassSessionStatusTag from '../components/CourseClassSessionStatusTag';
+import type { CourseClassSessionFilterParams } from '../types/course-class-session-filter-params-type';
+import { courseClassSessionFilters } from '../constants/course-class-filter-table';
+import { courseClassSessionFormFields } from '../constants/course-class-form-fields';
+import { FORMAT_DATE_TIME } from '@/shared/constants/format-date';
+
+const CourseClassSessionPage = () => {
+  const { getAll, done, cancel } = courseClassSessionRoleAdminApi;
+
+  const { open, mode, selectedRecord, openView, close } = useFormModal<CourseClassSession>();
+
+  const {
+    data: courseClassSessions,
+
+    loading,
+
+    pagination,
+
+    filterValues,
+
+    handleFilterChange,
+
+    handleFilterSubmit,
+
+    handleFilterReset,
+
+    handleChangePage,
+
+    handleActive,
+
+    handleInActive,
+
+    refetch,
+  } = useTable<CourseClassSession, CourseClassSessionFilterParams>({
+    fetchApi: getAll,
+    activeApi: done,
+    inActiveApi: cancel,
+  });
+
+  const sectionsCourseClassSessionForm: SectionForm<CourseClassSession>[] = [
+    {
+      key: 'courseClassSession',
+      label: 'Thông tin lịch học',
+      fields: courseClassSessionFormFields,
+    },
+  ];
+
+  const columns = [
+    {
+      title: 'Tên khóa học',
+      dataIndex: 'courseName',
+    },
+    {
+      title: 'Tên lớp học',
+      dataIndex: 'courseClassName',
+    },
+    {
+      title: 'Giáo viên chính',
+      dataIndex: 'mainTeacherName',
+    },
+    {
+      title: 'Thời gian',
+      dataIndex: 'time',
+      align: 'center' as const,
+      render: (_: string, record: CourseClassSession) => (
+        <span>
+          {record.scheduleSlotName} ({formatDate(record.startTime, FORMAT_DATE_TIME)} -{' '}
+          {formatDate(record.endTime, FORMAT_DATE_TIME)})
+        </span>
+      ),
+    },
+    {
+      title: 'Trạng thái',
+      dataIndex: 'status',
+      align: 'center' as const,
+      render: (_: any, record: CourseClassSession) => {
+        return (
+          <CourseClassSessionStatusTag status={record.status} statusText={record.statusText} />
+        );
+      },
+    },
+    {
+      title: 'Tác vụ',
+      align: 'center' as const,
+      render: (_: any, record: CourseClassSession) => {
+        return (
+          <ActionGroup<CourseClassSession>
+            record={record}
+            actions={[
+              {
+                show: () => true,
+                icon: <EyeOutlined />,
+                tooltip: 'Chi tiết',
+                onClick: openView,
+              },
+              {
+                show: (r) => r.status === CourseClassSessionStatus.SCHEDULED,
+                icon: <CheckOutlined />,
+                tooltip: 'Hoàn thành',
+                color: '#52c41a',
+                onClick: () => handleActive(record.id),
+                isPopconfirm: true,
+              },
+              {
+                show: (r) => r.status === CourseClassSessionStatus.SCHEDULED,
+                icon: <DeleteOutlined />,
+                tooltip: 'Hủy',
+                danger: true,
+                onClick: () => handleInActive(record.id),
+                isPopconfirm: true,
+              },
+            ]}
+          />
+        );
+      },
+    },
+  ];
+
+  return (
+    <div className="flex flex-col h-full">
+      <PageHeader title="Quản lý lịch học" subtitle="Danh sách lịch học" />
+
+      <div className="mb-4">
+        <FilterTableCustom
+          dataFilters={courseClassSessionFilters}
+          values={filterValues}
+          onChange={handleFilterChange}
+          onReset={handleFilterReset}
+          onSubmit={handleFilterSubmit}
+        />
+      </div>
+
+      <TablePaginationCustom<CourseClassSession>
+        columns={columns}
+        data={courseClassSessions}
+        loading={loading}
+        pagination={pagination}
+        onChangePage={handleChangePage}
+      />
+
+      <ModalFormCustom<CourseClassSession>
+        open={open}
+        title="Lịch học"
+        mode={mode}
+        initialValues={selectedRecord}
+        disabled={mode === FormModalMode.VIEW}
+        onCancel={close}
+        onSuccess={refetch}
+        sections={sectionsCourseClassSessionForm}
+      />
+    </div>
+  );
+};
+
+export default CourseClassSessionPage;

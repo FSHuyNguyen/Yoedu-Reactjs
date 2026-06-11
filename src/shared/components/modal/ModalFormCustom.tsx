@@ -67,7 +67,7 @@ interface ModalFormCustomProps<T> {
 
   onSuccess: () => void;
 
-  onSubmit: (values: T) => Promise<void>;
+  onSubmit?: (values: T) => Promise<void>;
 }
 
 const ModalFormCustom = <T,>({
@@ -104,7 +104,9 @@ const ModalFormCustom = <T,>({
 
       const formattedValues = formatFormValues(values, sections);
 
-      await onSubmit(formattedValues);
+      if (onSubmit) {
+        await onSubmit(formattedValues);
+      }
 
       showNotification('success', 'Thành công', 'Dữ liệu đã được lưu thành công');
 

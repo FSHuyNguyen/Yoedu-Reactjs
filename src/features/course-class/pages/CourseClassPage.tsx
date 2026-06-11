@@ -71,17 +71,6 @@ const CourseClassPage = () => {
       dataIndex: 'mainTeacherName',
     },
     {
-      title: 'Lịch học',
-      dataIndex: 'scheduleInformation',
-      render: (value: string[]) => (
-        <div className="flex flex-col">
-          {value?.map((item) => (
-            <span key={item}>{item}</span>
-          ))}
-        </div>
-      ),
-    },
-    {
       title: 'Phòng học',
       dataIndex: 'roomName',
     },
@@ -96,6 +85,17 @@ const CourseClassPage = () => {
       dataIndex: 'endDate',
       align: 'center' as const,
       render: (value: string) => formatDate(value),
+    },
+    {
+      title: 'Lịch học',
+      dataIndex: 'scheduleInformation',
+      render: (value: string[]) => (
+        <div className="flex flex-col">
+          {value?.map((item) => (
+            <span key={item}>{item}</span>
+          ))}
+        </div>
+      ),
     },
     {
       title: 'Trạng thái',

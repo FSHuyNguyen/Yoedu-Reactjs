@@ -14,6 +14,7 @@ import InputTextAreaCustom from '../input/InputTextAreaCustom';
 import { FormFieldType } from '@/shared/types/form-field-type';
 import type { UserRole } from '@/features/users/types/user-role-type';
 import type { FormField } from '../modal/ModalFormCustom';
+import DateTimePickerCustom from '../datetimepicker/DateTimePickerCustom';
 
 interface DynamicFormProps<T> {
   fields: FormField<T>[];
@@ -102,6 +103,14 @@ const DynamicForm = <T,>({ fields, disabled, mode }: DynamicFormProps<T>) => {
                   case FormFieldType.DatePicker:
                     return (
                       <DatePickerCustom
+                        placeholder={field.placeholder}
+                        disabled={isDisabled || disabled}
+                        {...fieldProps}
+                      />
+                    );
+                  case FormFieldType.DateTimePicker:
+                    return (
+                      <DateTimePickerCustom
                         placeholder={field.placeholder}
                         disabled={isDisabled || disabled}
                         {...fieldProps}

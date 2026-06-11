@@ -17,6 +17,7 @@ export const formatFormValues = <T>(values: T, sections: SectionForm<T>[]): T =>
 
       switch (field.type) {
         case FormFieldType.DatePicker:
+        case FormFieldType.DateTimePicker:
           formattedValues[field.name as string] = dayjs.isDayjs(value)
             ? value.toISOString()
             : formatDateToPicker(value as string);

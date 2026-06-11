@@ -1,0 +1,30 @@
+import { axiosClient } from '@/shared/lib/axios';
+import type { CourseClassSessionFilterParams } from '../types/course-class-session-filter-params-type';
+
+const API_URL_PREFIX = '/course-class-sessions';
+
+export const courseClassSessionRoleAdminApi = {
+  getAll: async (params: CourseClassSessionFilterParams) => {
+    const res = await axiosClient.get(`${API_URL_PREFIX}`, { params });
+
+    return res.data;
+  },
+
+  getDetail: async (id: string) => {
+    const res = await axiosClient.get(`${API_URL_PREFIX}/${id}`);
+
+    return res.data;
+  },
+
+  done: async (id: string) => {
+    const res = await axiosClient.patch(`${API_URL_PREFIX}/${id}/done`);
+
+    return res.data;
+  },
+
+  cancel: async (id: string) => {
+    const res = await axiosClient.patch(`${API_URL_PREFIX}/${id}/cancel`);
+
+    return res.data;
+  },
+};

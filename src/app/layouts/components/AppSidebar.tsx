@@ -10,6 +10,7 @@ import {
   ReadOutlined,
   WalletOutlined,
   ScheduleOutlined,
+  CalendarOutlined,
 } from '@ant-design/icons';
 import YoeduLogo from '@/assets/images/yoedu-logo.svg';
 import { useTheme } from '@/app/providers/theme/hooks/useTheme';
@@ -74,9 +75,14 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
       icon: <BookOutlined />,
       children: [
         {
-          key: '/course-classes',
+          key: '/courses',
           icon: <ReadOutlined />,
-          label: 'Lớp học',
+          label: 'Khóa đào tạo',
+        },
+        {
+          key: '/enrollments',
+          icon: <SolutionOutlined />,
+          label: 'Tuyển sinh',
         },
         {
           key: '/rooms',
@@ -89,14 +95,14 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
           label: 'Ca học',
         },
         {
-          key: '/courses',
+          key: '/course-classes',
           icon: <ReadOutlined />,
-          label: 'Khóa đào tạo',
+          label: 'Lớp học',
         },
         {
-          key: '/enrollments',
-          icon: <SolutionOutlined />,
-          label: 'Tuyển sinh',
+          key: '/course-class-sessions',
+          icon: <CalendarOutlined />,
+          label: 'Lịch học',
         },
       ],
     },

@@ -33,4 +33,10 @@ export const courseClassRoleAdminApi = {
 
     return res.data;
   },
+
+  remove: async (id: string) => {
+    const res = await axiosClient.delete(`${API_URL_PREFIX}/${id}`);
+
+    return res.data;
+  },
 };

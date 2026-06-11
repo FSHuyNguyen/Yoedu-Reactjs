@@ -7,7 +7,7 @@ import { FormModalMode } from '@/shared/types/form-modal-mode-type';
 import FilterTableCustom from '@/shared/components/table/FilterTableCustom';
 import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
 import ActionGroup from '@/shared/components/table/ActionGroup';
-import { EyeOutlined, EditOutlined } from '@ant-design/icons';
+import { EyeOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import type { SectionForm } from '@/shared/components/modal/ModalFormCustom';
 import { courseClassRoleAdminApi } from '../api/course-class-api';
 import { CourseClassStatus, type CourseClass } from '../types/course-class-type';
@@ -18,7 +18,7 @@ import { courseClassFilters } from '../constants/course-class-filter-table';
 import { formatDate } from '@/shared/utils/date';
 
 const CourseClassPage = () => {
-  const { getAll, create, update } = courseClassRoleAdminApi;
+  const { getAll, create, update, remove } = courseClassRoleAdminApi;
 
   const { open, mode, selectedRecord, openCreate, openView, openEdit, close } =
     useFormModal<CourseClass>();
@@ -40,9 +40,12 @@ const CourseClassPage = () => {
 
     handleChangePage,
 
+    handleDelete,
+
     refetch,
   } = useTable<CourseClass, CourseClassFilterParams>({
     fetchApi: getAll,
+    removeApi: remove,
   });
 
   const sectionsCourseClassForm: SectionForm<CourseClass>[] = [
@@ -124,6 +127,14 @@ const CourseClassPage = () => {
                 icon: <EditOutlined />,
                 tooltip: 'Sửa',
                 onClick: openEdit,
+              },
+              {
+                show: (r) => r.status === CourseClassStatus.OPEN,
+                icon: <DeleteOutlined />,
+                tooltip: 'Xóa',
+                danger: true,
+                onClick: () => handleDelete(record.id),
+                isPopconfirm: true,
               },
             ]}
           />

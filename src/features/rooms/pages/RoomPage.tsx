@@ -9,7 +9,7 @@ import TablePaginationCustom from '@/shared/components/table/TablePaginationCust
 import ActionGroup from '@/shared/components/table/ActionGroup';
 import { EyeOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import type { SectionForm } from '@/shared/components/modal/ModalFormCustom';
-import { roomsRoleAdminApi } from '../api/room.api';
+import { roomsRoleAdminApi } from '../api/room-api';
 import type { Room } from '../types/room-type';
 import type { RoomFilterParams } from '../types/room-filter-params-type';
 import { roomFormFields } from '../constants/room-form-fields';

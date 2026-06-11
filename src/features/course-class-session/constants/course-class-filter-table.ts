@@ -1,7 +1,7 @@
 import { FormFieldType } from '@/shared/types/form-field-type';
 import { getCourseOptions } from '@/features/courses/api/course-api';
 import { getTeachersOptions } from '@/features/teachers/api/teacher-api';
-import { getScheduleOptions } from '@/features/schedule/api/schedule.api';
+import { getScheduleOptions } from '@/features/schedule/api/schedule-api';
 import { getCourseClassOptions } from '@/features/course-class/api/course-class-api';
 
 export const courseClassSessionFilters = [

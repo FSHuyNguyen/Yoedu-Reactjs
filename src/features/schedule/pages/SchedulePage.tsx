@@ -9,7 +9,7 @@ import TablePaginationCustom from '@/shared/components/table/TablePaginationCust
 import ActionGroup from '@/shared/components/table/ActionGroup';
 import { EyeOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import type { SectionForm } from '@/shared/components/modal/ModalFormCustom';
-import { scheduleRoleAdminApi } from '../api/schedule.api';
+import { scheduleRoleAdminApi } from '../api/schedule-api';
 import type { Schedule } from '../types/schedule-type';
 import { scheduleFilters } from '../constants/schedule-filter-table';
 import type { ScheduleFilterParams } from '../types/schedule-filter-params-type';

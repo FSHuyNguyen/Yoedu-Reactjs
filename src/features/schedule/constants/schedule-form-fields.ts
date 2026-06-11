@@ -16,6 +16,7 @@ export const scheduleFormFields: FormField<Schedule>[] = [
     label: 'Thứ',
     type: FormFieldType.Select,
     options: scheduleWeekOptions,
+    placeholder: 'Chọn thứ',
     rules: [{ required: true, message: 'Vui lòng chọn thứ' }],
   },
   {

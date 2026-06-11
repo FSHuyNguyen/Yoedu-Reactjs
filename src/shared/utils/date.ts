@@ -25,6 +25,16 @@ export const formatDateToPicker = (value?: string | Date | null): Dayjs | null =
 };
 
 /**
+ * Convert dayjs object -> ISO string
+ * Gửi lên BE
+ */
+export const formatDateToISO = (value?: Dayjs | null): string | null => {
+  if (!value) return null;
+
+  return value.toISOString();
+};
+
+/**
  * Convert dayjs -> YYYY-MM-DD
  * dùng cho query params
  */

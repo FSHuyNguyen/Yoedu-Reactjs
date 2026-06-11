@@ -1,5 +1,6 @@
 import { axiosClient } from '@/shared/lib/axios';
 import type { CourseClassSessionFilterParams } from '../types/course-class-session-filter-params-type';
+import type { CourseClassSessionCalendarFilterParams } from '../types/course-class-session-calendar-filter-params-type';
 
 const API_URL_PREFIX = '/course-class-sessions';
 
@@ -12,6 +13,12 @@ export const courseClassSessionRoleAdminApi = {
 
   getDetail: async (id: string) => {
     const res = await axiosClient.get(`${API_URL_PREFIX}/${id}`);
+
+    return res.data;
+  },
+
+  calendar: async (params: CourseClassSessionCalendarFilterParams) => {
+    const res = await axiosClient.get(`${API_URL_PREFIX}/calendar`, { params });
 
     return res.data;
   },

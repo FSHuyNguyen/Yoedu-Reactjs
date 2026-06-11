@@ -104,6 +104,11 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
           icon: <CalendarOutlined />,
           label: 'Lịch học',
         },
+        {
+          key: '/calendar',
+          icon: <CalendarOutlined />,
+          label: 'Calendars',
+        },
       ],
     },
     {

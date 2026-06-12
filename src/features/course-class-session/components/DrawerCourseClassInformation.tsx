@@ -2,6 +2,7 @@ import { Descriptions, Divider, Drawer, Tag } from 'antd';
 import type { CalendarSession } from '../types/course-class-session-calendar-type';
 import { formatDate } from '@/shared/utils/date';
 import { FORMAT_DATE_TIME } from '@/shared/constants/format-date';
+import { mappedColorByStatus } from '../constants/calendar-color';
 
 interface DrawerCourseClassInformationProps {
   open: boolean;
@@ -40,7 +41,9 @@ const DrawerCourseClassInformation: React.FC<DrawerCourseClassInformationProps> 
             </Descriptions.Item>
 
             <Descriptions.Item label="Trạng thái">
-              <Tag color="blue">{selectedSession.statusText}</Tag>
+              <Tag className={`${mappedColorByStatus[selectedSession.status]} text-white!`}>
+                {selectedSession.statusText}
+              </Tag>
             </Descriptions.Item>
           </Descriptions>
 

@@ -1,3 +1,5 @@
+import type { CourseClassSessionStatusType } from './course-class-session-type';
+
 export interface CalendarSession {
   id: string;
 
@@ -7,7 +9,7 @@ export interface CalendarSession {
 
   end: string;
 
-  status: string;
+  status: CourseClassSessionStatusType;
   statusText: string;
 
   courseClassId: string;

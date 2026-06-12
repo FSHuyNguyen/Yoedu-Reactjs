@@ -75,16 +75,6 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
       icon: <BookOutlined />,
       children: [
         {
-          key: '/courses',
-          icon: <ReadOutlined />,
-          label: 'Khóa đào tạo',
-        },
-        {
-          key: '/enrollments',
-          icon: <SolutionOutlined />,
-          label: 'Tuyển sinh',
-        },
-        {
           key: '/rooms',
           icon: <SolutionOutlined />,
           label: 'Phòng học',
@@ -95,9 +85,19 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
           label: 'Ca học',
         },
         {
+          key: '/courses',
+          icon: <ReadOutlined />,
+          label: 'Khóa đào tạo',
+        },
+        {
           key: '/course-classes',
           icon: <ReadOutlined />,
           label: 'Lớp học',
+        },
+        {
+          key: '/enrollments',
+          icon: <SolutionOutlined />,
+          label: 'Tuyển sinh',
         },
         {
           key: '/course-class-sessions',

@@ -25,9 +25,13 @@ import type { UserFilterParams } from '../types/user-filter-params-type';
 import { userFilters } from '../constants/user-filter-table';
 import { formatDate } from '@/shared/utils/date';
 import { FORMAT_DATE_TIME } from '@/shared/constants/format-date';
+import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
+import { getMeThunk } from '@/features/auth/store/auth-thunk';
 
 const UserPage = () => {
   const { getAll, create, update, active, inActive, remove } = userRoleAdminApi;
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((state) => state.auth);
 
   const { open, mode, selectedRecord, openCreate, openView, openEdit, close } =
     useFormModal<User>();
@@ -226,7 +230,12 @@ const UserPage = () => {
         initialValues={selectedRecord}
         disabled={mode === FormModalMode.VIEW}
         onCancel={close}
-        onSuccess={refetch}
+        onSuccess={() => {
+          refetch();
+          if (mode === FormModalMode.EDIT && selectedRecord?.id === user?.id) {
+            dispatch(getMeThunk());
+          }
+        }}
         onSubmit={
           mode === FormModalMode.CREATE ? create : (values) => update(selectedRecord!.id, values)
         }

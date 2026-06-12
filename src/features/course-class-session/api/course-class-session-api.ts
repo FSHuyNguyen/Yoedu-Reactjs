@@ -1,6 +1,7 @@
 import { axiosClient } from '@/shared/lib/axios';
 import type { CourseClassSessionFilterParams } from '../types/course-class-session-filter-params-type';
 import type { CourseClassSessionCalendarFilterParams } from '../types/course-class-session-calendar-filter-params-type';
+import type { AttendancePayload } from '../types/attendance-type';
 
 const API_URL_PREFIX = '/course-class-sessions';
 
@@ -31,6 +32,18 @@ export const courseClassSessionRoleAdminApi = {
 
   cancel: async (id: string) => {
     const res = await axiosClient.patch(`${API_URL_PREFIX}/${id}/cancel`);
+
+    return res.data;
+  },
+
+  attendance: async (id: string) => {
+    const res = await axiosClient.get(`${API_URL_PREFIX}/${id}/attendance`);
+
+    return res.data;
+  },
+
+  takeAttendance: async (id: string, data: { attendances: AttendancePayload[] }) => {
+    const res = await axiosClient.post(`${API_URL_PREFIX}/${id}/attendance`, data);
 
     return res.data;
   },

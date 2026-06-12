@@ -6,7 +6,7 @@ import { FormModalMode } from '@/shared/types/form-modal-mode-type';
 import FilterTableCustom from '@/shared/components/table/FilterTableCustom';
 import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
 import ActionGroup from '@/shared/components/table/ActionGroup';
-import { CheckOutlined, EyeOutlined, DeleteOutlined } from '@ant-design/icons';
+import { CheckOutlined, EyeOutlined, DeleteOutlined, FormOutlined } from '@ant-design/icons';
 import type { SectionForm } from '@/shared/components/modal/ModalFormCustom';
 import { formatDate } from '@/shared/utils/date';
 import { courseClassSessionRoleAdminApi } from '../api/course-class-session-api';
@@ -19,6 +19,8 @@ import type { CourseClassSessionFilterParams } from '../types/course-class-sessi
 import { courseClassSessionFilters } from '../constants/course-class-filter-table';
 import { courseClassSessionFormFields } from '../constants/course-class-form-fields';
 import { FORMAT_DATE_TIME } from '@/shared/constants/format-date';
+import { useState } from 'react';
+import AttendanceModal from '../components/AttendanceModal';
 
 const CourseClassSessionPage = () => {
   const { getAll, done, cancel } = courseClassSessionRoleAdminApi;
@@ -52,6 +54,15 @@ const CourseClassSessionPage = () => {
     activeApi: done,
     inActiveApi: cancel,
   });
+
+  const [openAttendance, setOpenAttendance] = useState(false);
+
+  const [selectedSession, setSelectedSession] = useState<CourseClassSession | null>(null);
+
+  const handleAttendance = (session: CourseClassSession) => {
+    setSelectedSession(session);
+    setOpenAttendance(true);
+  };
 
   const sectionsCourseClassSessionForm: SectionForm<CourseClassSession>[] = [
     {
@@ -111,6 +122,17 @@ const CourseClassSessionPage = () => {
               },
               {
                 show: (r) => r.status === CourseClassSessionStatus.SCHEDULED,
+
+                icon: <FormOutlined />,
+
+                tooltip: 'Điểm danh',
+
+                color: '#1677ff',
+
+                onClick: handleAttendance,
+              },
+              {
+                show: (r) => r.status === CourseClassSessionStatus.SCHEDULED,
                 icon: <CheckOutlined />,
                 tooltip: 'Hoàn thành',
                 color: '#52c41a',
@@ -163,6 +185,18 @@ const CourseClassSessionPage = () => {
         onCancel={close}
         onSuccess={refetch}
         sections={sectionsCourseClassSessionForm}
+      />
+
+      <AttendanceModal
+        open={openAttendance}
+        sessionId={selectedSession?.id}
+        onCancel={() => {
+          setOpenAttendance(false);
+          setSelectedSession(null);
+        }}
+        onSuccess={() => {
+          refetch();
+        }}
       />
     </div>
   );

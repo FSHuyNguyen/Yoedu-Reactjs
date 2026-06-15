@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import useTable from '@/shared/hooks/useTable';
 import PageHeader from '@/shared/components/page/PageHeader';
 import ModalFormCustom from '@/shared/components/modal/ModalFormCustom';
@@ -8,7 +10,6 @@ import TablePaginationCustom from '@/shared/components/table/TablePaginationCust
 import ActionGroup from '@/shared/components/table/ActionGroup';
 import { CheckOutlined, EyeOutlined, DeleteOutlined, FormOutlined } from '@ant-design/icons';
 import type { SectionForm } from '@/shared/components/modal/ModalFormCustom';
-import { formatDate } from '@/shared/utils/date';
 import { courseClassSessionRoleAdminApi } from '../api/course-class-session-api';
 import {
   CourseClassSessionStatus,
@@ -18,9 +19,8 @@ import CourseClassSessionStatusTag from '../components/CourseClassSessionStatusT
 import type { CourseClassSessionFilterParams } from '../types/course-class-session-filter-params-type';
 import { courseClassSessionFilters } from '../constants/course-class-filter-table';
 import { courseClassSessionFormFields } from '../constants/course-class-form-fields';
-import { FORMAT_DATE_TIME } from '@/shared/constants/format-date';
-import { useState } from 'react';
 import AttendanceModal from '../components/AttendanceModal';
+import { mappedTimeInformation } from '../utils';
 
 const CourseClassSessionPage = () => {
   const { getAll, done, cancel } = courseClassSessionRoleAdminApi;
@@ -91,8 +91,11 @@ const CourseClassSessionPage = () => {
       align: 'center' as const,
       render: (_: string, record: CourseClassSession) => (
         <span>
-          {record.scheduleSlotName} ({formatDate(record.startTime, FORMAT_DATE_TIME)} -{' '}
-          {formatDate(record.endTime, FORMAT_DATE_TIME)})
+          {mappedTimeInformation({
+            scheduleSlotName: record.scheduleSlotName,
+            startTime: record.startTime,
+            endTime: record.endTime,
+          })}
         </span>
       ),
     },

@@ -5,6 +5,12 @@ import type { AttendancePayload } from '../types/attendance-type';
 
 const API_URL_PREFIX = '/course-class-sessions';
 
+export const getCourseClassSessionOptions = async () => {
+  const res = await axiosClient.get(`${API_URL_PREFIX}/options`, {});
+
+  return res.data;
+};
+
 export const courseClassSessionRoleAdminApi = {
   getAll: async (params: CourseClassSessionFilterParams) => {
     const res = await axiosClient.get(`${API_URL_PREFIX}`, { params });

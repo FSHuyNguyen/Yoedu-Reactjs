@@ -109,6 +109,11 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
           icon: <CalendarOutlined />,
           label: 'Calendars',
         },
+        {
+          key: '/leave-requests',
+          icon: <AuditOutlined />,
+          label: 'Đơn xin nghỉ',
+        },
       ],
     },
     {

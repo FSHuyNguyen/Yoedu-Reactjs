@@ -31,7 +31,9 @@ const DynamicForm = <T,>({ fields, disabled, mode }: DynamicFormProps<T>) => {
       {fields
         .filter((field) => {
           const isHidden =
-            typeof field.hidden === 'function' ? field.hidden({ mode }) : field.hidden;
+            typeof field.hidden === 'function'
+              ? field.hidden({ mode, role: user?.role as UserRole })
+              : field.hidden;
 
           return !isHidden;
         })

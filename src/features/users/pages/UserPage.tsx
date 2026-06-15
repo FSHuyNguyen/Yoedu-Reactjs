@@ -1,6 +1,5 @@
 import useTable from '@/shared/hooks/useTable';
 import PageHeader from '@/shared/components/page/PageHeader';
-import { Button } from 'antd';
 import ModalFormCustom from '@/shared/components/modal/ModalFormCustom';
 import { useFormModal } from '@/shared/hooks/useFormModal';
 import { FormModalMode } from '@/shared/types/form-modal-mode-type';
@@ -29,12 +28,11 @@ import { useAppDispatch, useAppSelector } from '@/app/redux/hooks';
 import { getMeThunk } from '@/features/auth/store/auth-thunk';
 
 const UserPage = () => {
-  const { getAll, create, update, active, inActive, remove } = userRoleAdminApi;
+  const { getAll, update, active, inActive, remove } = userRoleAdminApi;
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
 
-  const { open, mode, selectedRecord, openCreate, openView, openEdit, close } =
-    useFormModal<User>();
+  const { open, mode, selectedRecord, openView, openEdit, close } = useFormModal<User>();
 
   const {
     data: users,
@@ -195,15 +193,7 @@ const UserPage = () => {
 
   return (
     <div className="flex flex-col h-full">
-      <PageHeader
-        title="Quản lý tài khoản"
-        subtitle="Danh sách tài khoản"
-        extra={
-          <Button type="primary" onClick={openCreate}>
-            + Thêm tài khoản
-          </Button>
-        }
-      />
+      <PageHeader title="Quản lý tài khoản" subtitle="Danh sách tài khoản" />
 
       <div className="mb-4">
         <FilterTableCustom
@@ -237,7 +227,7 @@ const UserPage = () => {
           }
         }}
         onSubmit={
-          mode === FormModalMode.CREATE ? create : (values) => update(selectedRecord!.id, values)
+          mode === FormModalMode.CREATE ? undefined : (values) => update(selectedRecord!.id, values)
         }
         sections={sectionsUserForm}
       />

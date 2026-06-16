@@ -120,7 +120,13 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
       key: 'finance',
       label: 'Quản lý học phí',
       icon: <WalletOutlined />,
-      children: [],
+      children: [
+        {
+          key: '/tuition-invoices',
+          icon: <WalletOutlined />,
+          label: 'Hóa đơn học phí',
+        },
+      ],
     },
   ];
 

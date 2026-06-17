@@ -5,6 +5,7 @@ import { USER_ROLE } from '@/features/users/types/user-role-type';
 import type { TuitionInvoice } from '../types/tuition-invoice-type';
 import { getCourseClassOptions } from '@/features/course-class/api/course-class-api';
 import { FormModalMode } from '@/shared/types/form-modal-mode-type';
+import { getPromotionsOptions } from '@/features/promotion/api/promotion-api';
 
 export const tuitionInvoiceFormFields: FormField<TuitionInvoice>[] = [
   {
@@ -24,16 +25,16 @@ export const tuitionInvoiceFormFields: FormField<TuitionInvoice>[] = [
     fetchOptions: getCourseClassOptions,
     placeholder: 'Chọn lớp học',
     rules: [{ required: true, message: 'Vui lòng chọn lớp học' }],
+    disabled: ({ mode }: FormContext) => mode === FormModalMode.EDIT,
   },
-  // {
-  //   name: 'promotionId',
-  //   label: 'Khuyến mãi',
-  //   type: FormFieldType.SelectFetch,
-  //   fetchOptions: getCourseClassSessionOptions,
-  //   placeholder: 'Chọn khuyến mãi',
-  //   rules: [{ required: true, message: 'Vui lòng chọn khuyến mãi' }],
-  //   col: 24,
-  // },
+  {
+    name: 'promotionId',
+    label: 'Khuyến mãi',
+    type: FormFieldType.SelectFetch,
+    fetchOptions: getPromotionsOptions,
+    placeholder: 'Chọn khuyến mãi',
+    disabled: ({ mode }: FormContext) => mode === FormModalMode.EDIT,
+  },
   {
     name: 'dueDate',
     label: 'Hạn thanh toán',

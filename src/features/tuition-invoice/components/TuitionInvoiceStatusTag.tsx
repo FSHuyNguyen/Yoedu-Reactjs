@@ -17,9 +17,6 @@ const TuitionInvoiceStatusTag = ({ status, statusText }: TuitionInvoiceStatusTag
     case TuitionInvoiceStatus.PAID:
       return <Tag color="green">{statusText || 'Đã thanh toán'}</Tag>;
 
-    case TuitionInvoiceStatus.OVERPAID:
-      return <Tag color="red">{statusText || 'Đã thanh toán vượt mức'}</Tag>;
-
     default:
       return <Tag>{statusText || 'Không xác định'}</Tag>;
   }

@@ -35,7 +35,6 @@ export const TuitionInvoiceStatus = {
   UNPAID: 'UNPAID', // chưa trả
   PARTIAL: 'PARTIAL', // trả 1 phần
   PAID: 'PAID', // đủ
-  OVERPAID: 'OVERPAID', // trả dư
 } as const;
 
 export type TuitionInvoiceStatusType =

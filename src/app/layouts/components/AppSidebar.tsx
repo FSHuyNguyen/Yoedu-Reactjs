@@ -126,6 +126,11 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
           icon: <WalletOutlined />,
           label: 'Hóa đơn học phí',
         },
+        {
+          key: '/promotions',
+          icon: <WalletOutlined />,
+          label: 'Chương trình khuyến mãi',
+        },
       ],
     },
   ];

@@ -98,6 +98,9 @@ const DynamicForm = <T,>({ fields, disabled, mode }: DynamicFormProps<T>) => {
                       <SelectFetchCustom
                         placeholder={field.placeholder}
                         fetchOptions={field.fetchOptions}
+                        onChange={(value, options) =>
+                          field.onChange && field.onChange(value, options, form)
+                        }
                         disabled={isDisabled || disabled}
                         {...fieldProps}
                       />

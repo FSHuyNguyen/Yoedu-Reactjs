@@ -120,11 +120,17 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
       key: 'finance',
       label: 'Quản lý học phí',
       icon: <WalletOutlined />,
+      roles: [USER_ROLE.ADMIN, USER_ROLE.STAFF], // Chỉ admin và manager mới thấy menu này
       children: [
         {
           key: '/tuition-invoices',
           icon: <WalletOutlined />,
           label: 'Hóa đơn học phí',
+        },
+        {
+          key: '/payments',
+          icon: <WalletOutlined />,
+          label: 'Thanh toán',
         },
         {
           key: '/promotions',

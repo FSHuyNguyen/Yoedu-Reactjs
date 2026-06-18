@@ -88,6 +88,7 @@ const PromotionPage = () => {
     {
       title: 'Giá trị khuyến mãi',
       dataIndex: 'discountValue',
+      align: 'right' as const,
       render: (value: number, record: Promotion) => {
         return record.discountType === DiscountTypePromotion.PERCENT
           ? `${value}%`

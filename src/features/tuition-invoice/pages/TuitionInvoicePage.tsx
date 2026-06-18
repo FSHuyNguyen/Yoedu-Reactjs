@@ -21,6 +21,7 @@ import TuitionInvoiceStatusTag from '../components/TuitionInvoiceStatusTag';
 import { tuitionInvoiceFilters } from '../constants/tuition-invoice-filter-table';
 import { useAppSelector } from '@/app/redux/hooks';
 import { USER_ROLE } from '@/features/users/types/user-role-type';
+import { formatCurrency } from '@/shared/utils/currecy';
 
 const TuitionInvoicePage = () => {
   const { getAll, create, update, remove } = tuitionInvoiceRoleAdminApi;
@@ -80,8 +81,22 @@ const TuitionInvoicePage = () => {
       dataIndex: 'courseClassName',
     },
     {
-      title: 'Tên khóa học',
-      dataIndex: 'courseName',
+      title: 'Tổng tiền',
+      dataIndex: 'finalAmount',
+      align: 'right' as const,
+      render: (value: string) => formatCurrency(value),
+    },
+    {
+      title: 'Đã thanh toán',
+      dataIndex: 'amountPaid',
+      align: 'right' as const,
+      render: (value: string) => formatCurrency(value),
+    },
+    {
+      title: 'Còn lại',
+      dataIndex: 'balanceAmount',
+      align: 'right' as const,
+      render: (value: string) => formatCurrency(value),
     },
     {
       title: 'Ngày đến hạn',

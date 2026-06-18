@@ -3,6 +3,12 @@ import type { TuitionInvoiceFilterParams } from '../types/tuition-invoice-filter
 
 const API_URL_PREFIX = '/tuition-invoices';
 
+export const getTuitionInvoiceOptions = async () => {
+  const res = await axiosClient.get(`${API_URL_PREFIX}/options`, {});
+
+  return res.data;
+};
+
 export const tuitionInvoiceRoleAdminApi = {
   getAll: async (params: TuitionInvoiceFilterParams) => {
     const res = await axiosClient.get(API_URL_PREFIX, { params });

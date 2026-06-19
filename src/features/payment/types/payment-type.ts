@@ -1,4 +1,6 @@
-export interface Payment {
+import type { TuitionInvoice } from '@/features/tuition-invoice/types/tuition-invoice-type';
+
+export interface Payment extends Pick<TuitionInvoice, 'amountPaid' | 'balanceAmount'> {
   id: string;
 
   paymentCode: string;

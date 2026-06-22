@@ -21,6 +21,7 @@ import { courseClassSessionFilters } from '../constants/course-class-filter-tabl
 import { courseClassSessionFormFields } from '../constants/course-class-form-fields';
 import AttendanceModal from '../components/AttendanceModal';
 import { mappedTimeInformation } from '../utils';
+import { courseFormFields } from '@/features/courses/constants/course-form-fields';
 
 const CourseClassSessionPage = () => {
   const { getAll, done, cancel } = courseClassSessionRoleAdminApi;
@@ -64,11 +65,18 @@ const CourseClassSessionPage = () => {
     setOpenAttendance(true);
   };
 
-  const sectionsCourseClassSessionForm: SectionForm<CourseClassSession>[] = [
+  const sectionsCourseClassSessionForm: SectionForm[] = [
     {
       key: 'courseClassSession',
       label: 'Thông tin lịch học',
       fields: courseClassSessionFormFields,
+    },
+    {
+      key: 'class',
+      label: 'Thông tin khóa học',
+      fields: courseFormFields,
+      isDisabled: true,
+      isHidden: ({ dataForm }: { dataForm: any }) => dataForm && !dataForm.courseId,
     },
   ];
 

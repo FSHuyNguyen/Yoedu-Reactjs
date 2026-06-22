@@ -61,7 +61,7 @@ const TeacherPage = () => {
     inActiveApi: paused,
   });
 
-  const sectionsTeacherForm: SectionForm<Teacher>[] = [
+  const sectionsTeacherForm: SectionForm[] = [
     {
       key: 'general',
       label: 'Thông tin chung',

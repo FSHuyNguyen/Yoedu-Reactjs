@@ -8,6 +8,8 @@ import { getScheduleOptions } from '@/features/schedule/api/schedule-api';
 import { disableEndDateNotPast, disableStartDateNotPast } from '@/shared/utils/validate-date';
 import type { FormInstance } from 'antd';
 import { Dayjs } from 'dayjs';
+import { USER_ROLE, type UserRole } from '@/features/users/types/user-role-type';
+import { courseFormFields } from '@/features/courses/constants/course-form-fields';
 
 export const courseClassFormFields: FormField<CourseClass>[] = [
   {
@@ -41,6 +43,15 @@ export const courseClassFormFields: FormField<CourseClass>[] = [
         message: 'Vui lòng chọn khóa học',
       },
     ],
+    onChange: (value, options, form) => {
+      const selectedCourse = options.find((option: any) => option.value === value);
+
+      courseFormFields.forEach((field) => {
+        form.setFieldsValue({
+          [field.name]: selectedCourse ? selectedCourse[field.name] : undefined,
+        });
+      });
+    },
   },
   {
     name: 'mainTeacherId',
@@ -81,6 +92,7 @@ export const courseClassFormFields: FormField<CourseClass>[] = [
     type: FormFieldType.SelectFetch,
     fetchOptions: getScheduleOptions,
     placeholder: 'Chọn ca học',
+    col: 24,
     props: {
       mode: 'multiple',
     },
@@ -143,5 +155,6 @@ export const courseClassFormFields: FormField<CourseClass>[] = [
     label: 'Số học viên tối đa',
     type: FormFieldType.InputNumber,
     placeholder: 'Nhập số học viên tối đa',
+    hidden: ({ role }: { role: UserRole }) => role !== USER_ROLE.ADMIN,
   },
 ];

@@ -43,7 +43,7 @@ const ParentPage = () => {
     fetchApi: getAll,
   });
 
-  const sectionsParentForm: SectionForm<Parent>[] = [
+  const sectionsParentForm: SectionForm[] = [
     {
       key: 'general',
       label: 'Thông tin chung',

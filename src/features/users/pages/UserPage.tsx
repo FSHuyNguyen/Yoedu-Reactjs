@@ -65,7 +65,7 @@ const UserPage = () => {
     inActiveApi: inActive,
   });
 
-  const sectionsUserForm: SectionForm<User>[] = [
+  const sectionsUserForm: SectionForm[] = [
     {
       key: 'general',
       label: 'Thông tin chung',

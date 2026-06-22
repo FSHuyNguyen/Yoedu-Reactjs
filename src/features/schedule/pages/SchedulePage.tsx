@@ -46,7 +46,7 @@ const SchedulePage = () => {
     removeApi: remove,
   });
 
-  const sectionsScheduleForm: SectionForm<Schedule>[] = [
+  const sectionsScheduleForm: SectionForm[] = [
     {
       key: 'schedule',
       label: 'Thông tin ca học',

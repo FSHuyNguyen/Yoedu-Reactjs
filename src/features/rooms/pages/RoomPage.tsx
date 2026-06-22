@@ -46,7 +46,7 @@ const RoomPage = () => {
     removeApi: remove,
   });
 
-  const sectionsRoomForm: SectionForm<Room>[] = [
+  const sectionsRoomForm: SectionForm[] = [
     {
       key: 'room',
       label: 'Thông tin phòng học',

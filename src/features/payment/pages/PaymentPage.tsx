@@ -45,7 +45,7 @@ const PaymentPage = () => {
     fetchApi: getAll,
   });
 
-  const sectionsPaymentForm: SectionForm<Payment>[] = [
+  const sectionsPaymentForm: SectionForm[] = [
     {
       key: 'payment',
       label: 'Thông tin thanh toán',

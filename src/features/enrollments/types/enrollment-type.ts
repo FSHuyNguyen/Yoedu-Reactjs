@@ -1,4 +1,4 @@
-export interface Enrollment {
+export type Enrollment = {
   id: string;
   studentId: string;
   studentName: string | null;
@@ -18,7 +18,7 @@ export interface Enrollment {
 
   createdAt: string;
   updatedAt: string;
-}
+};
 
 export const EnrollmentStatus = {
   ACTIVE: 'ACTIVE',

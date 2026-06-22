@@ -61,7 +61,7 @@ const PromotionPage = () => {
     inActiveApi: inActive,
   });
 
-  const sectionsPromotionForm: SectionForm<Promotion>[] = [
+  const sectionsPromotionForm: SectionForm[] = [
     {
       key: 'promotion',
       label: 'Thông tin khuyến mãi',

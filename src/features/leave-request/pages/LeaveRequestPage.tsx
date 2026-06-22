@@ -66,7 +66,7 @@ const LeaveRequestPage = () => {
     inActiveApi: reject,
   });
 
-  const sectionsLeaveRequestForm: SectionForm<LeaveRequest>[] = [
+  const sectionsLeaveRequestForm: SectionForm[] = [
     {
       key: 'leaveRequest',
       label: 'Thông tin đơn xin nghỉ',

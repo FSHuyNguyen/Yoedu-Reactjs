@@ -59,7 +59,7 @@ const TuitionInvoicePage = () => {
     removeApi: remove,
   });
 
-  const sectionsTuitionInvoiceForm: SectionForm<TuitionInvoice>[] = [
+  const sectionsTuitionInvoiceForm: SectionForm[] = [
     {
       key: 'tuitionInvoice',
       label: 'Thông tin hóa đơn',

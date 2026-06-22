@@ -6,7 +6,7 @@ import { useFormModal } from '@/shared/hooks/useFormModal';
 import { FormModalMode } from '@/shared/types/form-modal-mode-type';
 import FilterTableCustom from '@/shared/components/table/FilterTableCustom';
 import { EnrollmentStatus, type Enrollment } from '../types/enrollment-type';
-import { enrollmentRoleAdminApi } from '../api/enrollment-api';
+import { enrollmentRoleAdminApi, enrollmentRoleStudentApi } from '../api/enrollment-api';
 import type { EnrollmentFilterParams } from '../types/enrollment-filter-params-type';
 import { enrollmentFilters } from '../constants/enrollment-filter-table';
 import { enrollmentFormFields } from '../constants/enrollment-form-fields';
@@ -15,9 +15,15 @@ import ActionGroup from '@/shared/components/table/ActionGroup';
 import { EyeOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import EnrollmentStatusTag from '../components/EnrollmentStatusTag';
 import type { SectionForm } from '@/shared/components/modal/ModalFormCustom';
+import { USER_ROLE } from '@/features/users/types/user-role-type';
+import { useAppSelector } from '@/app/redux/hooks';
+import { courseClassFormFields } from '@/features/course-class/constants/course-class-form-fields';
 
 const EnrollmentPage = () => {
   const { getAll, create, update, remove } = enrollmentRoleAdminApi;
+  const { pause } = enrollmentRoleStudentApi;
+
+  const { user } = useAppSelector((state) => state.auth);
 
   const { open, mode, selectedRecord, openCreate, openView, openEdit, close } =
     useFormModal<Enrollment>();
@@ -39,19 +45,29 @@ const EnrollmentPage = () => {
 
     handleChangePage,
 
+    handleInActive,
+
     handleDelete,
 
     refetch,
   } = useTable<Enrollment, EnrollmentFilterParams>({
     fetchApi: getAll,
     removeApi: remove,
+    inActiveApi: pause,
   });
 
-  const sectionsEnrollmentForm: SectionForm<Enrollment>[] = [
+  const sectionsEnrollmentForm: SectionForm[] = [
     {
       key: 'enrollment',
       label: 'Thông tin đăng ký',
       fields: enrollmentFormFields,
+    },
+    {
+      key: 'courseClass',
+      label: 'Thông tin lớp học',
+      fields: courseClassFormFields,
+      isDisabled: true,
+      isHidden: ({ dataForm }: { dataForm: any }) => dataForm && !dataForm.courseClassId,
     },
   ];
 
@@ -97,6 +113,13 @@ const EnrollmentPage = () => {
                 onClick: openEdit,
               },
               {
+                show: (r) =>
+                  user?.role === USER_ROLE.STUDENT && r.status === EnrollmentStatus.ACTIVE,
+                icon: <EditOutlined />,
+                tooltip: 'Bảo lưu',
+                onClick: () => handleInActive(record.id),
+              },
+              {
                 show: (r) => r.status === EnrollmentStatus.ACTIVE,
                 icon: <DeleteOutlined />,
                 tooltip: 'Hủy đăng ký',
@@ -117,9 +140,11 @@ const EnrollmentPage = () => {
         title="Quản lý đăng ký"
         subtitle="Danh sách đăng ký"
         extra={
-          <Button type="primary" onClick={openCreate}>
-            + Thêm đăng ký
-          </Button>
+          user?.role === USER_ROLE.ADMIN ? (
+            <Button type="primary" onClick={openCreate}>
+              Thêm đăng ký
+            </Button>
+          ) : null
         }
       />
 

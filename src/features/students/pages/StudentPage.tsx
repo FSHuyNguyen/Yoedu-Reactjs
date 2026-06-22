@@ -61,7 +61,7 @@ const StudentPage = () => {
     inActiveApi: paused,
   });
 
-  const sectionsStudentForm: SectionForm<Student>[] = [
+  const sectionsStudentForm: SectionForm[] = [
     {
       key: 'general',
       label: 'Thông tin chung',

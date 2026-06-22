@@ -1,4 +1,4 @@
-export interface CourseClass {
+export type CourseClass = {
   id: string;
   classCode: string;
   name: string;
@@ -20,7 +20,7 @@ export interface CourseClass {
   statusText: string;
   createdAt: string;
   updatedAt: string;
-}
+};
 
 export const CourseClassStatus = {
   OPEN: 'OPEN',

@@ -66,7 +66,7 @@ const CoursePage = () => {
     inActiveApi: closeCourse,
   });
 
-  const sectionsCourseForm: SectionForm<Course>[] = [
+  const sectionsCourseForm: SectionForm[] = [
     {
       key: 'course',
       label: 'Thông tin khóa học',

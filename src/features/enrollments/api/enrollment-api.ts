@@ -34,3 +34,17 @@ export const enrollmentRoleAdminApi = {
     return res.data;
   },
 };
+
+export const enrollmentRoleStudentApi = {
+  pause: async (id: string) => {
+    const res = await axiosClient.patch(`${API_URL_PREFIX}/${id}/pause`);
+
+    return res.data;
+  },
+
+  remove: async (id: string) => {
+    const res = await axiosClient.delete(`${API_URL_PREFIX}/${id}`);
+
+    return res.data;
+  },
+};

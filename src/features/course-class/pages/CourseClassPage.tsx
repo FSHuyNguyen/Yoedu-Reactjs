@@ -16,6 +16,7 @@ import type { CourseClassFilterParams } from '../types/course-class-filter-param
 import CourseClassStatusTag from '../components/CourseClassStatusTag';
 import { courseClassFilters } from '../constants/course-class-filter-table';
 import { formatDate } from '@/shared/utils/date';
+import { courseFormFields } from '@/features/courses/constants/course-form-fields';
 
 const CourseClassPage = () => {
   const { getAll, create, update, remove } = courseClassRoleAdminApi;
@@ -48,11 +49,18 @@ const CourseClassPage = () => {
     removeApi: remove,
   });
 
-  const sectionsCourseClassForm: SectionForm<CourseClass>[] = [
+  const sectionsCourseClassForm: SectionForm[] = [
     {
       key: 'courseClass',
       label: 'Thông tin lớp học',
       fields: courseClassFormFields,
+    },
+    {
+      key: 'class',
+      label: 'Thông tin khóa học',
+      fields: courseFormFields,
+      isDisabled: true,
+      isHidden: ({ dataForm }: { dataForm: any }) => dataForm && !dataForm.courseId,
     },
   ];
 

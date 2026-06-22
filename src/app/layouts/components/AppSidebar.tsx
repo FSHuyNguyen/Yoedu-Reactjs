@@ -78,16 +78,19 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
           key: '/rooms',
           icon: <SolutionOutlined />,
           label: 'Phòng học',
+          roles: [USER_ROLE.ADMIN, USER_ROLE.STAFF],
         },
         {
           key: '/schedules',
           icon: <ScheduleOutlined />,
           label: 'Ca học',
+          roles: [USER_ROLE.ADMIN, USER_ROLE.STAFF],
         },
         {
           key: '/courses',
           icon: <ReadOutlined />,
           label: 'Khóa đào tạo',
+          roles: [USER_ROLE.ADMIN, USER_ROLE.STAFF],
         },
         {
           key: '/course-classes',
@@ -123,6 +126,11 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
       roles: [USER_ROLE.ADMIN, USER_ROLE.STAFF], // Chỉ admin và manager mới thấy menu này
       children: [
         {
+          key: '/promotions',
+          icon: <WalletOutlined />,
+          label: 'Chương trình khuyến mãi',
+        },
+        {
           key: '/tuition-invoices',
           icon: <WalletOutlined />,
           label: 'Hóa đơn học phí',
@@ -131,11 +139,6 @@ const AppSidebar: React.FC<AppSidebarProps> = ({ collapsed }) => {
           key: '/payments',
           icon: <WalletOutlined />,
           label: 'Thanh toán',
-        },
-        {
-          key: '/promotions',
-          icon: <WalletOutlined />,
-          label: 'Chương trình khuyến mãi',
         },
       ],
     },

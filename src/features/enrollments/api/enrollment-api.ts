@@ -28,6 +28,12 @@ export const enrollmentRoleAdminApi = {
     return res.data;
   },
 
+  active: async (id: string) => {
+    const res = await axiosClient.patch(`${API_URL_PREFIX}/${id}/active`);
+
+    return res.data;
+  },
+
   remove: async (id: string) => {
     const res = await axiosClient.delete(`${API_URL_PREFIX}/${id}`);
 

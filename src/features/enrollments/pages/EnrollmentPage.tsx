@@ -12,7 +12,7 @@ import { enrollmentFilters } from '../constants/enrollment-filter-table';
 import { enrollmentFormFields } from '../constants/enrollment-form-fields';
 import TablePaginationCustom from '@/shared/components/table/TablePaginationCustom';
 import ActionGroup from '@/shared/components/table/ActionGroup';
-import { EyeOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EyeOutlined, EditOutlined, DeleteOutlined, CheckOutlined } from '@ant-design/icons';
 import EnrollmentStatusTag from '../components/EnrollmentStatusTag';
 import type { SectionForm } from '@/shared/components/modal/ModalFormCustom';
 import { USER_ROLE } from '@/features/users/types/user-role-type';
@@ -20,7 +20,7 @@ import { useAppSelector } from '@/app/redux/hooks';
 import { courseClassFormFields } from '@/features/course-class/constants/course-class-form-fields';
 
 const EnrollmentPage = () => {
-  const { getAll, create, update, remove } = enrollmentRoleAdminApi;
+  const { getAll, create, update, active, remove } = enrollmentRoleAdminApi;
   const { pause } = enrollmentRoleStudentApi;
 
   const { user } = useAppSelector((state) => state.auth);
@@ -45,6 +45,8 @@ const EnrollmentPage = () => {
 
     handleChangePage,
 
+    handleActive,
+
     handleInActive,
 
     handleDelete,
@@ -53,6 +55,7 @@ const EnrollmentPage = () => {
   } = useTable<Enrollment, EnrollmentFilterParams>({
     fetchApi: getAll,
     removeApi: remove,
+    activeApi: active,
     inActiveApi: pause,
   });
 
@@ -118,6 +121,14 @@ const EnrollmentPage = () => {
                 icon: <EditOutlined />,
                 tooltip: 'Bảo lưu',
                 onClick: () => handleInActive(record.id),
+              },
+              {
+                show: (r) => r.status === EnrollmentStatus.CANCELLED,
+                icon: <CheckOutlined />,
+                tooltip: 'Đăng ký lại',
+                color: '#52c41a',
+                onClick: () => handleActive(record.id),
+                isPopconfirm: true,
               },
               {
                 show: (r) => r.status === EnrollmentStatus.ACTIVE,

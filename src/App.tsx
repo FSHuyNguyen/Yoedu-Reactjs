@@ -7,17 +7,20 @@ import AntdProvider from './app/providers/antd/AntdProvider';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './app/router/routes';
 import AppInit from './app/init/AppInit';
+import { ReactQueryProvider } from './app/providers/react-query/ReactQueryProvider';
 
 function App() {
   return (
     <Provider store={store}>
-      <ThemeProvider>
-        <AntdProvider>
-          <AppInit>
-            <RouterProvider router={router} />
-          </AppInit>
-        </AntdProvider>
-      </ThemeProvider>
+      <ReactQueryProvider>
+        <ThemeProvider>
+          <AntdProvider>
+            <AppInit>
+              <RouterProvider router={router} />
+            </AppInit>
+          </AntdProvider>
+        </ThemeProvider>
+      </ReactQueryProvider>
     </Provider>
   );
 }

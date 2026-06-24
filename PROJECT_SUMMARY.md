@@ -20,6 +20,7 @@
 | **HTTP Client** | Axios |
 | **Linting** | ESLint 9 (TypeScript + React Hooks rules) |
 | **Formatting** | Prettier |
+| **React Query** | 
 
 ### Dev Environment
 

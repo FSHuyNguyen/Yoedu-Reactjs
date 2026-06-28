@@ -43,15 +43,6 @@ export const courseClassFormFields: FormField<CourseClass>[] = [
         message: 'Vui lòng chọn khóa học',
       },
     ],
-    onChange: (value, options, form) => {
-      const selectedCourse = options.find((option: any) => option.value === value);
-
-      courseFormFields.forEach((field) => {
-        form.setFieldsValue({
-          [field.name]: selectedCourse ? selectedCourse[field.name] : undefined,
-        });
-      });
-    },
   },
   {
     name: 'mainTeacherId',

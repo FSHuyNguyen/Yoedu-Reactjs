@@ -36,13 +36,13 @@ export const promotionRoleAdminApi = {
   },
 
   active: async (id: string) => {
-    const res = await axiosClient.post(`${API_URL_PREFIX}/${id}/active`);
+    const res = await axiosClient.patch(`${API_URL_PREFIX}/${id}/active`);
 
     return res.data;
   },
 
   inActive: async (id: string) => {
-    const res = await axiosClient.post(`${API_URL_PREFIX}/${id}/inactive`);
+    const res = await axiosClient.patch(`${API_URL_PREFIX}/${id}/inactive`);
 
     return res.data;
   },

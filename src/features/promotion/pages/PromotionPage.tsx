@@ -131,7 +131,7 @@ const PromotionPage = () => {
                 onClick: openEdit,
               },
               {
-                show: (r) => r.status !== PromotionStatus.ACTIVE,
+                show: (r) => r.status === PromotionStatus.ACTIVE,
                 icon: <CloseOutlined />,
                 tooltip: 'Ngưng khuyến mãi',
                 danger: true,
@@ -139,7 +139,7 @@ const PromotionPage = () => {
                 isPopconfirm: true,
               },
               {
-                show: (r) => r.status !== PromotionStatus.INACTIVE,
+                show: (r) => r.status === PromotionStatus.INACTIVE,
                 icon: <CheckOutlined />,
                 tooltip: 'Kích hoạt khuyến mãi',
                 color: '#52c41a',
@@ -147,7 +147,7 @@ const PromotionPage = () => {
                 isPopconfirm: true,
               },
               {
-                show: (r) => r.status !== PromotionStatus.INACTIVE,
+                show: (r) => r.status === PromotionStatus.INACTIVE,
                 icon: <DeleteOutlined />,
                 tooltip: 'Xóa khuyến mãi',
                 danger: true,

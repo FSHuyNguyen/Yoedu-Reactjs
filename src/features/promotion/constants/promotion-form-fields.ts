@@ -51,6 +51,9 @@ export const promotionFormFields: FormField<Promotion>[] = [
         message: 'Vui lòng nhập giá trị khuyến mãi',
       },
     ],
+    props: {
+      isCurrency: true,
+    },
   },
   {
     name: 'startDate',

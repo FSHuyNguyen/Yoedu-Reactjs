@@ -22,6 +22,9 @@ export const formatSectionFieldsFormValues = <T>(values: T, sections: SectionFor
       if (!value) return;
 
       switch (field.type) {
+        case FormFieldType.InputNumber:
+          formattedValues[field.name as string] = Number(value);
+          break;
         case FormFieldType.DatePicker:
           formattedValues[field.name as string] = dayjs.isDayjs(value)
             ? formatDateToQuery(value as Dayjs)

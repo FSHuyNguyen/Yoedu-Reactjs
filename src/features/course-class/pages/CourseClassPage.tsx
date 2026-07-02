@@ -131,7 +131,7 @@ const CourseClassPage = () => {
                 onClick: openView,
               },
               {
-                show: (r) => r.status === CourseClassStatus.OPEN,
+                show: (r) => r.status !== CourseClassStatus.CLOSED,
                 icon: <EditOutlined />,
                 tooltip: 'Sửa',
                 onClick: openEdit,

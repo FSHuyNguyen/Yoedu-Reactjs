@@ -9,7 +9,6 @@ import { disableEndDateNotPast, disableStartDateNotPast } from '@/shared/utils/v
 import type { FormInstance } from 'antd';
 import { Dayjs } from 'dayjs';
 import { USER_ROLE, type UserRole } from '@/features/users/types/user-role-type';
-import { courseFormFields } from '@/features/courses/constants/course-form-fields';
 
 export const courseClassFormFields: FormField<CourseClass>[] = [
   {
@@ -43,6 +42,11 @@ export const courseClassFormFields: FormField<CourseClass>[] = [
         message: 'Vui lòng chọn khóa học',
       },
     ],
+    onChange: (value, options, form) => {
+      const selectedCourse = options.find((option: any) => option.value === value);
+
+      form.setFieldsValue(selectedCourse);
+    },
   },
   {
     name: 'mainTeacherId',
